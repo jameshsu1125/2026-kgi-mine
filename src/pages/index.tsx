@@ -12,10 +12,12 @@ import Home from './home';
 
 Click.install();
 
+console.log(import.meta.env.VITE_API_PATH);
+
 Fetcher.install({
   hostUrl: import.meta.env.VITE_API_PATH || './api',
-  contentType: contentType.JSON,
-  formatType: formatType.JSON,
+  contentType: contentType.URL_ENCODED,
+  formatType: formatType.string,
 });
 
 if (import.meta.env.VITE_MOCKING === 'true') {

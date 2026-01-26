@@ -3,5 +3,5 @@ export const PAGE = {
 };
 
 export const REST_PATH = {
-  test: 'todos/1',
+  member_sigIn: 'member/sigIn',
 };
