@@ -7,8 +7,6 @@ import Click from 'lesca-click';
 import Fetcher, { contentType, formatType } from 'lesca-fetcher';
 import { Suspense, lazy, memo, useContext, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './home';
 
 Click.install();
 
@@ -36,7 +34,7 @@ const Pages = memo(() => {
       const Element = lazy(() => import(`./${target}/index.tsx`));
       return (
         <Suspense fallback=''>
-          <Element>Static Pages</Element>
+          <Element />
         </Suspense>
       );
     }
@@ -46,21 +44,12 @@ const Pages = memo(() => {
   return Page;
 });
 
-const RoutePages = memo(() => (
-  <Routes>
-    <Route path='/' element={<Home>Route Pages</Home>} />
-  </Routes>
-));
-
 const App = () => {
   const [state, setState] = useReducer(Reducer, InitialState);
   const value: TContext = useMemo(() => [state, setState], [state]);
   return (
     <div className='App'>
       <Context.Provider {...{ value }}>
-        <BrowserRouter basename=''>
-          <RoutePages />
-        </BrowserRouter>
         <Pages />
         {state[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
       </Context.Provider>
@@ -68,6 +57,6 @@ const App = () => {
   );
 };
 
-if (document.getElementById('app')?.children.length === 0) {
-  ReactDOM.createRoot(document.getElementById('app')!).render(<App />);
+if (document.getElementById('immersive_experience_section')?.children.length === 0) {
+  ReactDOM.createRoot(document.getElementById('immersive_experience_section')!).render(<App />);
 }

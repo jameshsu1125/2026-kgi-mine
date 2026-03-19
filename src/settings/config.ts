@@ -4,4 +4,5 @@ export const PAGE = {
 
 export const REST_PATH = {
   member_sigIn: 'member/sigIn',
+  immersion_miner: 'immersion/miner',
 };

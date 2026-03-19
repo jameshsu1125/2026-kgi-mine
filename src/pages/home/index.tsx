@@ -1,30 +1,25 @@
 import Button from '@/components/button';
-import useSigIn from '@/hooks/useSigIn';
-import { IReactProps } from '@/settings/type';
+import useMiner from '@/hooks/useMiner';
 import { memo, useState } from 'react';
 import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
-import { faker } from '@faker-js/faker';
+import { REST_PATH } from '@/settings/config';
 
-const Home = memo(({ children }: IReactProps) => {
+const Home = memo(() => {
   const [state, setState] = useState<THomeState>(HomeState);
-  const [todos, getUseSigIn] = useSigIn();
+  const [res, getMiner] = useMiner();
 
   return (
     <div className='Home'>
       <HomeContext.Provider value={[state, setState]}>
-        <h1 className='text-2xl'>{children}</h1>
-        <Button
-          onClick={() =>
-            getUseSigIn({
-              credential: faker.finance.creditCardNumber(),
-              email: faker.internet.email(),
-            })
-          }
-        >
-          <Button.regular>Fetch</Button.regular>
+        <h1 className='text-2xl'>
+          API test: {import.meta.env.VITE_API_PATH}
+          {REST_PATH.immersion_miner}
+        </h1>
+        <Button onClick={() => getMiner()}>
+          <Button.regular>Get Miner</Button.regular>
         </Button>
-        <p className='text-center'>{JSON.stringify(todos)}</p>
+        <p className='text-center'>{JSON.stringify(res)}</p>
       </HomeContext.Provider>
     </div>
   );
