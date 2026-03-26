@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import { defineConfig, loadEnv } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import mkcert from 'vite-plugin-mkcert';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -22,6 +23,7 @@ export default defineConfig(async ({ mode }) => {
         input: {
           index: resolve(__dirname, 'src/pages/index.html'),
         },
+        output: { manualChunks: undefined },
       },
     },
     css: {
@@ -34,6 +36,7 @@ export default defineConfig(async ({ mode }) => {
     },
     plugins: [
       react(),
+      cssInjectedByJsPlugin(),
       createHtmlPlugin({
         minify: true,
         inject: {
