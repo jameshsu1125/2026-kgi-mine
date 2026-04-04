@@ -6,6 +6,7 @@ import {
   IState,
   LoadingProcessType,
   TContext,
+  TDatasetState,
   TLoadingProcessState,
 } from './type';
 
@@ -15,9 +16,16 @@ export const LoadingProcessState: TLoadingProcessState = {
   body: '',
 };
 
+export const DatasetState: TDatasetState = {
+  dataset: {
+    baseUri: 'https://localhost:5173/',
+  },
+};
+
 export const InitialState: IState = {
   [ActionType.Page]: PAGE.home,
   [ActionType.LoadingProcess]: LoadingProcessState,
+  [ActionType.Dataset]: DatasetState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);

@@ -3,6 +3,7 @@ import { Dispatch, ReactNode } from 'react';
 export enum ActionType {
   Page = 'page',
   LoadingProcess = 'loadingProcess',
+  Dataset = 'dataset',
 }
 
 export enum LoadingProcessType {
@@ -32,13 +33,20 @@ export type TLoadingProcessState = {
   body?: '';
 };
 
+export type TDatasetState = {
+  dataset: {
+    [key: string]: string | undefined;
+  };
+};
+
 export interface IState {
   page?: string;
   loadingProcess?: TLoadingProcessState;
+  dataset?: TDatasetState;
 }
 
 export interface IAction {
-  state: IState | TLoadingProcessState;
+  state: IState | TLoadingProcessState | TDatasetState;
   type: ActionType;
 }
 
