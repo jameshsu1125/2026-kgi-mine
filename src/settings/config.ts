@@ -6,3 +6,7 @@ export const REST_PATH = {
   member_sigIn: 'member/sigIn',
   immersion_miner: 'immersion/miner',
 };
+
+export const Debug = {
+  resource: true,
+};

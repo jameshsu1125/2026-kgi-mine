@@ -1,14 +1,22 @@
-import { memo, useEffect } from 'react';
-import './index.less';
+import useURI from '@/hooks/useURI';
 import { IReactProps } from '@/settings/type';
+import { memo } from 'react';
 import Div100vh from 'react-div-100vh';
+import './index.less';
+import Header from '../header';
 
 const Container = memo(({ children }: IReactProps) => {
-  useEffect(() => {}, []);
+  useURI({ filePath: 'img/scene-bg.jpg', variableName: 'scene-bg' });
+
   return (
     <Div100vh className='Container'>
       <div className='bg' />
-      <div>{children}</div>
+      <div className='ctx'>
+        <div>
+          <Header />
+          <div className='content'>{children}</div>
+        </div>
+      </div>
     </Div100vh>
   );
 });

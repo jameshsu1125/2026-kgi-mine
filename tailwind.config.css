@@ -18,4 +18,7 @@
 
   --font-roboto-condensed: 'Roboto Condensed', sans-serif;
   --font-noto-sans-tc: 'Noto Sans TC', sans-serif;
+
+  --container-md: 414px;
+  --container-8xl: 1600px;
 }
