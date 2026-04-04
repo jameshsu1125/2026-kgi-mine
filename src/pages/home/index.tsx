@@ -17,7 +17,9 @@ const Home = memo(() => {
           {REST_PATH.immersion_miner}
         </h1>
         <Button onClick={() => getMiner()}>
-          <Button.regular>Get Miner</Button.regular>
+          <Button.regular>
+            <div>asd</div>Get Miner
+          </Button.regular>
         </Button>
         <p className='text-center'>{JSON.stringify(res)}</p>
       </HomeContext.Provider>
