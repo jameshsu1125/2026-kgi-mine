@@ -2,8 +2,8 @@ import useURI from '@/hooks/useURI';
 import { IReactProps } from '@/settings/type';
 import { memo } from 'react';
 import Div100vh from 'react-div-100vh';
+import NavBar from '../navBar';
 import './index.less';
-import Header from '../header';
 
 const Container = memo(({ children }: IReactProps) => {
   useURI({ filePath: 'img/scene-bg.jpg', variableName: 'scene-bg' });
@@ -13,7 +13,7 @@ const Container = memo(({ children }: IReactProps) => {
       <div className='bg' />
       <div className='ctx'>
         <div>
-          <Header />
+          <NavBar />
           <div className='content'>{children}</div>
         </div>
       </div>

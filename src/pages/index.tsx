@@ -9,7 +9,7 @@ import { useEffect, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from './home';
 
-Click.install();
+Click.install('#immersive_experience_section');
 
 Fetcher.install({
   hostUrl: import.meta.env.VITE_API_PATH || './api',

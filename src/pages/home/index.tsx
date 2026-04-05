@@ -11,7 +11,7 @@ const Home = memo(() => {
 
   return (
     <div className='Home'>
-      <HomeContext.Provider value={[state, setState]}>
+      {/* <HomeContext.Provider value={[state, setState]}>
         <h1 className='text-2xl'>
           API test: {import.meta.env.VITE_API_PATH}
           {REST_PATH.immersion_miner}
@@ -22,7 +22,7 @@ const Home = memo(() => {
           </Button.regular>
         </Button>
         <p className='text-center'>{JSON.stringify(res)}</p>
-      </HomeContext.Provider>
+      </HomeContext.Provider> */}
     </div>
   );
 });

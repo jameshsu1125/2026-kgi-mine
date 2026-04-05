@@ -1,18 +1,18 @@
 @import url('@/settings/global.css');
 @import url('@/settings/config.less');
 
-.Header {
+.Navbar {
   @apply bg-font-white-light flex h-20 w-full flex-col justify-end;
 
-  .header-logo {
+  .navbar-logo {
     width: 222px;
 
-    @img: './img/header-logo.svg';
+    @img: './img/navbar-logo.svg';
     @apply relative flex;
 
     &::before {
       padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-      background-image: var(--header-logo);
+      background-image: var(--navbar-logo);
       content: '';
 
       @apply inline-block w-full bg-contain bg-center bg-no-repeat;
