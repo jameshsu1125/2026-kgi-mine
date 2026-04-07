@@ -10,6 +10,8 @@ body {
   overscroll-behavior: none;
 }
 
-.App {
+#immersive_experience_section {
+  min-width: 320px;
+
   @apply font-roboto-condensed absolute h-full w-full;
 }

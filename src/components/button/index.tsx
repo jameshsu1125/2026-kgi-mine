@@ -1,6 +1,9 @@
 import { IReactProps } from '@/settings/type';
 import Regular from './regular';
 import { twMerge } from 'tailwind-merge';
+import { useEffect, useId } from 'react';
+import Click from 'lesca-click';
+import NavBar from './navBar';
 
 type TRegularProps = IReactProps & {
   id?: string;
@@ -9,19 +12,27 @@ type TRegularProps = IReactProps & {
   onClick?: () => void;
 };
 
-const Button = ({ id, children, className, style, onClick }: TRegularProps) => {
+const Button = ({ children, className, style, onClick }: TRegularProps) => {
+  const id = useId();
+
+  useEffect(() => {
+    Click.add(`#${id}`, () => onClick?.());
+    return () => Click.remove(`#${id}`);
+  }, []);
+
   return (
-    <button
+    <div
       id={id}
-      className={twMerge(className, '**:pointer-events-none')}
+      className={twMerge(className, 'Button', '**:pointer-events-none', 'cursor-pointer')}
       style={style}
       onClick={onClick}
     >
       {children}
-    </button>
+    </div>
   );
 };
 
-Button.regular = Regular;
+Button.Regular = Regular;
+Button.NavBar = NavBar;
 
 export default Button;

@@ -2,26 +2,17 @@
 @import url('@/settings/config.less');
 
 .Navbar {
-  @apply bg-font-white-light flex h-20 w-full flex-col justify-end;
+  @apply bg-font-white-light flex h-20 w-full flex-col justify-end md:h-24 md:justify-center;
 
-  .navbar-logo {
-    width: 222px;
-
-    @img: './img/navbar-logo.svg';
-    @apply relative flex;
-
-    &::before {
-      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-      background-image: var(--navbar-logo);
-      content: '';
-
-      @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+  @media only screen and (max-width: @XS) {
+    & {
+      height: 19vw;
     }
+  }
 
-    @media only screen and (max-width: @SM) {
-      & {
-        width: 150px;
-      }
+  @media only screen and (max-width: @XXS) {
+    & {
+      height: 60px;
     }
   }
 }

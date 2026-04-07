@@ -1,0 +1,89 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Menu {
+  .Button {
+    .burger,
+    .user,
+    .eyes,
+    .search,
+    .navigate {
+      @apply flex h-10 w-10 flex-col items-center justify-center gap-1 bg-center bg-no-repeat p-2;
+
+      @media only screen and (max-width: @XS) {
+        width: 10vw;
+        height: 10vw;
+      }
+
+      @media only screen and (max-width: @XXS) {
+        @apply h-8 w-8;
+      }
+    }
+
+    .burger {
+      & > div {
+        height: 2px;
+        @apply bg-font-black w-10/12;
+
+        @media only screen and (max-width: @XS) {
+          height: 1px;
+          @apply w-full;
+        }
+      }
+    }
+
+    .user {
+      background-image: var(--navbar-icon-user);
+
+      & > div {
+        @apply invisible;
+      }
+    }
+
+    .eyes {
+      background-image: var(--navbar-icon-eyes);
+
+      & > div {
+        @apply invisible;
+      }
+    }
+
+    .navigate {
+      background-image: var(--navbar-icon-navigate);
+
+      & > div {
+        @apply invisible;
+      }
+    }
+
+    .search {
+      background-image: var(--navbar-icon-search);
+
+      & > div {
+        @apply invisible;
+      }
+    }
+
+    &:hover {
+      .burger {
+        @apply bg-bg-gray-light;
+      }
+
+      .user {
+        @apply bg-bg-gray-light;
+      }
+
+      .eyes {
+        @apply bg-bg-gray-light;
+      }
+
+      .navigate {
+        @apply bg-bg-gray-light;
+      }
+
+      .search {
+        @apply bg-bg-gray-light;
+      }
+    }
+  }
+}

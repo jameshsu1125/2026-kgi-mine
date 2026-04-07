@@ -1,4 +1,12 @@
 @import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
 .Menu {
-  @apply mb-4 flex flex-row items-baseline justify-center gap-4;
+  @apply flex flex-row-reverse items-baseline justify-center;
+
+  @media only screen and (max-width: @MD) {
+    & {
+      @apply pb-1;
+    }
+  }
 }

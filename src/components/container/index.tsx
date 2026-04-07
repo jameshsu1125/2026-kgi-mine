@@ -6,7 +6,7 @@ import NavBar from '../navBar';
 import './index.less';
 
 const Container = memo(({ children }: IReactProps) => {
-  useURI({ filePath: 'img/scene-bg.jpg', variableName: 'scene-bg' });
+  useURI({ path: 'img/scene-bg.jpg', name: 'scene-bg' });
 
   return (
     <Div100vh className='Container'>
