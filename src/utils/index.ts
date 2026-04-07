@@ -1,4 +1,4 @@
-export const printCSSAnimation = (radius: number, isBlank: boolean) => {
+export const printCSSAnimation = (radius: number = 20, isBlank: boolean = false) => {
   let i = 0;
   if (isBlank) {
     let s = setInterval(() => {
@@ -14,11 +14,12 @@ export const printCSSAnimation = (radius: number, isBlank: boolean) => {
   const render = () => {
     const x = Math.cos((Math.PI / 180) * index) * r;
     const y = Math.sin((Math.PI / 180) * index * 2) * r;
-    const currentX = x - r;
+    const currentX = x + r;
+    const rotate = index;
 
     out += `${Math.round((index / 360) * 100)}%{transform: translateX(${currentX.toFixed(
       2,
-    )}px) translateY(${y.toFixed(2)}px)}\n`;
+    )}px) translateY(${y.toFixed(2)}px) rotate(${rotate}deg)}\n`;
 
     index += 5;
     if (index <= 360) requestAnimationFrame(render);

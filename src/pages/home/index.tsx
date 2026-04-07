@@ -1,11 +1,10 @@
+import Article from '@/components/article';
 import useMiner from '@/hooks/useMiner';
-import { printCSSAnimation } from '@/utils';
 import { memo, useState } from 'react';
 import Background from './background';
 import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
-
-printCSSAnimation(30, false);
+import Content from './content';
 
 const Home = memo(() => {
   const [state, setState] = useState<THomeState>(HomeState);
@@ -15,6 +14,9 @@ const Home = memo(() => {
     <HomeContext.Provider value={[state, setState]}>
       <div className='Home'>
         <Background />
+        <Article>
+          <Content />
+        </Article>
       </div>
     </HomeContext.Provider>
   );

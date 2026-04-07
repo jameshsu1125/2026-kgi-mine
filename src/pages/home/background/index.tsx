@@ -8,6 +8,7 @@ const Background = memo(() => {
   useURI({ path: 'img/pattern-icon-health.png', name: 'pattern-icon-health' });
   useURI({ path: 'img/pattern-icon-relations.png', name: 'pattern-icon-relations' });
   useURI({ path: 'img/pattern-icon-society.png', name: 'pattern-icon-society' });
+
   return (
     <div className='background'>
       <div>
