@@ -1,0 +1,120 @@
+@import url('@/settings/config.less');
+@import url('@/settings/global.css');
+
+.Home {
+  .background {
+    //  background-image: url('./img/bg.png');
+    background-size: auto 100%;
+    @apply h-full w-full overflow-hidden;
+    @apply relative bg-center;
+
+    & > div {
+      @apply absolute top-1/2 left-1/2 h-0 w-0;
+
+      & > div {
+        @apply absolute;
+
+        &::before {
+          content: '';
+          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      & > div:nth-child(1) {
+        top: -23.3rem;
+        left: 24.1rem;
+        width: (unit(image-width(@img))) / 1560 * 100rem;
+
+        @img: './img/pattern-icon-career.png';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: var(--pattern-icon-career);
+        }
+      }
+
+      & > div:nth-child(2) {
+        top: -10.7rem;
+        left: -31.9rem;
+        width: (unit(image-width(@img))) / 1560 * 100rem;
+
+        @img: './img/pattern-icon-finance.png';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: var(--pattern-icon-finance);
+          transform: scale(0.65) rotate(280deg);
+        }
+      }
+
+      & > div:nth-child(3) {
+        top: -0.4rem;
+        left: 30.1rem;
+        width: (unit(image-width(@img))) / 1560 * 100rem;
+
+        @img: './img/pattern-icon-health.png';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: var(--pattern-icon-health);
+        }
+      }
+
+      & > div:nth-child(4) {
+        top: -24.3rem;
+        left: -42rem;
+        width: (unit(image-width(@img))) / 1560 * 100rem;
+
+        @img: './img/pattern-icon-relations.png';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: var(--pattern-icon-relations);
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      & > div:nth-child(5) {
+        top: 2.5rem;
+        left: -44.1rem;
+        width: (unit(image-width(@img))) / 1560 * 100rem;
+
+        @img: './img/pattern-icon-society.png';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: var(--pattern-icon-society);
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      & > div:nth-child(6) {
+        top: 14.4rem;
+        left: -38.7rem;
+        width: (unit(image-width(@img))) / 1560 * 100rem;
+
+        @img: './img/pattern-icon-career.png';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: var(--pattern-icon-career);
+          transform: scale(0.53) rotate(65deg);
+        }
+      }
+
+      & > div:nth-child(7) {
+        top: 20.5rem;
+        left: 22.2rem;
+        width: (unit(image-width(@img))) / 1560 * 100rem;
+
+        @img: './img/pattern-icon-relations.png';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: var(--pattern-icon-relations);
+          transform: scale(0.85) rotate(0deg);
+        }
+      }
+    }
+  }
+}
