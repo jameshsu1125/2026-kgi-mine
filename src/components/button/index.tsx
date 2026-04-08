@@ -18,6 +18,7 @@ const Button = ({ children, className, style, onClick }: TRegularProps) => {
 
   useEffect(() => {
     Click.add(`#${id}`, () => onClick?.());
+    Click.addPreventExcept(`#${id}`);
     return () => Click.remove(`#${id}`);
   }, []);
 
@@ -26,7 +27,6 @@ const Button = ({ children, className, style, onClick }: TRegularProps) => {
       id={id}
       className={twMerge(className, 'Button', '**:pointer-events-none', 'cursor-pointer')}
       style={style}
-      onClick={onClick}
     >
       {children}
     </div>

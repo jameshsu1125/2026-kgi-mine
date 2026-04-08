@@ -11,6 +11,16 @@
   &:hover {
     .Outline {
       @apply bg-black/20;
+
+      @media only screen and (max-width: @XS) {
+        @apply bg-transparent;
+      }
+    }
+  }
+
+  &:active {
+    .Outline {
+      @apply bg-black/20;
     }
   }
 }

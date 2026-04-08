@@ -1,6 +1,8 @@
 @import url('@/settings/config.less');
 @import url('@/settings/global.css');
 
+@offsetY: 15vw;
+
 .Home {
   .background {
     @apply h-full w-full overflow-hidden;
@@ -39,7 +41,7 @@
 
         @media only screen and (max-width: @MD) {
           & {
-            top: -62.4vw;
+            top: -62.4vw - @offsetY;
             left: 29.1vw;
             width: (unit(image-width(@img))) / 720 * 100vw;
           }
@@ -64,7 +66,7 @@
 
         @media only screen and (max-width: @MD) {
           & {
-            top: -33.4vw;
+            top: -33.4vw - @offsetY;
             left: -49.4vw;
             width: (unit(image-width(@img))) / 640 * 100vw;
           }
@@ -87,7 +89,7 @@
 
         @media only screen and (max-width: @MD) {
           & {
-            top: -3.4vw;
+            top: -3.4vw - @offsetY;
             left: 29.1vw;
             width: (unit(image-width(@img))) / 540 * 100vw;
           }
@@ -111,7 +113,7 @@
 
         @media only screen and (max-width: @MD) {
           & {
-            top: -86.9vw;
+            top: -86.9vw - @offsetY;
             left: -60.4vw;
             width: (unit(image-width(@img))) / 640 * 100vw;
           }
@@ -135,7 +137,7 @@
 
         @media only screen and (max-width: @MD) {
           & {
-            top: 22.5vw;
+            top: 22.5vw - @offsetY;
             left: -61.1vw;
             width: (unit(image-width(@img))) / 640 * 100vw;
           }
@@ -159,7 +161,7 @@
 
         @media only screen and (max-width: @MD) {
           & {
-            top: 77.2vw;
+            top: 77.2vw - @offsetY;
             left: -62.7vw;
             width: (unit(image-width(@img))) / 640 * 100vw;
           }
@@ -183,7 +185,7 @@
 
         @media only screen and (max-width: @MD) {
           & {
-            top: 89vw;
+            top: 89vw - @offsetY;
             left: 23.3vw;
             width: (unit(image-width(@img))) / 520 * 100vw;
           }
