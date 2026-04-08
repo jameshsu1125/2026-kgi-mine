@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import { useEffect, useId } from 'react';
 import Click from 'lesca-click';
 import NavBar from './navBar';
+import Outline from './outline';
 
 type TRegularProps = IReactProps & {
   id?: string;
@@ -34,5 +35,6 @@ const Button = ({ children, className, style, onClick }: TRegularProps) => {
 
 Button.Regular = Regular;
 Button.NavBar = NavBar;
+Button.Outline = Outline;
 
 export default Button;

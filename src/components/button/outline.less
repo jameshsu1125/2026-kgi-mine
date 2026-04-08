@@ -1,0 +1,16 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Button {
+  .Outline {
+    border: 1px solid #ffffff;
+
+    @apply text-font-white-dark font-noto-sans-tc w-xs rounded-l-full rounded-r-full py-3 text-center text-xl tracking-widest;
+  }
+
+  &:hover {
+    .Outline {
+      @apply bg-black/20;
+    }
+  }
+}

@@ -1,13 +1,13 @@
 import Article from '@/components/article';
 import useMiner from '@/hooks/useMiner';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
+import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useState } from 'react';
+import Content from './content';
 import Background from './background';
 import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
-import Content from './content';
-import OnloadProvider from 'lesca-react-onload';
-import { Context } from '@/settings/constant';
-import { ActionType } from '@/settings/type';
 
 const Home = memo(() => {
   const [, setContext] = useContext(Context);

@@ -1,0 +1,20 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Button {
+  .regular {
+    background: radial-gradient(138.55% 153.18% at 2.38% 0%, #0093ff 0%, #002e80 100%);
+    box-shadow: 0px 2px 3px 0px #0093ff inset;
+    box-shadow: 0px 2px 4px 0px #0000004d;
+
+    @apply text-font-white-dark font-noto-sans-tc w-xs rounded-l-full rounded-r-full py-3 text-center text-xl tracking-widest;
+  }
+
+  &:hover {
+    .regular {
+      background: radial-gradient(138.55% 153.18% at 2.38% 0%, #0073cc 0%, #001a4d 100%);
+      box-shadow: 0px 2px 3px 0px #0073cc inset;
+      box-shadow: 0px 2px 4px 0px #0000004d;
+    }
+  }
+}

@@ -2,17 +2,16 @@
 @import url('@/settings/config.less');
 
 .Miner {
-  width: 740px / 2;
-  height: 1039px / 2;
+  @apply flex w-full justify-center;
 
   .sprite {
+    position: absolute;
     display: block;
     width: 740px;
     height: 1039px;
     background-image: url(./img/spriteSheet.png);
     background-repeat: no-repeat;
-
-    object-fit: contain;
+    transform-origin: center top;
   }
 
   .sprite-MINER-WALK_00000 {

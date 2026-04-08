@@ -6,7 +6,7 @@ import Menu from './menu';
 
 const NavBar = memo(() => (
   <div className='Navbar'>
-    <Contain className='flex flex-row items-end justify-between md:items-center'>
+    <Contain className='flex w-full max-w-7xl flex-row items-end justify-between md:items-center'>
       <NavbarLogo />
       <Menu />
     </Contain>
