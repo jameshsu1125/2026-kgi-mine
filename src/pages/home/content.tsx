@@ -1,4 +1,5 @@
 import Heading from '@/components/heading';
+import Miner from '@/components/miner';
 import Paragraph from '@/components/paragraph';
 import { memo, useEffect } from 'react';
 
@@ -16,6 +17,7 @@ const Content = memo(() => {
         <br />
         準備好展開旅程嗎？
       </Paragraph>
+      <Miner />
     </div>
   );
 });

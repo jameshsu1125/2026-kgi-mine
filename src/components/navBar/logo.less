@@ -6,7 +6,7 @@
     width: 222px;
 
     @img: './img/navbar-logo.svg';
-    @apply relative flex;
+    @apply relative flex cursor-pointer;
 
     &::before {
       padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
@@ -14,6 +14,10 @@
       content: '';
 
       @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+    }
+
+    &::hover {
+      @apply bg-amber-400;
     }
 
     @media only screen and (max-width: @MD) {
