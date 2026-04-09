@@ -10,14 +10,18 @@ type TRegularProps = IReactProps & {
   id?: string;
   className?: string;
   style?: React.CSSProperties;
+  clickOnce?: boolean;
   onClick?: () => void;
 };
 
-const Button = ({ children, className, style, onClick }: TRegularProps) => {
+const Button = ({ children, className, style, clickOnce, onClick }: TRegularProps) => {
   const id = useId();
 
   useEffect(() => {
-    Click.add(`#${id}`, () => onClick?.());
+    Click.add(`#${id}`, () => {
+      onClick?.();
+      if (clickOnce) Click.remove(`#${id}`);
+    });
     Click.addPreventExcept(`#${id}`);
     return () => Click.remove(`#${id}`);
   }, []);

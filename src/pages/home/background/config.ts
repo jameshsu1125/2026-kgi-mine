@@ -1,34 +1,32 @@
 import { Bezier } from 'lesca-use-tween';
 
-const isMobile = window.innerWidth < 768;
-
 export const HOME_BACKGROUND_TWEEN_PROPERTIES = [
   {
-    initialStyle: { opacity: 0, scale: 5, x: isMobile ? -170 : -500, y: isMobile ? 120 : 150 },
-    options: { duration: 600, delay: 100, easing: Bezier.outBack },
+    initialStyle: { opacity: 0, scale: 2, x: 400, y: -540 },
+    options: { duration: 5300, delay: 700, easing: Bezier.outBack },
   },
   {
-    initialStyle: { opacity: 0, scale: 3, x: isMobile ? 150 : 380, y: isMobile ? 100 : 0 },
-    options: { duration: 600, delay: 200, easing: Bezier.outBack },
+    initialStyle: { opacity: 0, scale: 2, x: -880, y: -300 },
+    options: { duration: 7000, delay: 100, easing: Bezier.outQuart },
   },
   {
-    initialStyle: { opacity: 0, scale: 3, x: isMobile ? -250 : -630, y: isMobile ? 120 : -150 },
-    options: { duration: 600, delay: 200, easing: Bezier.outBack },
+    initialStyle: { opacity: 0, scale: 2, x: 630, y: -150 },
+    options: { duration: 3000, delay: 2500, easing: Bezier.outQuart },
   },
   {
-    initialStyle: { opacity: 0, scale: 3, x: isMobile ? 210 : 600, y: isMobile ? 240 : -380 },
-    options: { duration: 600, delay: 200, easing: Bezier.outBack },
+    initialStyle: { opacity: 0, scale: 2, x: -600, y: -380 },
+    options: { duration: 4000, delay: 2000, easing: Bezier.outQuart },
   },
   {
-    initialStyle: { opacity: 0, scale: 3, x: isMobile ? 181 : 550, y: isMobile ? -100 : -200 },
-    options: { duration: 600, delay: 200, easing: Bezier.outBack },
+    initialStyle: { opacity: 0, scale: 2, x: -550, y: -300 },
+    options: { duration: 7000, delay: 1000, easing: Bezier.outBack },
   },
   {
-    initialStyle: { opacity: 0, scale: 3, x: isMobile ? 160 : 470, y: isMobile ? -300 : -400 },
-    options: { duration: 600, delay: 200, easing: Bezier.outBack },
+    initialStyle: { opacity: 0, scale: 2, x: -470, y: 100 },
+    options: { duration: 5000, delay: 0, easing: Bezier.outQuart },
   },
   {
-    initialStyle: { opacity: 0, scale: 3, x: isMobile ? -190 : -470, y: isMobile ? -340 : -500 },
-    options: { duration: 600, delay: 200, easing: Bezier.outBack },
+    initialStyle: { opacity: 0, scale: 2, x: 470, y: 100 },
+    options: { duration: 4000, delay: 1000, easing: Bezier.outQuart },
   },
 ];

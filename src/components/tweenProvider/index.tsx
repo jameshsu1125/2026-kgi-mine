@@ -26,19 +26,27 @@ export type Options = {
 type TTweenerProvider = IReactProps & {
   initialStyle: CSS;
   tweenTo: CSS;
+  fadeOutStyle?: CSS;
   options?: Options;
-  shouldPlay: boolean;
+  optionsFadeOut?: Options;
+  shouldFadeIn: boolean;
+  shouldFadeOut?: boolean;
 };
 
-const TweenerProvider = memo(
-  ({ children, initialStyle, tweenTo, options, shouldPlay }: TTweenerProvider) => {
-    const [style, setStyle] = useTween(initialStyle);
+const TweenerProvider = memo((props: TTweenerProvider) => {
+  const { children, initialStyle, tweenTo, options, shouldFadeIn } = props;
+  const { fadeOutStyle, optionsFadeOut, shouldFadeOut } = props;
 
-    useEffect(() => {
-      if (shouldPlay) setStyle(tweenTo, options);
-    }, [shouldPlay, tweenTo]);
+  const [style, setStyle] = useTween(initialStyle);
 
-    return <div style={style}>{children}</div>;
-  },
-);
+  useEffect(() => {
+    if (shouldFadeIn) setStyle(tweenTo, options);
+  }, [shouldFadeIn, tweenTo]);
+
+  useEffect(() => {
+    if (shouldFadeOut && fadeOutStyle) setStyle(fadeOutStyle, optionsFadeOut);
+  }, [fadeOutStyle, shouldFadeOut]);
+
+  return <div style={style}>{children}</div>;
+});
 export default TweenerProvider;

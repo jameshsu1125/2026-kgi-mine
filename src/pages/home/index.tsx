@@ -19,7 +19,7 @@ const Home = memo(() => {
         onStart={() => setContext({ type: ActionType.LoadingProcess, state: { enabled: true } })}
         onload={() => {
           setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
-          setState((S) => ({ ...S, step: HomeStepType.fadeIn }));
+          setState((S) => ({ ...S, step: HomeStepType.landingFadeIn }));
         }}
       >
         <div className='Home'>

@@ -2,7 +2,8 @@ import { createContext, Dispatch, SetStateAction } from 'react';
 
 export enum HomeStepType {
   unset = 0,
-  fadeIn = 1,
+  landingFadeIn = 1,
+  landingFadeOut = 2,
 }
 
 export enum HomePageType {
