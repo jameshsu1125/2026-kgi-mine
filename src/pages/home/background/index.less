@@ -4,6 +4,10 @@
 @offsetY: 15vw;
 
 .Home {
+  .tran {
+    transition: all 2s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
   .background {
     // background-image: url('./img/bg2-m.png');
     // background-size: 100% auto;
@@ -38,7 +42,7 @@
 
           @img: './img/pattern-icon-career.png';
 
-          // @apply animate-infinite-circle-r30-50s;
+          @apply animate-infinite-circle-r30-50s;
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
@@ -64,7 +68,7 @@
 
           @img: './img/pattern-icon-finance.png';
 
-          // @apply animate-infinite-circle-r20-50s;
+          @apply animate-infinite-circle-r20-50s;
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
@@ -90,7 +94,7 @@
           animation-delay: -30s;
 
           @img: './img/pattern-icon-health.png';
-          // @apply animate-infinite-circle-reverse-r30-50s;
+          @apply animate-infinite-circle-reverse-r30-50s;
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
@@ -115,7 +119,7 @@
           animation-delay: -15s;
 
           @img: './img/pattern-icon-relations.png';
-          // @apply animate-infinite-circle-r30-100s;
+          @apply animate-infinite-circle-r30-100s;
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
@@ -140,7 +144,7 @@
           animation-delay: -45s;
 
           @img: './img/pattern-icon-society.png';
-          // @apply animate-infinite-circle-reverse-r30-100s;
+          @apply animate-infinite-circle-reverse-r30-100s;
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
@@ -165,7 +169,7 @@
           animation-delay: -35s;
 
           @img: './img/pattern-icon-career.png';
-          // @apply animate-infinite-circle-reverse-r20-50s;
+          @apply animate-infinite-circle-reverse-r20-50s;
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
@@ -191,7 +195,7 @@
           animation-delay: -15s;
 
           @img: './img/pattern-icon-relations.png';
-          // @apply animate-infinite-circle-reverse-r20-100s;
+          @apply animate-infinite-circle-reverse-r20-100s;
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
@@ -215,12 +219,13 @@
         & > div {
           top: -27rem;
           left: 26.1rem;
-          transition: all 4s cubic-bezier(0.76, 0, 0.24, 1);
+
+          .tran;
 
           @media only screen and (max-width: @MD) {
             & {
-              top: -86.4vw;
-              left: 29.1vw;
+              top: -96.4vw;
+              left: 50.1vw;
             }
           }
         }
@@ -230,11 +235,13 @@
         & > div {
           top: 7.7rem;
           left: -34.9rem;
-          transition: all 4s cubic-bezier(0.76, 0, 0.24, 1);
+
+          .tran;
 
           &::before {
-            transition: all 4s cubic-bezier(0.76, 0, 0.24, 1);
             transform: scale(1.1) rotate(280deg);
+
+            .tran;
           }
 
           @media only screen and (max-width: @MD) {
@@ -254,12 +261,13 @@
         & > div {
           top: 11.4rem;
           left: 19.6rem;
-          transition: all 4s cubic-bezier(0.76, 0, 0.24, 1);
+
+          .tran;
 
           @media only screen and (max-width: @MD) {
             & {
-              top: 66.6vw;
-              left: 26.1vw;
+              top: 56.6vw;
+              left: 5.9vw;
             }
           }
         }
@@ -269,17 +277,19 @@
         & > div {
           top: -17.3rem;
           left: -38.5rem;
-          transition: all 4s cubic-bezier(0.76, 0, 0.24, 1);
+
+          .tran;
 
           &::before {
-            transition: all 4s cubic-bezier(0.76, 0, 0.24, 1);
             transform: scale(0.7) rotate(0deg);
+
+            .tran;
           }
 
           @media only screen and (max-width: @MD) {
             & {
-              top: -74.9vw;
-              left: -63.4vw;
+              top: -64.9vw;
+              left: -50.4vw;
 
               &::before {
                 transform: scale(0.8) rotate(0deg);
@@ -292,11 +302,13 @@
         & > div {
           top: 19.4rem;
           left: 0.2rem;
-          transition: all 4s cubic-bezier(0.76, 0, 0.24, 1);
+
+          .tran;
 
           &::before {
-            transition: all 4s cubic-bezier(0.76, 0, 0.24, 1);
             transform: scale(0.8) rotate(0deg);
+
+            .tran;
           }
 
           @media only screen and (max-width: @MD) {
@@ -312,7 +324,8 @@
         & > div {
           top: 34.4rem;
           left: -48.7rem;
-          transition: all 4s cubic-bezier(0.76, 0, 0.24, 1);
+
+          .tran;
         }
       }
 
@@ -320,7 +333,8 @@
         & > div {
           top: 30.5rem;
           left: 32.2rem;
-          transition: all 4s cubic-bezier(0.76, 0, 0.24, 1);
+
+          .tran;
         }
       }
     }

@@ -6,15 +6,16 @@ import TweenerProvider from '@/components/tweenProvider';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext } from 'react';
 import { HomeContext, HomePageType, HomeStepType } from '../../config';
+import useStart from '@/hooks/useStart';
 
 const Landing = memo(() => {
   const [{ step }, setState] = useContext(HomeContext);
-  const queryStatus = new URLSearchParams(window.location.search).get('status');
+  const [response, getStart] = useStart();
 
   return (
     <>
       <TweenerProvider
-        initialStyle={queryStatus ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+        initialStyle={{ y: 50, opacity: 0 }}
         tweenTo={{ y: 0, opacity: 1 }}
         shouldFadeIn={step === HomeStepType.landingFadeIn}
         options={{ duration: 600, delay: 0 }}
@@ -26,7 +27,7 @@ const Landing = memo(() => {
       </TweenerProvider>
       <Paragraph className='text-center'>
         <TweenerProvider
-          initialStyle={queryStatus ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+          initialStyle={{ y: 50, opacity: 0 }}
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn={step === HomeStepType.landingFadeIn}
           options={{ duration: 600, delay: 350 }}
@@ -37,7 +38,7 @@ const Landing = memo(() => {
           你將在旅途中偶遇各種精選內容
         </TweenerProvider>
         <TweenerProvider
-          initialStyle={queryStatus ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+          initialStyle={{ y: 50, opacity: 0 }}
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn={step === HomeStepType.landingFadeIn}
           options={{ duration: 600, delay: 400 }}
@@ -48,7 +49,7 @@ const Landing = memo(() => {
           你可以用自己的步調
         </TweenerProvider>
         <TweenerProvider
-          initialStyle={queryStatus ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+          initialStyle={{ y: 50, opacity: 0 }}
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn={step === HomeStepType.landingFadeIn}
           options={{ duration: 600, delay: 450 }}
@@ -59,7 +60,7 @@ const Landing = memo(() => {
           即時瀏覽或收藏再看
         </TweenerProvider>
         <TweenerProvider
-          initialStyle={queryStatus ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+          initialStyle={{ y: 50, opacity: 0 }}
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn={step === HomeStepType.landingFadeIn}
           options={{ duration: 600, delay: 500 }}
@@ -71,7 +72,7 @@ const Landing = memo(() => {
         </TweenerProvider>
       </Paragraph>
       <TweenerProvider
-        initialStyle={queryStatus ? { x: 0, opacity: 1 } : { x: -400, opacity: 0 }}
+        initialStyle={{ x: -400, opacity: 0 }}
         tweenTo={{ x: 0, opacity: 1 }}
         shouldFadeIn={step === HomeStepType.landingFadeIn}
         options={{ duration: 5000, delay: 700, easing: Bezier.outBack }}
@@ -89,15 +90,20 @@ const Landing = memo(() => {
       </TweenerProvider>
       <div className='my-5 flex w-full flex-col items-center justify-center gap-5 md:flex-row'>
         <TweenerProvider
+          key={response?.isSuccess}
           initialStyle={{ y: 100, opacity: 0 }}
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn={step === HomeStepType.landingFadeIn}
-          options={{ duration: 800, delay: queryStatus ? 0 : 2000, easing: Bezier.outQuart }}
+          options={{
+            duration: 800,
+            delay: response?.isSuccess ? 0 : 2000,
+            easing: Bezier.outQuart,
+          }}
           shouldFadeOut={step === HomeStepType.landingFadeOut}
           fadeOutStyle={{ opacity: 0, y: 50 }}
           optionsFadeOut={{ duration: 800 }}
         >
-          {queryStatus ? (
+          {response?.isSuccess ? (
             <Button
               clickOnce
               onClick={() => {
@@ -110,16 +116,13 @@ const Landing = memo(() => {
             <Button
               clickOnce
               onClick={() => {
-                window.location.search = 'status=1';
+                getStart();
               }}
             >
               <Button.Outline>登入／註冊會員</Button.Outline>
             </Button>
           )}
         </TweenerProvider>
-        {/* <Button>
-          <Button.Outline>登入／註冊會員</Button.Outline>
-        </Button> */}
       </div>
     </>
   );

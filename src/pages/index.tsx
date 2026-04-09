@@ -15,7 +15,7 @@ Click.install('#immersive_experience_section');
 Fetcher.install({
   hostUrl: import.meta.env.VITE_API_PATH || './api',
   contentType: contentType.URL_ENCODED,
-  formatType: formatType.string,
+  formatType: formatType.JSON,
 });
 
 const rootAppElement = document.getElementById('immersive_experience_section');

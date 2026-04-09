@@ -2,10 +2,18 @@
 @import url('@/settings/config.less');
 
 .Button {
+  .Outline-lg {
+    @apply w-xs;
+  }
+
+  .Outline-full {
+    @apply w-full px-5;
+  }
+
   .Outline {
     border: 1px solid #ffffff;
 
-    @apply text-font-white-dark font-noto-sans-tc w-xs rounded-l-full rounded-r-full py-3 text-center text-xl tracking-widest;
+    @apply text-font-white-dark font-noto-sans-tc rounded-l-full rounded-r-full py-3 text-center text-xl tracking-widest;
   }
 
   &:hover {
@@ -15,12 +23,6 @@
       @media only screen and (max-width: @XS) {
         @apply bg-transparent;
       }
-    }
-  }
-
-  &:active {
-    .Outline {
-      @apply bg-black/20;
     }
   }
 }
