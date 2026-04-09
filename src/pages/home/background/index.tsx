@@ -1,9 +1,10 @@
 import TweenerProvider from '@/components/tweenProvider';
 import useURI from '@/hooks/useURI';
 import { memo, useContext } from 'react';
-import { HomeContext } from '../config';
+import { HomeContext, HomeStepType } from '../config';
 import './index.less';
 import { Bezier } from 'lesca-use-tween';
+import { HOME_BACKGROUND_TWEEN_PROPERTIES } from './config';
 
 const Background = memo(() => {
   const [state] = useContext(HomeContext);
@@ -17,13 +18,20 @@ const Background = memo(() => {
   return (
     <div className='background'>
       <div>
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
+        {[...new Array(7).keys()].map((index) => {
+          const { initialStyle, options } = HOME_BACKGROUND_TWEEN_PROPERTIES[index];
+          return (
+            <TweenerProvider
+              key={index}
+              initialStyle={initialStyle}
+              tweenTo={{ opacity: 1, scale: 1 }}
+              options={options}
+              shouldPlay={state.step === HomeStepType.fadeIn}
+            >
+              <div />
+            </TweenerProvider>
+          );
+        })}
       </div>
     </div>
   );

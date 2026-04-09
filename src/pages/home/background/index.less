@@ -8,7 +8,7 @@
     @apply h-full w-full overflow-hidden;
     @apply absolute bg-center;
 
-    &::after {
+    &::before {
       content: '';
       @apply absolute top-0 left-0 h-full w-full bg-black opacity-30;
     }
@@ -17,177 +17,193 @@
       @apply absolute top-1/2 left-1/2 h-0 w-0;
 
       & > div {
-        @apply absolute;
+        & > div {
+          @apply absolute;
 
-        &::before {
-          content: '';
-          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+          &::before {
+            content: '';
+            @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+          }
         }
       }
 
       & > div:nth-child(1) {
-        top: -23.3rem;
-        left: 24.1rem;
-        width: (unit(image-width(@img))) / 1560 * 100rem;
+        & > div {
+          top: -23.3rem;
+          left: 24.1rem;
+          width: (unit(image-width(@img))) / 1560 * 100rem;
 
-        @img: './img/pattern-icon-career.png';
+          @img: './img/pattern-icon-career.png';
 
-        @apply animate-infinite-circle-r30-50s;
+          @apply animate-infinite-circle-r30-50s;
 
-        &::before {
-          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-          background-image: var(--pattern-icon-career);
-        }
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--pattern-icon-career);
+          }
 
-        @media only screen and (max-width: @MD) {
-          & {
-            top: -62.4vw - @offsetY;
-            left: 29.1vw;
-            width: (unit(image-width(@img))) / 720 * 100vw;
+          @media only screen and (max-width: @MD) {
+            & {
+              top: -62.4vw - @offsetY;
+              left: 29.1vw;
+              width: (unit(image-width(@img))) / 720 * 100vw;
+            }
           }
         }
       }
 
       & > div:nth-child(2) {
-        top: -10.7rem;
-        left: -31.9rem;
-        width: (unit(image-width(@img))) / 1560 * 100rem;
-        animation-delay: -5s;
+        & > div {
+          top: -10.7rem;
+          left: -31.9rem;
+          width: (unit(image-width(@img))) / 1560 * 100rem;
+          animation-delay: -5s;
 
-        @img: './img/pattern-icon-finance.png';
+          @img: './img/pattern-icon-finance.png';
 
-        @apply animate-infinite-circle-r20-50s;
+          @apply animate-infinite-circle-r20-50s;
 
-        &::before {
-          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-          background-image: var(--pattern-icon-finance);
-          transform: scale(0.65) rotate(280deg);
-        }
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--pattern-icon-finance);
+            transform: scale(0.65) rotate(280deg);
+          }
 
-        @media only screen and (max-width: @MD) {
-          & {
-            top: -33.4vw - @offsetY;
-            left: -49.4vw;
-            width: (unit(image-width(@img))) / 640 * 100vw;
+          @media only screen and (max-width: @MD) {
+            & {
+              top: -33.4vw - @offsetY;
+              left: -49.4vw;
+              width: (unit(image-width(@img))) / 640 * 100vw;
+            }
           }
         }
       }
 
       & > div:nth-child(3) {
-        top: -0.4rem;
-        left: 30.1rem;
-        width: (unit(image-width(@img))) / 1560 * 100rem;
-        animation-delay: -30s;
+        & > div {
+          top: -0.4rem;
+          left: 30.1rem;
+          width: (unit(image-width(@img))) / 1560 * 100rem;
+          animation-delay: -30s;
 
-        @img: './img/pattern-icon-health.png';
-        @apply animate-infinite-circle-reverse-r30-50s;
+          @img: './img/pattern-icon-health.png';
+          @apply animate-infinite-circle-reverse-r30-50s;
 
-        &::before {
-          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-          background-image: var(--pattern-icon-health);
-        }
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--pattern-icon-health);
+          }
 
-        @media only screen and (max-width: @MD) {
-          & {
-            top: -3.4vw - @offsetY;
-            left: 29.1vw;
-            width: (unit(image-width(@img))) / 540 * 100vw;
+          @media only screen and (max-width: @MD) {
+            & {
+              top: -3.4vw - @offsetY;
+              left: 29.1vw;
+              width: (unit(image-width(@img))) / 540 * 100vw;
+            }
           }
         }
       }
 
       & > div:nth-child(4) {
-        top: -24.3rem;
-        left: -42rem;
-        width: (unit(image-width(@img))) / 1560 * 100rem;
-        animation-delay: -15s;
+        & > div {
+          top: -24.3rem;
+          left: -42rem;
+          width: (unit(image-width(@img))) / 1560 * 100rem;
+          animation-delay: -15s;
 
-        @img: './img/pattern-icon-relations.png';
-        @apply animate-infinite-circle-r30-50s;
+          @img: './img/pattern-icon-relations.png';
+          @apply animate-infinite-circle-r30-50s;
 
-        &::before {
-          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-          background-image: var(--pattern-icon-relations);
-          transform: scale(1) rotate(0deg);
-        }
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--pattern-icon-relations);
+            transform: scale(1) rotate(0deg);
+          }
 
-        @media only screen and (max-width: @MD) {
-          & {
-            top: -86.9vw - @offsetY;
-            left: -60.4vw;
-            width: (unit(image-width(@img))) / 640 * 100vw;
+          @media only screen and (max-width: @MD) {
+            & {
+              top: -86.9vw - @offsetY;
+              left: -60.4vw;
+              width: (unit(image-width(@img))) / 640 * 100vw;
+            }
           }
         }
       }
 
       & > div:nth-child(5) {
-        top: 2.5rem;
-        left: -44.1rem;
-        width: (unit(image-width(@img))) / 1560 * 100rem;
-        animation-delay: -45s;
+        & > div {
+          top: 2.5rem;
+          left: -44.1rem;
+          width: (unit(image-width(@img))) / 1560 * 100rem;
+          animation-delay: -45s;
 
-        @img: './img/pattern-icon-society.png';
-        @apply animate-infinite-circle-reverse-r30-50s;
+          @img: './img/pattern-icon-society.png';
+          @apply animate-infinite-circle-reverse-r30-50s;
 
-        &::before {
-          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-          background-image: var(--pattern-icon-society);
-          transform: scale(1) rotate(0deg);
-        }
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--pattern-icon-society);
+            transform: scale(1) rotate(0deg);
+          }
 
-        @media only screen and (max-width: @MD) {
-          & {
-            top: 22.5vw - @offsetY;
-            left: -61.1vw;
-            width: (unit(image-width(@img))) / 640 * 100vw;
+          @media only screen and (max-width: @MD) {
+            & {
+              top: 22.5vw - @offsetY;
+              left: -61.1vw;
+              width: (unit(image-width(@img))) / 640 * 100vw;
+            }
           }
         }
       }
 
       & > div:nth-child(6) {
-        top: 14.4rem;
-        left: -38.7rem;
-        width: (unit(image-width(@img))) / 1560 * 100rem;
-        animation-delay: -35s;
+        & > div {
+          top: 14.4rem;
+          left: -38.7rem;
+          width: (unit(image-width(@img))) / 1560 * 100rem;
+          animation-delay: -35s;
 
-        @img: './img/pattern-icon-career.png';
-        @apply animate-infinite-circle-reverse-r20-50s;
+          @img: './img/pattern-icon-career.png';
+          @apply animate-infinite-circle-reverse-r20-50s;
 
-        &::before {
-          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-          background-image: var(--pattern-icon-career);
-          transform: scale(0.53) rotate(65deg);
-        }
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--pattern-icon-career);
+            transform: scale(0.53) rotate(65deg);
+          }
 
-        @media only screen and (max-width: @MD) {
-          & {
-            top: 77.2vw - @offsetY;
-            left: -62.7vw;
-            width: (unit(image-width(@img))) / 640 * 100vw;
+          @media only screen and (max-width: @MD) {
+            & {
+              top: 77.2vw - @offsetY;
+              left: -62.7vw;
+              width: (unit(image-width(@img))) / 640 * 100vw;
+            }
           }
         }
       }
 
       & > div:nth-child(7) {
-        top: 20.5rem;
-        left: 22.2rem;
-        width: (unit(image-width(@img))) / 1560 * 100rem;
-        animation-delay: -15s;
+        & > div {
+          top: 20.5rem;
+          left: 22.2rem;
+          width: (unit(image-width(@img))) / 1560 * 100rem;
+          animation-delay: -15s;
 
-        @img: './img/pattern-icon-relations.png';
-        @apply animate-infinite-circle-reverse-r20-50s;
+          @img: './img/pattern-icon-relations.png';
+          @apply animate-infinite-circle-reverse-r20-50s;
 
-        &::before {
-          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-          background-image: var(--pattern-icon-relations);
-          transform: scale(0.85) rotate(0deg);
-        }
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--pattern-icon-relations);
+            transform: scale(0.85) rotate(0deg);
+          }
 
-        @media only screen and (max-width: @MD) {
-          & {
-            top: 89vw - @offsetY;
-            left: 23.3vw;
-            width: (unit(image-width(@img))) / 520 * 100vw;
+          @media only screen and (max-width: @MD) {
+            & {
+              top: 89vw - @offsetY;
+              left: 23.3vw;
+              width: (unit(image-width(@img))) / 520 * 100vw;
+            }
           }
         }
       }
