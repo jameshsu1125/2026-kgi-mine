@@ -14,10 +14,11 @@ type TRegularProps = IReactProps & {
   onClick?: (dataset?: Record<string, string>) => void;
   active?: boolean;
   dataset?: Record<string, string>;
+  disabled?: boolean;
 };
 
 const Button = (props: TRegularProps) => {
-  const { children, className, style, clickOnce, onClick, active, dataset } = props;
+  const { children, className, style, clickOnce, onClick, active, dataset, disabled } = props;
 
   const id = useId();
   const [isPress, setIsPress] = useState(false);
@@ -50,6 +51,7 @@ const Button = (props: TRegularProps) => {
         'Button',
         isPress && 'Button-active',
         'cursor-pointer **:pointer-events-none',
+        (disabled || (clickOnce && isPress)) && 'pointer-events-none **:grayscale-50',
       )}
       style={style}
     >

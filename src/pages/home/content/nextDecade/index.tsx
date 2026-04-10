@@ -5,7 +5,7 @@ import { ResponseType } from '@/hooks/useQuestion';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import { memo, useCallback, useContext, useEffect, useMemo } from 'react';
-import { HomeContext, HomePageType } from '../../config';
+import { HomeContext, HomePageType, HomeStepType } from '../../config';
 
 const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }) => {
   const [, setContext] = useContext(Context);
@@ -33,7 +33,7 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
 
   useEffect(() => {
     if (state.nextDecadeData && state.nextDecadeData?.length >= 3) {
-      setState((S) => ({ ...S, page: HomePageType.whichJourney }));
+      setState((S) => ({ ...S, step: HomeStepType.nextDecadeFadeOut }));
     }
   }, [state.nextDecadeData]);
 
@@ -51,6 +51,9 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
         tweenTo={{ y: 0, opacity: 1 }}
         shouldFadeIn
         options={{ duration: 600, delay: 0 }}
+        shouldFadeOut={state.step === HomeStepType.nextDecadeFadeOut}
+        fadeOutStyle={{ opacity: 0 }}
+        optionsFadeOut={{ duration: 600 }}
       >
         <Heading.H2>你想要的下一個十年是?</Heading.H2>
       </TweenerProvider>
@@ -59,6 +62,9 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
         tweenTo={{ y: 0, opacity: 1 }}
         shouldFadeIn
         options={{ duration: 600, delay: 50 }}
+        shouldFadeOut={state.step === HomeStepType.nextDecadeFadeOut}
+        fadeOutStyle={{ opacity: 0 }}
+        optionsFadeOut={{ duration: 600, delay: 50 }}
       >
         <Heading.D4>(請選擇3個)</Heading.D4>
       </TweenerProvider>
@@ -71,6 +77,16 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
               tweenTo={{ opacity: 1, y: 0 }}
               options={{ duration: 600, delay: 100 + index * 50 }}
               shouldFadeIn
+              shouldFadeOut={state.step === HomeStepType.nextDecadeFadeOut}
+              fadeOutStyle={{ opacity: 0 }}
+              optionsFadeOut={{
+                duration: 600,
+                delay: 100 + index * 20,
+                onEnd: () => {
+                  index === currentData.length - 1 &&
+                    setState((S) => ({ ...S, page: HomePageType.whichJourney }));
+                },
+              }}
             >
               <div className='flex w-full justify-center'>
                 <Button
@@ -78,6 +94,7 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
                   onClick={onClick}
                   dataset={dat}
                   active={dat.active === 'true'}
+                  disabled={state.step === HomeStepType.nextDecadeFadeOut}
                 >
                   <Button.Outline size='full'>{dat.name}</Button.Outline>
                 </Button>

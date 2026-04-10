@@ -129,7 +129,7 @@ const Landing = memo(() => {
             duration: animationSetting.duration,
             delay: response?.isSuccess
               ? 0
-              : animationSetting.paragraphStart + animationSetting.gap * 5,
+              : animationSetting.paragraphStart + animationSetting.gap * 4,
             easing: Bezier.outQuart,
           }}
           shouldFadeOut={step === HomeStepType.landingFadeOut}

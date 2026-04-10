@@ -4,6 +4,7 @@ export enum HomeStepType {
   unset = 0,
   landingFadeIn = 1,
   landingFadeOut = 2,
+  nextDecadeFadeOut = 3,
 }
 
 export enum HomePageType {
