@@ -11,16 +11,20 @@ type TRegularProps = IReactProps & {
   className?: string;
   style?: React.CSSProperties;
   clickOnce?: boolean;
-  onClick?: () => void;
+  onClick?: (dataset?: Record<string, string>) => void;
+  active?: boolean;
+  dataset?: Record<string, string>;
 };
 
-const Button = ({ children, className, style, clickOnce, onClick }: TRegularProps) => {
+const Button = (props: TRegularProps) => {
+  const { children, className, style, clickOnce, onClick, active, dataset } = props;
+
   const id = useId();
   const [isPress, setIsPress] = useState(false);
 
   useEffect(() => {
     Click.add(`#${id}`, () => {
-      onClick?.();
+      onClick?.(dataset);
       if (clickOnce) Click.remove(`#${id}`);
       setIsPress(true);
     });
@@ -42,6 +46,7 @@ const Button = ({ children, className, style, clickOnce, onClick }: TRegularProp
       id={id}
       className={twMerge(
         className,
+        active ? 'button-active' : 'button-hover',
         'Button',
         isPress && 'Button-active',
         'cursor-pointer **:pointer-events-none',

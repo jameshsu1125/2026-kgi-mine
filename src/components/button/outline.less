@@ -15,14 +15,28 @@
 
     @apply text-font-white-dark font-noto-sans-tc rounded-l-full rounded-r-full py-3 text-center text-xl tracking-widest;
   }
+}
 
+.button-hover {
   &:hover {
     .Outline {
+      @apply bg-black/20;
+
       @apply bg-black/20;
 
       @media only screen and (max-width: @XS) {
         @apply bg-transparent;
       }
+    }
+  }
+}
+
+.button-active {
+  .Outline {
+    @apply bg-primary-blue/80;
+
+    &:hover {
+      background-color: color-mix(in oklab, var(--color-black) 80%, transparent) !important;
     }
   }
 }

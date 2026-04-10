@@ -12,7 +12,11 @@ export enum HomePageType {
   whichJourney = 'whichJourney',
 }
 
-export type THomeState = { step: HomeStepType; page: HomePageType };
+export type THomeState = {
+  step: HomeStepType;
+  page: HomePageType;
+  nextDecadeData?: Record<string, string>[];
+};
 export type THomeContext = [THomeState, Dispatch<SetStateAction<THomeState>>];
 
 export const HomeState = { step: HomeStepType.unset, page: HomePageType.landing };

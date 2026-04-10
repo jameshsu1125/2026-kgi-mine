@@ -15,8 +15,6 @@ const Background = memo(() => {
   useURI({ path: 'img/pattern-icon-relations.png', name: 'pattern-icon-relations' });
   useURI({ path: 'img/pattern-icon-society.png', name: 'pattern-icon-society' });
 
-  const queryStatus = new URLSearchParams(window.location.search).get('status');
-
   return (
     <div className='background'>
       <div className={page}>
@@ -25,7 +23,7 @@ const Background = memo(() => {
           return (
             <TweenerProvider
               key={index}
-              initialStyle={queryStatus ? { opacity: 1, scale: 1, x: 0, y: 0 } : initialStyle}
+              initialStyle={initialStyle}
               tweenTo={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               options={options}
               shouldFadeIn={state.step === HomeStepType.landingFadeIn}
