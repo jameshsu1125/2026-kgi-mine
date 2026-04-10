@@ -44,6 +44,9 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
       default:
       case PAGE.home:
         return <Home />;
+
+      case PAGE.character:
+        return <div>character</div>;
     }
   }, [page]);
 

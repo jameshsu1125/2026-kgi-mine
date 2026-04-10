@@ -1,48 +1,45 @@
-import Button from '@/components/button';
 import Heading from '@/components/heading';
 import TweenerProvider from '@/components/tweenProvider';
 import { ResponseType } from '@/hooks/useQuestion';
 import { Context } from '@/settings/constant';
-import { ActionType } from '@/settings/type';
 import { memo, useCallback, useContext, useEffect, useMemo } from 'react';
 import { HomeContext, HomePageType, HomeStepType } from '../../config';
+import Button from '@/components/button';
+import { ActionType } from '@/settings/type';
+import { PAGE } from '@/settings/config';
 
-const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }) => {
+const WhichJourney = memo(({ data }: { data?: ResponseType['result']['tripList'] }) => {
   const [, setContext] = useContext(Context);
   const [state, setState] = useContext(HomeContext);
 
   useEffect(() => {
-    if (data) setContext({ type: ActionType.LoadingProcess, state: { enabled: data.length <= 0 } });
-  }, [data]);
+    if (state.whichJourneyData && state.whichJourneyData?.length >= 1) {
+      setState((S) => ({ ...S, step: HomeStepType.whichJourneyFadeOut }));
+    }
+  }, [state.whichJourneyData]);
 
   const onClick = useCallback(
     (dataset?: Record<string, string>) => {
       setState((S) => {
         const clone = { ...S };
-        const isDatasetExist = clone.nextDecadeData?.find((d) => d.name === dataset?.name);
-        const nextDecadeData = isDatasetExist
-          ? clone.nextDecadeData?.filter((d) => d.name !== dataset?.name)
-          : [...(clone.nextDecadeData || []), dataset || {}];
-        if (nextDecadeData && nextDecadeData.length > 3) return S;
-        clone.nextDecadeData = nextDecadeData;
+        const isDatasetExist = clone.whichJourneyData?.find((d) => d.name === dataset?.name);
+        const whichJourneyData = isDatasetExist
+          ? clone.whichJourneyData?.filter((d) => d.name !== dataset?.name)
+          : [...(clone.whichJourneyData || []), dataset || {}];
+        if (whichJourneyData && whichJourneyData.length > 1) return S;
+        clone.whichJourneyData = whichJourneyData;
         return clone;
       });
     },
     [setState],
   );
 
-  useEffect(() => {
-    if (state.nextDecadeData && state.nextDecadeData?.length >= 3) {
-      setState((S) => ({ ...S, step: HomeStepType.nextDecadeFadeOut }));
-    }
-  }, [state.nextDecadeData]);
-
   const currentData = useMemo(() => {
     return data?.map((dat) => {
-      const isActive = state.nextDecadeData?.find((d) => d.name === dat.name);
+      const isActive = state.whichJourneyData?.find((d) => d.name === dat.name);
       return { ...dat, active: String(!!isActive) };
     });
-  }, [data, state.nextDecadeData]);
+  }, [data, state.whichJourneyData]);
 
   return (
     <>
@@ -51,25 +48,14 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
         tweenTo={{ y: 0, opacity: 1 }}
         shouldFadeIn
         options={{ duration: 600, delay: 0 }}
-        shouldFadeOut={state.step === HomeStepType.nextDecadeFadeOut}
+        shouldFadeOut={state.step === HomeStepType.whichJourneyFadeOut}
         fadeOutStyle={{ opacity: 0 }}
         optionsFadeOut={{ duration: 600 }}
       >
         <Heading.H2>你想要的下一個十年是?</Heading.H2>
       </TweenerProvider>
-      <TweenerProvider
-        initialStyle={{ y: 50, opacity: -0.1 }}
-        tweenTo={{ y: 0, opacity: 1 }}
-        shouldFadeIn
-        options={{ duration: 600, delay: 50 }}
-        shouldFadeOut={state.step === HomeStepType.nextDecadeFadeOut}
-        fadeOutStyle={{ opacity: 0 }}
-        optionsFadeOut={{ duration: 600, delay: 50 }}
-      >
-        <Heading.D4>(請選擇3個)</Heading.D4>
-      </TweenerProvider>
       <div className='w-full px-10 pt-16 md:px-44'>
-        <div className='grid w-full grid-cols-2 gap-5 md:gap-8'>
+        <div className='grid w-full grid-cols-1 gap-5 md:gap-8'>
           {currentData?.map((dat, index) => (
             <TweenerProvider
               key={JSON.stringify(index)}
@@ -77,14 +63,13 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
               tweenTo={{ opacity: 1, y: 0 }}
               options={{ duration: 600, delay: 100 + index * 50 }}
               shouldFadeIn
-              shouldFadeOut={state.step === HomeStepType.nextDecadeFadeOut}
+              shouldFadeOut={state.step === HomeStepType.whichJourneyFadeOut}
               fadeOutStyle={{ opacity: 0 }}
               optionsFadeOut={{
                 duration: 600,
                 delay: 100 + index * 20,
                 onEnd: () => {
-                  index === currentData.length - 1 &&
-                    setState((S) => ({ ...S, page: HomePageType.whichJourney }));
+                  setContext({ type: ActionType.Page, state: PAGE.character });
                 },
               }}
             >
@@ -94,7 +79,7 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
                   onClick={onClick}
                   dataset={dat}
                   active={dat.active === 'true'}
-                  disabled={state.step === HomeStepType.nextDecadeFadeOut}
+                  disabled={state.step === HomeStepType.whichJourneyFadeOut}
                 >
                   <Button.Outline size='full'>{dat.name}</Button.Outline>
                 </Button>
@@ -106,4 +91,4 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
     </>
   );
 });
-export default NextDecade;
+export default WhichJourney;

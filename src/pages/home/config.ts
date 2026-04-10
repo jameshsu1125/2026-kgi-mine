@@ -5,6 +5,7 @@ export enum HomeStepType {
   landingFadeIn = 1,
   landingFadeOut = 2,
   nextDecadeFadeOut = 3,
+  whichJourneyFadeOut = 4,
 }
 
 export enum HomePageType {
@@ -17,6 +18,7 @@ export type THomeState = {
   step: HomeStepType;
   page: HomePageType;
   nextDecadeData?: Record<string, string>[];
+  whichJourneyData?: Record<string, string>[];
 };
 export type THomeContext = [THomeState, Dispatch<SetStateAction<THomeState>>];
 

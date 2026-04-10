@@ -1,9 +1,11 @@
+import Sounds from '@/components/sounds';
 import { Dispatch, ReactNode } from 'react';
 
 export enum ActionType {
   Page = 'page',
   LoadingProcess = 'loadingProcess',
   Dataset = 'dataset',
+  Sounds = 'sounds',
 }
 
 export enum LoadingProcessType {
@@ -39,14 +41,17 @@ export type TDatasetState = {
   };
 };
 
+export type TSounds = Sounds;
+
 export interface IState {
   page?: string;
   loadingProcess?: TLoadingProcessState;
   dataset?: TDatasetState;
+  sounds?: TSounds;
 }
 
 export interface IAction {
-  state: IState | TLoadingProcessState | TDatasetState;
+  state: IState | TLoadingProcessState | TDatasetState | TSounds | string;
   type: ActionType;
 }
 

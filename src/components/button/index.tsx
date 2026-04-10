@@ -1,10 +1,11 @@
-import { IReactProps } from '@/settings/type';
+import { ActionType, IReactProps } from '@/settings/type';
 import Regular from './regular';
 import { twMerge } from 'tailwind-merge';
-import { useEffect, useId, useState } from 'react';
+import { useContext, useEffect, useId, useState } from 'react';
 import Click from 'lesca-click';
 import NavBar from './navBar';
 import Outline from './outline';
+import { Context } from '@/settings/constant';
 
 type TRegularProps = IReactProps & {
   id?: string;
@@ -18,6 +19,9 @@ type TRegularProps = IReactProps & {
 };
 
 const Button = (props: TRegularProps) => {
+  const [context] = useContext(Context);
+  const sounds = context[ActionType.Sounds];
+
   const { children, className, style, clickOnce, onClick, active, dataset, disabled } = props;
 
   const id = useId();
@@ -25,6 +29,7 @@ const Button = (props: TRegularProps) => {
 
   useEffect(() => {
     Click.add(`#${id}`, () => {
+      sounds?.play('click');
       onClick?.(dataset);
       if (clickOnce) Click.remove(`#${id}`);
       setIsPress(true);
@@ -40,7 +45,7 @@ const Button = (props: TRegularProps) => {
       Click.remove(`#${id}`);
       window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, []);
+  }, [sounds]);
 
   return (
     <div

@@ -26,10 +26,16 @@ export const InitialState: IState = {
   [ActionType.Page]: PAGE.home,
   [ActionType.LoadingProcess]: LoadingProcessState,
   [ActionType.Dataset]: DatasetState,
+  [ActionType.Sounds]: undefined,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);
 export const Reducer = (state: IState, action: IAction): IState => {
+  // Keep class instances intact; spreading drops prototype methods like play().
+  if (action.type === ActionType.Sounds) {
+    return { ...state, [ActionType.Sounds]: action.state as IState['sounds'] };
+  }
+
   if (action.state instanceof Object) {
     let stateStorage: { [key: string]: any } = {};
     Object.entries(action.state)

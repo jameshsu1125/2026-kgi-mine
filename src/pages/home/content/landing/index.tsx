@@ -4,20 +4,32 @@ import Miner from '@/components/miner';
 import Paragraph from '@/components/paragraph';
 import TweenerProvider from '@/components/tweenProvider';
 import { Bezier } from 'lesca-use-tween';
-import { memo, useContext } from 'react';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { HomeContext, HomePageType, HomeStepType } from '../../config';
 import useStart from '@/hooks/useStart';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
 
 const animationSetting = {
   start: 0,
   duration: 1200,
   paragraphStart: 2000,
-  gap: 1500,
+  gap: 1000,
 };
 
 const Landing = memo(() => {
+  const [context] = useContext(Context);
+  const sounds = context[ActionType.Sounds]!;
   const [{ step }, setState] = useContext(HomeContext);
   const [response, getStart] = useStart();
+  const [onButtonFadeIn, setOnButtonFadeIn] = useState(false);
+
+  useEffect(() => {
+    if (response?.isSuccess)
+      requestAnimationFrame(() => {
+        sounds.play('bgm');
+      });
+  }, [response]);
 
   return (
     <>
@@ -131,6 +143,7 @@ const Landing = memo(() => {
               ? 0
               : animationSetting.paragraphStart + animationSetting.gap * 4,
             easing: Bezier.outQuart,
+            onEnd: () => setOnButtonFadeIn(true),
           }}
           shouldFadeOut={step === HomeStepType.landingFadeOut}
           fadeOutStyle={{ opacity: 0, y: 50 }}
@@ -146,12 +159,7 @@ const Landing = memo(() => {
               <Button.Regular>開始探索</Button.Regular>
             </Button>
           ) : (
-            <Button
-              clickOnce
-              onClick={() => {
-                getStart();
-              }}
-            >
+            <Button clickOnce onClick={() => getStart()} disabled={!onButtonFadeIn}>
               <Button.Outline>登入／註冊會員</Button.Outline>
             </Button>
           )}

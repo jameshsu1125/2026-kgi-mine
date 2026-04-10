@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.4.0",
+    "howler": "^2.2.4",
     "lesca-click": "^5.0.1",
     "lesca-enterframe": "^2.0.0",
     "lesca-fetcher": "^2.1.0",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.2",
+    "@types/howler": "^2.2.12",
     "@types/node": "^25.5.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

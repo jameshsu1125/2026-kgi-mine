@@ -3,6 +3,7 @@ import { HomeContext, HomePageType } from '../config';
 import Landing from './landing';
 import NextDecade from './nextDecade';
 import useQuestion from '@/hooks/useQuestion';
+import WhichJourney from './whichJourney';
 
 const Content = memo(() => {
   const [state] = useContext(HomeContext);
@@ -18,7 +19,7 @@ const Content = memo(() => {
         return <NextDecade data={questionResponse?.result.quizList} />;
 
       case HomePageType.whichJourney:
-        return <div>whichJourney</div>;
+        return <WhichJourney data={questionResponse?.result.tripList} />;
     }
   }, [state.page, questionResponse]);
 
