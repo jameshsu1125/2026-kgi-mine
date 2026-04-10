@@ -8,6 +8,13 @@ import { memo, useContext } from 'react';
 import { HomeContext, HomePageType, HomeStepType } from '../../config';
 import useStart from '@/hooks/useStart';
 
+const animationSetting = {
+  start: 0,
+  duration: 1200,
+  paragraphStart: 2000,
+  gap: 1500,
+};
+
 const Landing = memo(() => {
   const [{ step }, setState] = useContext(HomeContext);
   const [response, getStart] = useStart();
@@ -18,7 +25,11 @@ const Landing = memo(() => {
         initialStyle={{ y: 50, opacity: 0 }}
         tweenTo={{ y: 0, opacity: 1 }}
         shouldFadeIn={step === HomeStepType.landingFadeIn}
-        options={{ duration: 600, delay: 0 }}
+        options={{
+          duration: animationSetting.duration,
+          delay: animationSetting.start,
+          easing: Bezier.inOutQuart,
+        }}
         shouldFadeOut={step === HomeStepType.landingFadeOut}
         fadeOutStyle={{ opacity: 0 }}
         optionsFadeOut={{ duration: 800 }}
@@ -30,7 +41,11 @@ const Landing = memo(() => {
           initialStyle={{ y: 50, opacity: 0 }}
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn={step === HomeStepType.landingFadeIn}
-          options={{ duration: 600, delay: 350 }}
+          options={{
+            duration: animationSetting.duration,
+            delay: animationSetting.paragraphStart,
+            easing: Bezier.inOutQuart,
+          }}
           shouldFadeOut={step === HomeStepType.landingFadeOut}
           fadeOutStyle={{ opacity: 0 }}
           optionsFadeOut={{ duration: 800 }}
@@ -41,7 +56,11 @@ const Landing = memo(() => {
           initialStyle={{ y: 50, opacity: 0 }}
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn={step === HomeStepType.landingFadeIn}
-          options={{ duration: 600, delay: 400 }}
+          options={{
+            duration: animationSetting.duration,
+            delay: animationSetting.paragraphStart + animationSetting.gap,
+            easing: Bezier.inOutQuart,
+          }}
           shouldFadeOut={step === HomeStepType.landingFadeOut}
           fadeOutStyle={{ opacity: 0 }}
           optionsFadeOut={{ duration: 800 }}
@@ -52,7 +71,11 @@ const Landing = memo(() => {
           initialStyle={{ y: 50, opacity: 0 }}
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn={step === HomeStepType.landingFadeIn}
-          options={{ duration: 600, delay: 450 }}
+          options={{
+            duration: animationSetting.duration,
+            delay: animationSetting.paragraphStart + animationSetting.gap * 2,
+            easing: Bezier.inOutQuart,
+          }}
           shouldFadeOut={step === HomeStepType.landingFadeOut}
           fadeOutStyle={{ opacity: 0 }}
           optionsFadeOut={{ duration: 800 }}
@@ -63,7 +86,11 @@ const Landing = memo(() => {
           initialStyle={{ y: 50, opacity: 0 }}
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn={step === HomeStepType.landingFadeIn}
-          options={{ duration: 600, delay: 500 }}
+          options={{
+            duration: animationSetting.duration,
+            delay: animationSetting.paragraphStart + animationSetting.gap * 3,
+            easing: Bezier.inOutQuart,
+          }}
           shouldFadeOut={step === HomeStepType.landingFadeOut}
           fadeOutStyle={{ opacity: 0 }}
           optionsFadeOut={{ duration: 800 }}
@@ -72,10 +99,14 @@ const Landing = memo(() => {
         </TweenerProvider>
       </Paragraph>
       <TweenerProvider
-        initialStyle={{ x: -400, opacity: 0 }}
+        initialStyle={{ x: -320, opacity: 0 }}
         tweenTo={{ x: 0, opacity: 1 }}
         shouldFadeIn={step === HomeStepType.landingFadeIn}
-        options={{ duration: 5000, delay: 700, easing: Bezier.outBack }}
+        options={{
+          duration: 10000,
+          delay: 0,
+          easing: Bezier.outBack,
+        }}
         shouldFadeOut={step === HomeStepType.landingFadeOut}
         optionsFadeOut={{
           duration: 3000,
@@ -95,8 +126,10 @@ const Landing = memo(() => {
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn={step === HomeStepType.landingFadeIn}
           options={{
-            duration: 800,
-            delay: response?.isSuccess ? 0 : 2000,
+            duration: animationSetting.duration,
+            delay: response?.isSuccess
+              ? 0
+              : animationSetting.paragraphStart + animationSetting.gap * 5,
             easing: Bezier.outQuart,
           }}
           shouldFadeOut={step === HomeStepType.landingFadeOut}

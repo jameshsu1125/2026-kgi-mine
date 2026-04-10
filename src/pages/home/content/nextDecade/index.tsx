@@ -50,7 +50,7 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
         initialStyle={{ y: 50, opacity: -0.1 }}
         tweenTo={{ y: 0, opacity: 1 }}
         shouldFadeIn
-        options={{ duration: 600, delay: 800 }}
+        options={{ duration: 600, delay: 0 }}
       >
         <Heading.H2>你想要的下一個十年是?</Heading.H2>
       </TweenerProvider>
@@ -58,7 +58,7 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
         initialStyle={{ y: 50, opacity: -0.1 }}
         tweenTo={{ y: 0, opacity: 1 }}
         shouldFadeIn
-        options={{ duration: 600, delay: 850 }}
+        options={{ duration: 600, delay: 50 }}
       >
         <Heading.D4>(請選擇3個)</Heading.D4>
       </TweenerProvider>
@@ -69,7 +69,7 @@ const NextDecade = memo(({ data }: { data?: ResponseType['result']['quizList'] }
               key={JSON.stringify(index)}
               initialStyle={{ opacity: -0.1, y: 80 }}
               tweenTo={{ opacity: 1, y: 0 }}
-              options={{ duration: 600, delay: 1000 + index * 50 }}
+              options={{ duration: 600, delay: 100 + index * 50 }}
               shouldFadeIn
             >
               <div className='flex w-full justify-center'>
