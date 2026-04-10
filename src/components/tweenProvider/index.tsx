@@ -34,28 +34,19 @@ type TTweenerProvider = IReactProps & {
 };
 
 const TweenerProvider = memo((props: TTweenerProvider) => {
-  const ref = useRef<HTMLDivElement>(null);
-
   const { children, initialStyle, tweenTo, options, shouldFadeIn } = props;
   const { fadeOutStyle, optionsFadeOut, shouldFadeOut } = props;
-
   const [style, setStyle, destroy] = useTween(initialStyle);
 
   useEffect(() => {
-    if (shouldFadeIn) {
-      setStyle(tweenTo, { ...options });
-    }
+    if (shouldFadeIn) setStyle(tweenTo, { ...options });
     return () => destroy();
-  }, [shouldFadeIn, tweenTo]);
+  }, [shouldFadeIn]);
 
   useEffect(() => {
     if (shouldFadeOut && fadeOutStyle) setStyle(fadeOutStyle, optionsFadeOut);
-  }, [fadeOutStyle, shouldFadeOut]);
+  }, [fadeOutStyle]);
 
-  return (
-    <div ref={ref} style={style}>
-      {children}
-    </div>
-  );
+  return <div style={style}>{children}</div>;
 });
 export default TweenerProvider;

@@ -18,6 +18,12 @@ Fetcher.install({
   formatType: formatType.JSON,
 });
 
+if (import.meta.env.VITE_MOCKING === 'true') {
+  import('@/mocks/browser').then((e) => {
+    e.worker.start({ serviceWorker: { url: './mockServiceWorker.js' } });
+  });
+}
+
 const rootAppElement = document.getElementById('immersive_experience_section');
 const rooAppDataset = Object.fromEntries(Object.entries(rootAppElement?.dataset || {}));
 

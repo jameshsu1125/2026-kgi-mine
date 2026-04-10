@@ -2,8 +2,18 @@ import useTween from 'lesca-use-tween';
 import { MINER_SIZE, MINER_SPRITE_FRAME_COUNT } from './config';
 import './index.less';
 
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import {
+  forwardRef,
+  use,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import EnterFrame from 'lesca-enterframe';
+import useCharacterSlowDown from '@/hooks/useCharacterSlowDown';
+import useURI from '@/hooks/useURI';
 
 type MinerProps = {
   height?: string;
@@ -15,10 +25,30 @@ const Miner = forwardRef(({ height, className, autoplay }: MinerProps, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
   const [spriteName, setSpriteName] = useState(0);
+  const [frame, setFrame] = useCharacterSlowDown();
+
+  useURI({ path: '/img/spriteSheet.png', name: 'minerSprite' });
+
+  useEffect(() => {
+    if (frame) {
+      setSpriteName(frame);
+    }
+  }, [frame]);
+
+  const slowDown = useCallback(() => {
+    setFrame(spriteName);
+  }, [spriteName, setFrame]);
 
   useImperativeHandle(ref, () => ({
     play() {
       EnterFrame.play();
+    },
+    stop() {
+      EnterFrame.stop();
+    },
+    slowDown() {
+      EnterFrame.stop();
+      slowDown();
     },
   }));
 

@@ -1,3 +1,4 @@
+import { ResponseType } from '@/hooks/useQuestion';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 export enum HomeStepType {
@@ -17,6 +18,7 @@ export enum HomePageType {
 export type THomeState = {
   step: HomeStepType;
   page: HomePageType;
+  result?: ResponseType['result'];
   nextDecadeData?: Record<string, string>[];
   whichJourneyData?: Record<string, string>[];
 };
