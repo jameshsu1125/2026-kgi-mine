@@ -11,18 +11,20 @@ export enum HomeStepType {
 
 export enum HomePageType {
   landing = 'landing',
-  nextDecade = 'nextDecade',
-  whichJourney = 'whichJourney',
+  decade = 'decade',
+  journey = 'journey',
+  character = 'character',
 }
 
 export type THomeState = {
   step: HomeStepType;
   page: HomePageType;
   result?: ResponseType['result'];
-  nextDecadeData?: Record<string, string>[];
-  whichJourneyData?: Record<string, string>[];
+  decadeData?: Record<string, string>[];
+  journeyData?: Record<string, string>[];
+  characterData?: Record<string, string>;
 };
 export type THomeContext = [THomeState, Dispatch<SetStateAction<THomeState>>];
 
-export const HomeState = { step: HomeStepType.unset, page: HomePageType.landing };
+export const HomeState: THomeState = { step: HomeStepType.unset, page: HomePageType.landing };
 export const HomeContext = createContext<THomeContext>([HomeState, () => {}]);

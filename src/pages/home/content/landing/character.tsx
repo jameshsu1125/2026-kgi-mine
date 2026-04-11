@@ -1,12 +1,18 @@
 import Miner from '@/components/miner';
 import TweenerProvider from '@/components/tweenProvider';
 import { Bezier } from 'lesca-use-tween';
-import { memo, useContext, useRef } from 'react';
+import { memo, useContext, useEffect, useRef } from 'react';
 import { HomeContext, HomePageType, HomeStepType } from '../../config';
 
-const Character = memo(() => {
+const Character = memo(({ shouldStop }: { shouldStop?: boolean }) => {
   const ref = useRef<{ play: () => void; stop: () => void; slowDown: () => void }>(null);
   const [{ step }, setState] = useContext(HomeContext);
+
+  useEffect(() => {
+    if (shouldStop === true) {
+      ref.current?.slowDown();
+    }
+  }, [shouldStop]);
 
   return (
     <TweenerProvider
@@ -17,9 +23,6 @@ const Character = memo(() => {
         duration: 3000,
         delay: 0,
         easing: Bezier.outBack,
-        onEnd: () => {
-          ref.current?.slowDown();
-        },
       }}
       shouldFadeOut={step === HomeStepType.landingFadeOut}
       optionsFadeOut={{
@@ -29,7 +32,7 @@ const Character = memo(() => {
           ref.current?.play();
         },
         onEnd: () => {
-          setState((S) => ({ ...S, page: HomePageType.nextDecade }));
+          setState((S) => ({ ...S, page: HomePageType.decade }));
         },
       }}
       fadeOutStyle={{ x: 350, opacity: 0 }}

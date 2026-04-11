@@ -1,0 +1,97 @@
+import Button from '@/components/button';
+import Heading from '@/components/heading';
+import TweenerProvider from '@/components/tweenProvider';
+import { ResponseType } from '@/hooks/useQuestion';
+import { PAGE } from '@/settings/config';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
+import { memo, useCallback, useContext, useEffect, useMemo } from 'react';
+import { HomeContext, HomePageType, HomeStepType } from '../../config';
+import Article from '@/components/article';
+
+const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType['result']['tripList'] }) => {
+  const [, setContext] = useContext(Context);
+  const [state, setState] = useContext(HomeContext);
+
+  useEffect(() => {
+    if (state.journeyData && state.journeyData?.length >= 1) {
+      setState((S) => ({ ...S, step: HomeStepType.whichJourneyFadeOut }));
+    }
+  }, [state.journeyData]);
+
+  const onClick = useCallback(
+    (dataset?: Record<string, string>) => {
+      setState((S) => {
+        const clone = { ...S };
+        const isDatasetExist = clone.journeyData?.find((d) => d.name === dataset?.name);
+        const whichJourneyData = isDatasetExist
+          ? clone.journeyData?.filter((d) => d.name !== dataset?.name)
+          : [...(clone.journeyData || []), dataset || {}];
+        if (whichJourneyData && whichJourneyData.length > 1) return S;
+        clone.journeyData = whichJourneyData;
+        return clone;
+      });
+    },
+    [setState],
+  );
+
+  const currentData = useMemo(() => {
+    return data?.map((dat) => {
+      const isActive = state.journeyData?.find((d) => d.name === dat.name);
+      return { ...dat, active: String(!!isActive) };
+    });
+  }, [data, state.journeyData]);
+
+  return (
+    <Article>
+      <div className='flex h-full w-full flex-col items-center justify-center'>
+        <TweenerProvider
+          initialStyle={{ y: 50, opacity: -0.1 }}
+          tweenTo={{ y: 0, opacity: 1 }}
+          shouldFadeIn
+          options={{ duration: 600, delay: 0 }}
+          shouldFadeOut={state.step === HomeStepType.whichJourneyFadeOut}
+          fadeOutStyle={{ opacity: 0 }}
+          optionsFadeOut={{ duration: 600 }}
+        >
+          <Heading.H2>你想要的下一個十年是?</Heading.H2>
+        </TweenerProvider>
+        <div className='w-full px-10 pt-16 md:px-44'>
+          <div className='grid w-full grid-cols-1 gap-5 md:gap-8'>
+            {currentData?.map((dat, index) => (
+              <TweenerProvider
+                key={JSON.stringify(index)}
+                initialStyle={{ opacity: -0.1, y: 80 }}
+                tweenTo={{ opacity: 1, y: 0 }}
+                options={{ duration: 600, delay: 100 + index * 50 }}
+                shouldFadeIn
+                shouldFadeOut={state.step === HomeStepType.whichJourneyFadeOut}
+                fadeOutStyle={{ opacity: 0 }}
+                optionsFadeOut={{
+                  duration: 600,
+                  delay: 100 + index * 20,
+                  onEnd: () => {
+                    setState((S) => ({ ...S, page: HomePageType.character }));
+                  },
+                }}
+              >
+                <div className='flex w-full justify-center'>
+                  <Button
+                    className='w-full'
+                    onClick={onClick}
+                    dataset={dat}
+                    active={dat.active === 'true'}
+                    disabled={state.step === HomeStepType.whichJourneyFadeOut}
+                  >
+                    <Button.Outline size='full'>{dat.name}</Button.Outline>
+                  </Button>
+                </div>
+              </TweenerProvider>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Article>
+  );
+});
+export default 你想要哪一場理想旅程呢;

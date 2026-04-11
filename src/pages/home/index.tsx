@@ -41,9 +41,7 @@ const Home = memo(() => {
       >
         <div className='Home'>
           <Background />
-          <Article>
-            <Content />
-          </Article>
+          <Content />
         </div>
       </OnloadProvider>
     </HomeContext.Provider>

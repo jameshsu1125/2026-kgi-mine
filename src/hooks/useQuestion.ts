@@ -5,7 +5,7 @@ import Fetcher from 'lesca-fetcher';
 import { useContext, useEffect, useState } from 'react';
 
 export type ResponseType = {
-  isSuccess: string;
+  isSuccess: boolean;
   result: {
     tripList: { trip: string; name: string }[];
     quizList: { quizId: string; name: string }[];
@@ -27,7 +27,7 @@ const useQuestion = (props?: { auto?: boolean; backgroundAppProcess?: boolean })
     try {
       response = await Fetcher.get(REST_PATH.questions);
     } catch {
-      response = { isSuccess: 'error', result: { tripList: [], quizList: [], minerList: [] } };
+      response = { isSuccess: false, result: { tripList: [], quizList: [], minerList: [] } };
     }
 
     if (!backgroundAppProcess) {
