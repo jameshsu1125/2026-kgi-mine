@@ -43,7 +43,7 @@ const 選擇你的Miner角色 = memo(({ data }: { data?: ResponseType['result'][
           <Heading.H2>開啟一段專屬旅程！</Heading.H2>
         </TweenerProvider>
       </div>
-      <div className='h-[40vh] w-full'>
+      <div className='max-h-[40vh] w-full overflow-hidden'>
         <Carousel data={data} />
       </div>
     </>

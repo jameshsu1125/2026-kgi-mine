@@ -1,12 +1,13 @@
 import { memo, useEffect } from 'react';
 import './index.less';
 import { IReactProps } from '@/settings/type';
+import { twMerge } from 'tailwind-merge';
 
-const Article = memo(({ children }: IReactProps) => {
+const Article = memo(({ children, className }: IReactProps & { className?: string }) => {
   useEffect(() => {}, []);
   return (
     <article className='Article'>
-      <div>{children}</div>
+      <div className={twMerge(className ? className : 'max-w-3xl')}>{children}</div>
     </article>
   );
 });

@@ -59,6 +59,11 @@ export const handlers = [
             name: 'character-gray',
             image: '/img/character-gray.png',
           },
+          {
+            minerId: 'a1b2c3d4-e5f6-4g7h-8i9j-k0l1m2n3o4p5',
+            name: 'character-yellow',
+            image: '/img/character-yellow.png',
+          },
         ],
       },
     });
