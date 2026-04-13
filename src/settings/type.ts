@@ -41,7 +41,9 @@ export type TDatasetState = {
   };
 };
 
-export type TSounds = Sounds;
+export type TSounds = {
+  track?: Sounds;
+};
 
 export interface IState {
   page?: string;

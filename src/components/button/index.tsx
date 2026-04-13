@@ -30,7 +30,7 @@ const Button = (props: TRegularProps) => {
 
   useEffect(() => {
     Click.add(`#${id}`, () => {
-      sounds?.play('click');
+      sounds?.track?.play('click');
       onClick?.(dataset);
       if (clickOnce) Click.remove(`#${id}`);
       setIsPress(true);

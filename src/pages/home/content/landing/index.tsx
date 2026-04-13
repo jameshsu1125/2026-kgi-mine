@@ -28,7 +28,7 @@ const Landing = memo(() => {
   useEffect(() => {
     if (response?.isSuccess)
       requestAnimationFrame(() => {
-        sounds.play('bgm');
+        sounds.track?.play('bgm');
       });
   }, [response]);
 

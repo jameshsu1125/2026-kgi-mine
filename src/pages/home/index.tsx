@@ -19,7 +19,7 @@ const Home = memo(() => {
       onload: () => setPreloadState((S) => ({ ...S, sounds: true })),
     });
 
-    setContext({ type: ActionType.Sounds, state: sounds });
+    setContext({ type: ActionType.Sounds, state: { track: sounds } });
   }, []);
 
   useEffect(() => {

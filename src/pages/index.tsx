@@ -1,14 +1,14 @@
 import Container from '@/components/container';
 import LoadingProcess from '@/components/loadingProcess';
+import { PAGE } from '@/settings/config';
 import { Context, DatasetState, InitialState, Reducer } from '@/settings/constant';
 import '@/settings/global.css';
 import { ActionType, TContext } from '@/settings/type';
 import Click from 'lesca-click';
 import Fetcher, { contentType, formatType } from 'lesca-fetcher';
-import { useContext, useEffect, useMemo, useReducer } from 'react';
+import { useEffect, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from './home';
-import { PAGE } from '@/settings/config';
 
 Click.install('#immersive_experience_section');
 
@@ -28,17 +28,16 @@ const rootAppElement = document.getElementById('immersive_experience_section');
 const rooAppDataset = Object.fromEntries(Object.entries(rootAppElement?.dataset || {}));
 
 const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
-  const [context] = useContext(Context);
-  const page = context[ActionType.Page]!;
-
-  const [state, setState] = useReducer(Reducer, {
+  const [context, setContext] = useReducer(Reducer, {
     ...InitialState,
     [ActionType.Dataset]: { dataset: { ...DatasetState.dataset, ...dataset } },
   });
-  const value: TContext = useMemo(() => [state, setState], [state]);
+
+  const value: TContext = useMemo(() => [context, setContext], [context]);
+  const page = context[ActionType.Page] || PAGE.home;
 
   useEffect(() => {
-    const baseUri = `${state[ActionType.Dataset]?.dataset.baseUri || location.origin}`.replace(
+    const baseUri = `${context[ActionType.Dataset]?.dataset.baseUri || location.origin}`.replace(
       /\/?$/,
       '/',
     );
@@ -51,8 +50,8 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
       case PAGE.home:
         return <Home />;
 
-      case PAGE.character:
-        return <div>character</div>;
+      case PAGE.journey:
+        return <div>journey</div>;
     }
   }, [page]);
 
@@ -60,7 +59,7 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
     <div className='App'>
       <Context.Provider {...{ value }}>
         <Container>{currentPage}</Container>
-        {state[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
+        {context[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
       </Context.Provider>
     </div>
   );

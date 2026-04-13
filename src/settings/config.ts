@@ -1,6 +1,6 @@
 export const PAGE = {
   home: 'home',
-  character: 'character',
+  journey: 'journey',
 };
 
 export const REST_PATH = {

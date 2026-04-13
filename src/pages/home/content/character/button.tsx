@@ -2,8 +2,12 @@ import Button from '@/components/button';
 import TweenerProvider from '@/components/tweenProvider';
 import { memo, useContext } from 'react';
 import { HomeContext, HomeStepType } from '../../config';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
+import { PAGE } from '@/settings/config';
 
 const SelectButton = memo(({ onClick }: { onClick: () => void }) => {
+  const [, setContext] = useContext(Context);
   const [state] = useContext(HomeContext);
   return (
     <TweenerProvider
@@ -13,7 +17,12 @@ const SelectButton = memo(({ onClick }: { onClick: () => void }) => {
       shouldFadeIn={state.step === HomeStepType.characterFadeIn}
       shouldFadeOut={state.step === HomeStepType.characterFadeOut}
       fadeOutStyle={{ opacity: 0 }}
-      optionsFadeOut={{ duration: 600 }}
+      optionsFadeOut={{
+        duration: 600,
+        onEnd: () => {
+          setContext({ type: ActionType.Page, state: PAGE.journey });
+        },
+      }}
     >
       <div className='flex w-full justify-center'>
         <Button onClick={onClick}>
