@@ -8,7 +8,7 @@ type TNavBarProps = {
 };
 
 const NavBar = memo(({ type }: TNavBarProps) => {
-  useURI({ path: `img/navbar-icon-${type}.svg`, name: `navbar-icon-${type}` });
+  useURI({ path: `/navbar-icon-${type}.svg`, name: `navbar-icon-${type}` });
   return (
     <div className={twMerge(type)}>
       <div />

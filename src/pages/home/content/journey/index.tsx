@@ -3,14 +3,12 @@ import Button from '@/components/button';
 import Heading from '@/components/heading';
 import TweenerProvider from '@/components/tweenProvider';
 import { ResponseType } from '@/hooks/useQuestion';
-import { Context } from '@/settings/constant';
 import OnloadProvider from 'lesca-react-onload';
+import { Bezier } from 'lesca-use-tween';
 import { memo, useCallback, useContext, useEffect, useMemo } from 'react';
 import { HomeContext, HomePageType, HomeStepType } from '../../config';
-import { Bezier } from 'lesca-use-tween';
 
 const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType['result']['tripList'] }) => {
-  const [, setContext] = useContext(Context);
   const [state, setState] = useContext(HomeContext);
 
   useEffect(() => {

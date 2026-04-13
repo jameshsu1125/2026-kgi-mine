@@ -27,7 +27,7 @@ const Miner = forwardRef(({ height, className, autoplay }: MinerProps, ref) => {
   const [spriteName, setSpriteName] = useState(0);
   const [frame, setFrame] = useCharacterSlowDown();
 
-  useURI({ path: '/img/character-blue-sprite-sheet.png', name: 'minerSprite' });
+  useURI({ path: 'character-blue-sprite-sheet.png', name: 'minerSprite' });
 
   useEffect(() => {
     if (frame) {

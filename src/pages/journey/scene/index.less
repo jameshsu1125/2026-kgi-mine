@@ -1,0 +1,14 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Scene {
+  @apply relative h-full w-full;
+
+  .back-view {
+    background-image: var(--scene-backView);
+    background-position-x: 0%;
+    background-size: auto 100%;
+
+    @apply absolute top-0 left-0 h-full w-full bg-amber-400;
+  }
+}

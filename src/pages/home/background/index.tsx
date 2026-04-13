@@ -10,11 +10,11 @@ const Background = memo(() => {
   const [state] = useContext(HomeContext);
   const { page } = state;
 
-  useURI({ path: 'img/pattern-icon-career.png', name: 'pattern-icon-career' });
-  useURI({ path: 'img/pattern-icon-finance.png', name: 'pattern-icon-finance' });
-  useURI({ path: 'img/pattern-icon-health.png', name: 'pattern-icon-health' });
-  useURI({ path: 'img/pattern-icon-relations.png', name: 'pattern-icon-relations' });
-  useURI({ path: 'img/pattern-icon-society.png', name: 'pattern-icon-society' });
+  useURI({ path: 'pattern-icon-career.png', name: 'pattern-icon-career' });
+  useURI({ path: 'pattern-icon-finance.png', name: 'pattern-icon-finance' });
+  useURI({ path: 'pattern-icon-health.png', name: 'pattern-icon-health' });
+  useURI({ path: 'pattern-icon-relations.png', name: 'pattern-icon-relations' });
+  useURI({ path: 'pattern-icon-society.png', name: 'pattern-icon-society' });
 
   const shouldFadeIn = useMemo(() => {
     return [

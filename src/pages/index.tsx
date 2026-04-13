@@ -9,6 +9,7 @@ import Fetcher, { contentType, formatType } from 'lesca-fetcher';
 import { useEffect, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from './home';
+import Journey from './journey';
 
 Click.install('#immersive_experience_section');
 
@@ -51,7 +52,7 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
         return <Home />;
 
       case PAGE.journey:
-        return <div>journey</div>;
+        return <Journey />;
     }
   }, [page]);
 
