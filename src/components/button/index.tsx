@@ -6,6 +6,7 @@ import Click from 'lesca-click';
 import NavBar from './navBar';
 import Outline from './outline';
 import { Context } from '@/settings/constant';
+import SliderArrow from './sliderArray';
 
 type TRegularProps = IReactProps & {
   id?: string;
@@ -68,5 +69,6 @@ const Button = (props: TRegularProps) => {
 Button.Regular = Regular;
 Button.NavBar = NavBar;
 Button.Outline = Outline;
+Button.SliderArray = SliderArrow;
 
 export default Button;

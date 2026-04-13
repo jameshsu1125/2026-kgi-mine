@@ -2,11 +2,14 @@ import { ResponseType } from '@/hooks/useQuestion';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 export enum HomeStepType {
-  unset = 0,
-  landingFadeIn = 1,
-  landingFadeOut = 2,
-  nextDecadeFadeOut = 3,
-  whichJourneyFadeOut = 4,
+  unset,
+  landingFadeIn,
+  landingFadeOut,
+  decadeFadeIn,
+  decadeFadeOut,
+  journeyFadeOut,
+  characterFadeIn,
+  characterFadeOut,
 }
 
 export enum HomePageType {
@@ -26,5 +29,5 @@ export type THomeState = {
 };
 export type THomeContext = [THomeState, Dispatch<SetStateAction<THomeState>>];
 
-export const HomeState: THomeState = { step: HomeStepType.unset, page: HomePageType.character };
+export const HomeState: THomeState = { step: HomeStepType.unset, page: HomePageType.landing };
 export const HomeContext = createContext<THomeContext>([HomeState, () => {}]);

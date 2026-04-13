@@ -1,13 +1,15 @@
 import TweenerProvider from '@/components/tweenProvider';
 import { ResponseType } from '@/hooks/useQuestion';
-import { memo, useContext, useEffect } from 'react';
+import { memo, useCallback, useContext, useEffect } from 'react';
 import { HomeContext, HomeStepType } from '../../config';
 import Heading from '@/components/heading';
 import Carousel from './slider';
 import useURI from '@/hooks/useURI';
+import OnloadProvider from 'lesca-react-onload';
+import SelectButton from './button';
 
 const 選擇你的Miner角色 = memo(({ data }: { data?: ResponseType['result']['minerList'] }) => {
-  const [state] = useContext(HomeContext);
+  const [state, setState] = useContext(HomeContext);
   const [, setURI] = useURI();
 
   useEffect(() => {
@@ -17,36 +19,49 @@ const 選擇你的Miner角色 = memo(({ data }: { data?: ResponseType['result'][
       });
   }, [data]);
 
+  if (!data) return null;
+
   return (
-    <>
-      <div className='flex w-full flex-col gap-2 text-center'>
-        <TweenerProvider
-          initialStyle={{ y: 50, opacity: 0 }}
-          tweenTo={{ y: 0, opacity: 1 }}
-          shouldFadeIn
-          options={{ duration: 600, delay: 0 }}
-          shouldFadeOut={state.step === HomeStepType.whichJourneyFadeOut}
-          fadeOutStyle={{ opacity: 0 }}
-          optionsFadeOut={{ duration: 600 }}
-        >
-          <Heading.H2>選擇你的Miner角色</Heading.H2>
-        </TweenerProvider>
-        <TweenerProvider
-          initialStyle={{ y: 50, opacity: 0 }}
-          tweenTo={{ y: 0, opacity: 1 }}
-          shouldFadeIn
-          options={{ duration: 600, delay: 50 }}
-          shouldFadeOut={state.step === HomeStepType.whichJourneyFadeOut}
-          fadeOutStyle={{ opacity: 0 }}
-          optionsFadeOut={{ duration: 600 }}
-        >
-          <Heading.H2>開啟一段專屬旅程！</Heading.H2>
-        </TweenerProvider>
+    <OnloadProvider
+      onload={() => {
+        setState((S) => ({ ...S, step: HomeStepType.characterFadeIn }));
+      }}
+    >
+      <div className='w-full'>
+        <div className='flex w-full flex-col gap-2 text-center'>
+          <TweenerProvider
+            initialStyle={{ y: 50, opacity: 0 }}
+            tweenTo={{ y: 0, opacity: 1 }}
+            shouldFadeIn={state.step === HomeStepType.characterFadeIn}
+            options={{ duration: 600, delay: 0 }}
+            shouldFadeOut={state.step === HomeStepType.characterFadeOut}
+            fadeOutStyle={{ opacity: 0 }}
+            optionsFadeOut={{ duration: 600 }}
+          >
+            <Heading.H2>選擇你的Miner角色</Heading.H2>
+          </TweenerProvider>
+          <TweenerProvider
+            initialStyle={{ y: 50, opacity: 0 }}
+            tweenTo={{ y: 0, opacity: 1 }}
+            shouldFadeIn={state.step === HomeStepType.characterFadeIn}
+            options={{ duration: 600, delay: 50 }}
+            shouldFadeOut={state.step === HomeStepType.characterFadeOut}
+            fadeOutStyle={{ opacity: 0 }}
+            optionsFadeOut={{ duration: 600 }}
+          >
+            <Heading.H2>開啟一段專屬旅程！</Heading.H2>
+          </TweenerProvider>
+        </div>
+        <div className='max-h-[40vh] w-full overflow-hidden'>
+          <Carousel data={data} />
+        </div>
+        <SelectButton
+          onClick={() => {
+            setState((S) => ({ ...S, step: HomeStepType.characterFadeOut }));
+          }}
+        />
       </div>
-      <div className='max-h-[40vh] w-full overflow-hidden'>
-        <Carousel data={data} />
-      </div>
-    </>
+    </OnloadProvider>
   );
 });
 

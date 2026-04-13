@@ -15,7 +15,7 @@ const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType[
 
   useEffect(() => {
     if (state.journeyData && state.journeyData?.length >= 1) {
-      setState((S) => ({ ...S, step: HomeStepType.whichJourneyFadeOut }));
+      setState((S) => ({ ...S, step: HomeStepType.journeyFadeOut }));
     }
   }, [state.journeyData]);
 
@@ -50,7 +50,7 @@ const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType[
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn
           options={{ duration: 600, delay: 0 }}
-          shouldFadeOut={state.step === HomeStepType.whichJourneyFadeOut}
+          shouldFadeOut={state.step === HomeStepType.journeyFadeOut}
           fadeOutStyle={{ opacity: 0 }}
           optionsFadeOut={{ duration: 600 }}
         >
@@ -65,7 +65,7 @@ const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType[
                 tweenTo={{ opacity: 1, y: 0 }}
                 options={{ duration: 600, delay: 100 + index * 50 }}
                 shouldFadeIn
-                shouldFadeOut={state.step === HomeStepType.whichJourneyFadeOut}
+                shouldFadeOut={state.step === HomeStepType.journeyFadeOut}
                 fadeOutStyle={{ opacity: 0 }}
                 optionsFadeOut={{
                   duration: 600,
@@ -81,7 +81,7 @@ const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType[
                     onClick={onClick}
                     dataset={dat}
                     active={dat.active === 'true'}
-                    disabled={state.step === HomeStepType.whichJourneyFadeOut}
+                    disabled={state.step === HomeStepType.journeyFadeOut}
                   >
                     <Button.Outline size='full'>{dat.name}</Button.Outline>
                   </Button>

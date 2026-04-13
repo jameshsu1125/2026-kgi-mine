@@ -1,0 +1,84 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Button {
+  .slider-prev {
+    background: linear-gradient(
+      216.99deg - 360deg,
+      rgba(255, 255, 255, 0.4) 7.98%,
+      rgba(255, 255, 255, 0) 102.3%
+    );
+
+    & > svg {
+      transform: scale(-1, 1);
+    }
+  }
+
+  .slider-next {
+    background: linear-gradient(
+      216.99deg,
+      rgba(255, 255, 255, 0.4) 7.98%,
+      rgba(255, 255, 255, 0) 102.3%
+    );
+  }
+
+  .slider-arrow {
+    border: 1px solid;
+    border-image-source:
+      radial-gradient(
+          134.92% 77.97% at 109.23% 2.54%,
+          rgba(255, 255, 255, 0.5) 0%,
+          rgba(255, 255, 255, 0) 100%
+        )
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+      radial-gradient(
+        164.58% 37.07% at -13.1% 77.4%,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    background: linear-gradient(
+      216.99deg,
+      rgba(255, 255, 255, 0.4) 7.98%,
+      rgba(255, 255, 255, 0) 102.3%
+    );
+    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+
+    @apply flex h-10 w-10 items-center justify-center rounded-full;
+  }
+
+  &:hover {
+    .slider-prev {
+      background: linear-gradient(
+        216.99deg - 360deg,
+        rgba(255, 255, 255, 0.6) 7.98%,
+        rgba(255, 255, 255, 0) 102.3%
+      );
+    }
+
+    .slider-next {
+      background: linear-gradient(
+        216.99deg,
+        rgba(255, 255, 255, 0.6) 7.98%,
+        rgba(255, 255, 255, 0) 102.3%
+      );
+    }
+  }
+
+  &:active {
+    .slider-prev {
+      background: linear-gradient(
+        216.99deg,
+        rgba(255, 255, 255, 0.8) 7.98%,
+        rgba(255, 255, 255, 0) 102.3%
+      );
+    }
+
+    .slider-next {
+      background: linear-gradient(
+        216.99deg - 360deg,
+        rgba(255, 255, 255, 0.8) 7.98%,
+        rgba(255, 255, 255, 0) 102.3%
+      );
+    }
+  }
+}

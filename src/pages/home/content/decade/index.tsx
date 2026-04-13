@@ -34,7 +34,7 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
 
   useEffect(() => {
     if (state.decadeData && state.decadeData?.length >= 3) {
-      setState((S) => ({ ...S, step: HomeStepType.nextDecadeFadeOut }));
+      setState((S) => ({ ...S, step: HomeStepType.decadeFadeOut }));
     }
   }, [state.decadeData]);
 
@@ -53,7 +53,7 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn
           options={{ duration: 600, delay: 0 }}
-          shouldFadeOut={state.step === HomeStepType.nextDecadeFadeOut}
+          shouldFadeOut={state.step === HomeStepType.decadeFadeOut}
           fadeOutStyle={{ opacity: 0 }}
           optionsFadeOut={{ duration: 600 }}
         >
@@ -64,7 +64,7 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
           tweenTo={{ y: 0, opacity: 1 }}
           shouldFadeIn
           options={{ duration: 600, delay: 50 }}
-          shouldFadeOut={state.step === HomeStepType.nextDecadeFadeOut}
+          shouldFadeOut={state.step === HomeStepType.decadeFadeOut}
           fadeOutStyle={{ opacity: 0 }}
           optionsFadeOut={{ duration: 600, delay: 50 }}
         >
@@ -79,7 +79,7 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
                 tweenTo={{ opacity: 1, y: 0 }}
                 options={{ duration: 600, delay: 100 + index * 50 }}
                 shouldFadeIn
-                shouldFadeOut={state.step === HomeStepType.nextDecadeFadeOut}
+                shouldFadeOut={state.step === HomeStepType.decadeFadeOut}
                 fadeOutStyle={{ opacity: 0 }}
                 optionsFadeOut={{
                   duration: 600,
@@ -96,7 +96,7 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
                     onClick={onClick}
                     dataset={dat}
                     active={dat.active === 'true'}
-                    disabled={state.step === HomeStepType.nextDecadeFadeOut}
+                    disabled={state.step === HomeStepType.decadeFadeOut}
                   >
                     <Button.Outline size='full'>{dat.name}</Button.Outline>
                   </Button>

@@ -2,13 +2,29 @@
 @import url('@/settings/config.less');
 
 .slider-container {
-  @apply my-5 w-full bg-amber-400;
+  @apply relative my-5 w-full px-0 md:px-20;
 
   .character {
     padding-bottom: ((unit(image-height(@img) / 2) / unit(image-width(@img))) * 100%);
-    width: 100%;
-    background-size: 100% auto;
 
     @img: './img/character-blue.png';
+
+    @apply relative w-full;
+
+    .active {
+      & > div {
+        background-position-y: 100%;
+      }
+    }
+
+    & > div {
+      @apply absolute top-0 right-0 bottom-0 left-0 duration-200;
+
+      & > div {
+        background-position-y: 0%;
+        background-size: 100% auto;
+        @apply h-full w-full;
+      }
+    }
   }
 }

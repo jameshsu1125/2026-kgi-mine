@@ -60,7 +60,7 @@ export const handlers = [
             image: '/img/character-gray.png',
           },
           {
-            minerId: 'a1b2c3d4-e5f6-4g7h-8i9j-k0l1m2n3o4p5',
+            minerId: 'c3d4e5f6-a7b8-4h9i-8j0k-l1m2n3o4p5q6',
             name: 'character-yellow',
             image: '/img/character-yellow.png',
           },

@@ -25,7 +25,7 @@ const Home = memo(() => {
   useEffect(() => {
     if (preloadState.doms && preloadState.sounds) {
       setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
-      setState((S) => ({ ...S, step: HomeStepType.landingFadeIn }));
+      setState((S) => ({ ...S, step: HomeStepType.LandingFadeIn }));
     }
   }, [preloadState]);
 
