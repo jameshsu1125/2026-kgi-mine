@@ -7,6 +7,7 @@ export enum HomeStepType {
   landingFadeOut,
   decadeFadeIn,
   decadeFadeOut,
+  journeyFadeIn,
   journeyFadeOut,
   characterFadeIn,
   characterFadeOut,

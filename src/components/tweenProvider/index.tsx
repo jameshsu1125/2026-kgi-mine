@@ -45,7 +45,7 @@ const TweenerProvider = memo((props: TTweenerProvider) => {
 
   useEffect(() => {
     if (shouldFadeOut && fadeOutStyle) setStyle(fadeOutStyle, optionsFadeOut);
-  }, [fadeOutStyle]);
+  }, [shouldFadeOut]);
 
   return <div style={style}>{children}</div>;
 });

@@ -111,7 +111,7 @@ const Landing = memo(() => {
           準備好展開旅程嗎？
         </TweenerProvider>
       </Paragraph>
-      <Character shouldStop={response?.isSuccess} />
+      <Character />
       <Buttons getStart={getStart} type={response?.isSuccess ? 'entry' : 'login'} />
     </>
   );

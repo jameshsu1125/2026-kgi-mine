@@ -1,9 +1,10 @@
 import TweenerProvider from '@/components/tweenProvider';
 import useURI from '@/hooks/useURI';
-import { memo, useContext } from 'react';
+import { memo, useContext, useMemo } from 'react';
 import { HomeContext, HomeStepType } from '../config';
 import { HOME_BACKGROUND_TWEEN_PROPERTIES } from './config';
 import './index.less';
+import { Bezier } from 'lesca-use-tween';
 
 const Background = memo(() => {
   const [state] = useContext(HomeContext);
@@ -15,11 +16,23 @@ const Background = memo(() => {
   useURI({ path: 'img/pattern-icon-relations.png', name: 'pattern-icon-relations' });
   useURI({ path: 'img/pattern-icon-society.png', name: 'pattern-icon-society' });
 
-  const shouldFadeIn = [
-    HomeStepType.landingFadeIn,
-    HomeStepType.characterFadeIn,
-    HomeStepType,
-  ].includes(state.step);
+  const shouldFadeIn = useMemo(() => {
+    return [
+      HomeStepType.landingFadeIn,
+      HomeStepType.decadeFadeIn,
+      HomeStepType.journeyFadeIn,
+      HomeStepType.characterFadeIn,
+    ].includes(state.step);
+  }, [state.step]);
+
+  const shouldFadeOut = useMemo(() => {
+    return [
+      HomeStepType.landingFadeOut,
+      HomeStepType.decadeFadeOut,
+      HomeStepType.journeyFadeOut,
+      HomeStepType.characterFadeOut,
+    ].includes(state.step);
+  }, [state.step]);
 
   return (
     <div className='background'>
@@ -32,8 +45,14 @@ const Background = memo(() => {
               initialStyle={initialStyle}
               tweenTo={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               options={options}
-              shouldFadeIn={state.step === HomeStepType.landingFadeIn}
-              shouldFadeOut={state.step === HomeStepType.landingFadeOut}
+              shouldFadeIn={shouldFadeIn}
+              fadeOutStyle={initialStyle}
+              shouldFadeOut={shouldFadeOut}
+              optionsFadeOut={{
+                duration: 2000,
+                delay: index * 50,
+                easing: Bezier.inOutQuart,
+              }}
             >
               <div />
             </TweenerProvider>
