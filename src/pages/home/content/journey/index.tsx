@@ -7,6 +7,7 @@ import { Context } from '@/settings/constant';
 import OnloadProvider from 'lesca-react-onload';
 import { memo, useCallback, useContext, useEffect, useMemo } from 'react';
 import { HomeContext, HomePageType, HomeStepType } from '../../config';
+import { Bezier } from 'lesca-use-tween';
 
 const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType['result']['tripList'] }) => {
   const [, setContext] = useContext(Context);
@@ -55,8 +56,8 @@ const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType[
             shouldFadeIn
             options={{ duration: 600, delay: 0 }}
             shouldFadeOut={state.step === HomeStepType.journeyFadeOut}
-            fadeOutStyle={{ opacity: 0 }}
-            optionsFadeOut={{ duration: 600 }}
+            fadeOutStyle={{ opacity: 0, y: -200 }}
+            optionsFadeOut={{ duration: 1200, easing: Bezier.inQuart }}
           >
             <Heading.H2>你想要的下一個十年是?</Heading.H2>
           </TweenerProvider>
@@ -70,10 +71,11 @@ const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType[
                   options={{ duration: 600, delay: 100 + index * 50 }}
                   shouldFadeIn
                   shouldFadeOut={state.step === HomeStepType.journeyFadeOut}
-                  fadeOutStyle={{ opacity: 0 }}
+                  fadeOutStyle={{ opacity: 0, y: -200 }}
                   optionsFadeOut={{
-                    duration: 600,
+                    duration: 1200,
                     delay: 100 + index * 20,
+                    easing: Bezier.inQuart,
                     onEnd: () => {
                       setTimeout(() => {
                         setState((S) => ({ ...S, page: HomePageType.character }));

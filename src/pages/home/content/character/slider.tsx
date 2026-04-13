@@ -41,7 +41,7 @@ const SliderArrows = memo(({ onClick }: { onClick: (direct: 'left' | 'right') =>
           initialStyle={{ opacity: 0, y: 50 }}
           tweenTo={{ opacity: 1, y: 0 }}
           shouldFadeIn={state.step === HomeStepType.characterFadeIn}
-          options={{ duration: 600, delay: 1200 }}
+          options={{ duration: 600, delay: 600 }}
         >
           <Button onClick={() => onClick('left')}>
             <Button.SliderArray direct='left' />
@@ -51,7 +51,7 @@ const SliderArrows = memo(({ onClick }: { onClick: (direct: 'left' | 'right') =>
           initialStyle={{ opacity: 0, y: 50 }}
           tweenTo={{ opacity: 1, y: 0 }}
           shouldFadeIn={state.step === HomeStepType.characterFadeIn}
-          options={{ duration: 600, delay: 1300 }}
+          options={{ duration: 600, delay: 700 }}
         >
           <Button onClick={() => onClick('right')}>
             <Button.SliderArray direct='right' />
@@ -81,7 +81,7 @@ const SliderContainer = memo(({ data }: SliderContainerProps) => {
       initialStyle={{ opacity: 0, y: 50 }}
       tweenTo={{ opacity: 1, y: 0 }}
       shouldFadeIn={state.step === HomeStepType.characterFadeIn}
-      options={{ duration: 600, delay: 600 }}
+      options={{ duration: 600, delay: 200 }}
       shouldFadeOut={state.step === HomeStepType.characterFadeOut}
       fadeOutStyle={{ opacity: 0 }}
       optionsFadeOut={{ duration: 600 }}

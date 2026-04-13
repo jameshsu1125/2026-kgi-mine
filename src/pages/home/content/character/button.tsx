@@ -9,7 +9,7 @@ const SelectButton = memo(({ onClick }: { onClick: () => void }) => {
     <TweenerProvider
       initialStyle={{ opacity: 0, y: 50 }}
       tweenTo={{ opacity: 1, y: 0 }}
-      options={{ duration: 600, delay: 1500 }}
+      options={{ duration: 600, delay: 800 }}
       shouldFadeIn={state.step === HomeStepType.characterFadeIn}
       shouldFadeOut={state.step === HomeStepType.characterFadeOut}
       fadeOutStyle={{ opacity: 0 }}

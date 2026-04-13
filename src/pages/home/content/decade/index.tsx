@@ -8,6 +8,7 @@ import { ActionType } from '@/settings/type';
 import { memo, useCallback, useContext, useEffect, useMemo } from 'react';
 import { HomeContext, HomePageType, HomeStepType } from '../../config';
 import OnloadProvider from 'lesca-react-onload';
+import { Bezier } from 'lesca-use-tween';
 
 const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['result']['quizList'] }) => {
   const [, setContext] = useContext(Context);
@@ -60,8 +61,8 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
             shouldFadeIn
             options={{ duration: 600, delay: 0 }}
             shouldFadeOut={state.step === HomeStepType.decadeFadeOut}
-            fadeOutStyle={{ opacity: 0 }}
-            optionsFadeOut={{ duration: 600 }}
+            fadeOutStyle={{ opacity: 0, y: -200 }}
+            optionsFadeOut={{ duration: 1200, easing: Bezier.inQuart }}
           >
             <Heading.H2>你想要的下一個十年是?</Heading.H2>
           </TweenerProvider>
@@ -71,8 +72,8 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
             shouldFadeIn
             options={{ duration: 600, delay: 50 }}
             shouldFadeOut={state.step === HomeStepType.decadeFadeOut}
-            fadeOutStyle={{ opacity: 0 }}
-            optionsFadeOut={{ duration: 600, delay: 50 }}
+            fadeOutStyle={{ opacity: 0, y: -200 }}
+            optionsFadeOut={{ duration: 1200, delay: 50, easing: Bezier.inQuart }}
           >
             <Heading.D4>(請選擇3個)</Heading.D4>
           </TweenerProvider>
@@ -86,10 +87,11 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
                   options={{ duration: 600, delay: 100 + index * 50 }}
                   shouldFadeIn
                   shouldFadeOut={state.step === HomeStepType.decadeFadeOut}
-                  fadeOutStyle={{ opacity: 0 }}
+                  fadeOutStyle={{ opacity: 0, y: -200 }}
                   optionsFadeOut={{
-                    duration: 600,
+                    duration: 1200,
                     delay: 100 + index * 20,
+                    easing: Bezier.inQuart,
                     onEnd: () => {
                       setTimeout(() => {
                         index === currentData.length - 1 &&

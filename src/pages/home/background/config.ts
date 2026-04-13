@@ -3,7 +3,7 @@ import { Bezier } from 'lesca-use-tween';
 export const HOME_BACKGROUND_TWEEN_PROPERTIES = [
   {
     initialStyle: { opacity: 0, scale: 2, x: 400, y: -540 },
-    options: { duration: 5300, delay: 700, easing: Bezier.outBack },
+    options: { duration: 5300, delay: 700, easing: Bezier.outQuart },
   },
   {
     initialStyle: { opacity: 0, scale: 2, x: -880, y: -300 },
@@ -19,7 +19,7 @@ export const HOME_BACKGROUND_TWEEN_PROPERTIES = [
   },
   {
     initialStyle: { opacity: 0, scale: 2, x: -550, y: -300 },
-    options: { duration: 7000, delay: 1000, easing: Bezier.outBack },
+    options: { duration: 7000, delay: 1000, easing: Bezier.outQuart },
   },
   {
     initialStyle: { opacity: 0, scale: 2, x: -470, y: 100 },

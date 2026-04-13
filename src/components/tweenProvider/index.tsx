@@ -1,6 +1,6 @@
 import { IReactProps } from '@/settings/type';
 import useTween from 'lesca-use-tween';
-import { CSSProperties, memo, useEffect, useRef } from 'react';
+import { CSSProperties, memo, use, useEffect, useRef, useState } from 'react';
 
 interface CSS extends Omit<CSSProperties, 'rotate'> {
   x?: string | number;
@@ -31,6 +31,8 @@ type TTweenerProvider = IReactProps & {
   optionsFadeOut?: Options;
   shouldFadeIn: boolean;
   shouldFadeOut?: boolean;
+  needSetCSSAfterFadeOut?: boolean;
+  cssAfterFadeOut?: CSS | null;
 };
 
 const TweenerProvider = memo((props: TTweenerProvider) => {
@@ -44,7 +46,16 @@ const TweenerProvider = memo((props: TTweenerProvider) => {
   }, [shouldFadeIn]);
 
   useEffect(() => {
-    if (shouldFadeOut && fadeOutStyle) setStyle(fadeOutStyle, optionsFadeOut);
+    if (shouldFadeOut && fadeOutStyle)
+      setStyle(fadeOutStyle, {
+        ...optionsFadeOut,
+        onEnd: () => {
+          optionsFadeOut?.onEnd?.();
+          if (props.needSetCSSAfterFadeOut && props.cssAfterFadeOut) {
+            setStyle(props.cssAfterFadeOut, 1);
+          }
+        },
+      });
   }, [shouldFadeOut]);
 
   return <div style={style}>{children}</div>;

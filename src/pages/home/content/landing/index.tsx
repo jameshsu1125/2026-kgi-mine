@@ -12,9 +12,9 @@ import Character from './character';
 
 const animationSetting = {
   start: 800,
-  duration: 1500,
-  paragraphStart: 2000,
-  gap: 1200,
+  duration: 600,
+  paragraphStart: 1200,
+  gap: 200,
   easing: Bezier.outQuart,
   y: 30,
 };

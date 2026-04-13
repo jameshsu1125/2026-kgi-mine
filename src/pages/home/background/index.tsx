@@ -1,10 +1,10 @@
 import TweenerProvider from '@/components/tweenProvider';
 import useURI from '@/hooks/useURI';
+import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useMemo } from 'react';
 import { HomeContext, HomeStepType } from '../config';
 import { HOME_BACKGROUND_TWEEN_PROPERTIES } from './config';
 import './index.less';
-import { Bezier } from 'lesca-use-tween';
 
 const Background = memo(() => {
   const [state] = useContext(HomeContext);
@@ -44,15 +44,30 @@ const Background = memo(() => {
               key={index}
               initialStyle={initialStyle}
               tweenTo={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-              options={options}
+              options={
+                state.step === HomeStepType.landingFadeIn
+                  ? options
+                  : Object.fromEntries(
+                      Object.entries(options).map(([key, value]) => [
+                        key,
+                        key === 'delay' || key === 'duration' ? Number(value) * 0.5 : value,
+                      ]),
+                    )
+              }
               shouldFadeIn={shouldFadeIn}
-              fadeOutStyle={initialStyle}
+              fadeOutStyle={
+                state.step === HomeStepType.landingFadeOut
+                  ? initialStyle
+                  : { y: -window.innerHeight * 2 }
+              }
               shouldFadeOut={shouldFadeOut}
               optionsFadeOut={{
                 duration: 2000,
                 delay: index * 50,
-                easing: Bezier.inOutQuart,
+                easing: Bezier.inQuart,
               }}
+              cssAfterFadeOut={{ y: window.innerHeight * 2, opacity: 1, scale: 1, x: 0 }}
+              needSetCSSAfterFadeOut={shouldFadeOut}
             >
               <div />
             </TweenerProvider>
