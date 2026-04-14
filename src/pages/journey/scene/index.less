@@ -4,11 +4,22 @@
 .Scene {
   @apply relative h-full w-full;
 
-  .back-view {
+  .back {
     background-image: var(--scene-backView);
+  }
+
+  .middle {
+    background-image: var(--scene-middleView);
+  }
+
+  .front {
+    background-image: var(--scene-frontView);
+  }
+
+  .view {
     background-position-x: 0%;
     background-size: auto 100%;
 
-    @apply absolute top-0 left-0 h-full w-full bg-amber-400;
+    @apply absolute top-0 left-0 h-full w-full;
   }
 }

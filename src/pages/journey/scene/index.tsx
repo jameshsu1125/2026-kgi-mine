@@ -1,56 +1,67 @@
-import { memo, useContext, useEffect, useState } from 'react';
-import './index.less';
 import useURI from '@/hooks/useURI';
-import { JourneyContext } from '../config';
-import OnloadProvider from 'lesca-react-onload';
 import { TransitionType } from '@/settings/type';
 import EnterFrame from 'lesca-enterframe';
+import OnloadProvider from 'lesca-react-onload';
+import { memo, useContext, useEffect, useState } from 'react';
+import { JourneyContext, JourneyDepth, JourneyStepType } from '../config';
+import './index.less';
+import { twMerge } from 'tailwind-merge';
+import useTween, { Bezier } from 'lesca-use-tween';
 
-const BackView = memo(() => {
-  const [state] = useContext(JourneyContext);
-  console.log(state);
-
-  return <div className='back-view' style={{ backgroundPositionX: `${state.offset}%` }} />;
+const View = memo(({ offset, depth, image }: { offset: number; depth: number; image: string }) => {
+  const currentOffset = offset * depth;
+  return (
+    <div className={twMerge('view', image)} style={{ backgroundPositionX: `${currentOffset}%` }} />
+  );
 });
 
 const Scene = memo(() => {
   const [state, setState] = useContext(JourneyContext);
   const [, setURI] = useURI();
-  const [transition, setTransition] = useState(TransitionType.Unset);
+  const [, setStyle] = useTween({ top: 0 });
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     if (state && state.scene) {
       setURI({ path: `${state.scene}-backView.jpg`, name: 'scene-backView' });
+      setURI({ path: `${state.scene}-middleView.png`, name: 'scene-middleView' });
+      setURI({ path: `${state.scene}-frontView.png`, name: 'scene-frontView' });
     }
   }, [state.scene]);
 
   useEffect(() => {
-    EnterFrame.add(() => {
-      console.log('a');
+    if (state.step === JourneyStepType.fadeIn) {
+      setStyle(
+        { top: 300 },
+        {
+          duration: 10000,
+          easing: Bezier.easeIn,
+          onUpdate: (value: { top: number }) => {
+            setOffset(value.top);
+          },
+          onEnd: (value: { top: number }) => {
+            setOffset(value.top);
+            setState((S) => ({ ...S, step: JourneyStepType.loop }));
+          },
+        },
+      );
+    }
+  }, [state.step]);
 
-      setState((S) => {
-        console.log(S.offset);
-        return { ...S, offset: S.offset + 0.1 };
+  useEffect(() => {
+    if (state.step === JourneyStepType.loop) {
+      EnterFrame.add(() => {
+        setOffset((S) => S + 1);
       });
-    });
-    EnterFrame.play();
-
-    return () => {
-      // EnterFrame.stop();
-      // EnterFrame.destroy();
-    };
-  }, []);
+    }
+  }, [state.step]);
 
   return (
-    <OnloadProvider
-      key={state.scene}
-      onStart={() => setTransition(TransitionType.Unset)}
-      onload={() => setTransition(TransitionType.FadeIn)}
-    >
-      <div className='Scene'>
-        <BackView />
-      </div>
-    </OnloadProvider>
+    <div className='Scene'>
+      <View offset={offset} depth={JourneyDepth.back} image='back' />
+      <View offset={offset} depth={JourneyDepth.middle} image='middle' />
+      <View offset={offset} depth={JourneyDepth.front} image='front' />
+    </div>
   );
 });
 export default Scene;

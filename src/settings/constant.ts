@@ -31,8 +31,6 @@ export const InitialState: IState = {
 
 export const Context = createContext<TContext>([InitialState, () => {}]);
 export const Reducer = (state: IState, action: IAction): IState => {
-  console.log(action.state instanceof Object, action.state);
-
   if (action.state instanceof Object) {
     let stateStorage: { [key: string]: any } = {};
     Object.entries(action.state)

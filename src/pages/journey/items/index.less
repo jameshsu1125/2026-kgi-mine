@@ -1,0 +1,31 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Items {
+  @apply pointer-events-none absolute top-0 left-0 h-full w-full overflow-hidden;
+
+  & > div {
+    @apply relative flex items-center;
+
+    & > div {
+      transform: translateY(5vh);
+      @apply w-full;
+
+      .goldenRiceField-item-1 {
+        width: (unit(image-width(@img))) / 3840 * 100%;
+
+        @img: '../../../../public/goldenRiceField-item-1.png';
+
+        @apply absolute;
+
+        & > div {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+    }
+  }
+}
