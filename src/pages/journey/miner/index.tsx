@@ -5,10 +5,14 @@ import useTween, { Bezier } from 'lesca-use-tween';
 
 const MinerWalker = memo(() => {
   const ref = useRef<{ play: () => void; stop: () => void; slowDown: () => void }>(null);
-  const [style, setStyle] = useTween({ x: -window.innerWidth * 0.55 });
+  const [style, setStyle] = useTween({
+    x: 0,
+    // x: -window.innerWidth * 0.55
+  });
   const [state] = useContext(JourneyContext);
   useEffect(() => {
     if (state.step === JourneyStepType.fadeIn) {
+      return;
       setStyle(
         { x: 0 },
         {
@@ -20,7 +24,7 @@ const MinerWalker = memo(() => {
     }
   }, [state.step]);
   return (
-    <div className='absolute top-0 left-0 flex h-full w-full items-center justify-center'>
+    <div className='pointer-events-none absolute top-0 left-0 flex h-full w-full items-center justify-center'>
       <div style={style}>
         <Miner ref={ref} height='20vh' className='mt-[15vh]' autoplay />
       </div>

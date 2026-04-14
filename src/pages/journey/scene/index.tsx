@@ -1,12 +1,12 @@
 import useURI from '@/hooks/useURI';
-import { TransitionType } from '@/settings/type';
 import EnterFrame from 'lesca-enterframe';
-import OnloadProvider from 'lesca-react-onload';
-import { memo, useContext, useEffect, useState } from 'react';
-import { JourneyContext, JourneyDepth, JourneyStepType } from '../config';
-import './index.less';
-import { twMerge } from 'tailwind-merge';
 import useTween, { Bezier } from 'lesca-use-tween';
+import { memo, useContext, useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
+import { JourneyContext, JourneyDepth, JourneyStepType } from '../config';
+import Items from '../items';
+import MinerWalker from '../miner';
+import './index.less';
 
 const View = memo(({ offset, depth, image }: { offset: number; depth: number; image: string }) => {
   const currentOffset = offset * depth;
@@ -31,6 +31,7 @@ const Scene = memo(() => {
 
   useEffect(() => {
     if (state.step === JourneyStepType.fadeIn) {
+      return;
       setStyle(
         { top: 300 },
         {
@@ -61,6 +62,9 @@ const Scene = memo(() => {
       <View offset={offset} depth={JourneyDepth.back} image='back' />
       <View offset={offset} depth={JourneyDepth.middle} image='middle' />
       <View offset={offset} depth={JourneyDepth.front} image='front' />
+      <Items offset={offset} depth='back' />
+      <MinerWalker />
+      <Items offset={offset} depth='front' />
     </div>
   );
 });

@@ -39,8 +39,20 @@ export const JourneyItemsList = {
     {
       name: 'goldenRiceField-item-1',
       path: 'goldenRiceField-item-1.png',
-      offset: -20,
-      position: 20,
+      top: -1,
+      left: 2739,
+    },
+    {
+      name: 'goldenRiceField-item-2',
+      path: 'goldenRiceField-item-2.png',
+      top: -18.4,
+      left: 1320,
+    },
+    {
+      name: 'goldenRiceField-item-4',
+      path: 'goldenRiceField-item-4.png',
+      top: 1,
+      left: 335,
     },
   ],
   [JourneySceneType.花海平原]: [],

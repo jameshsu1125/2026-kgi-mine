@@ -4,8 +4,6 @@ import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useState } from 'react';
 import { JourneyContext, JourneyState, JourneyStepType } from './config';
 import './index.less';
-import Items from './items';
-import MinerWalker from './miner';
 import Scene from './scene';
 
 const Journey = memo(() => {
@@ -27,8 +25,6 @@ const Journey = memo(() => {
       >
         <div className='Journey'>
           <Scene />
-          <Items />
-          <MinerWalker />
         </div>
       </OnloadProvider>
     </JourneyContext.Provider>
