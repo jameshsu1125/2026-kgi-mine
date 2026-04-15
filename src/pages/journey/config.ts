@@ -21,7 +21,7 @@ export type TJourneyContext = [TJourneyState, Dispatch<SetStateAction<TJourneySt
 
 export const JourneyState = {
   step: JourneyStepType.unset,
-  scene: JourneySceneType.蔚藍海岸,
+  scene: JourneySceneType.月夜雪地,
   loop: 0,
 };
 export const JourneyContext = createContext<TJourneyContext>([JourneyState, () => {}]);
@@ -53,7 +53,11 @@ export const JourneySceneList = {
     { path: 'azureCoast-middleView.png', name: 'scene-middleView' },
     { path: 'azureCoast-frontView.png', name: 'scene-frontView' },
   ],
-  [JourneySceneType.月夜雪地]: [],
+  [JourneySceneType.月夜雪地]: [
+    { path: 'moonlitSnowfield-backView.jpg', name: 'scene-backView' },
+    { path: 'moonlitSnowfield-middleView.png', name: 'scene-middleView' },
+    { path: 'moonlitSnowfield-frontView.png', name: 'scene-frontView' },
+  ],
   [JourneySceneType.翁鬱森林]: [],
 };
 
@@ -213,7 +217,7 @@ export const JourneyItemsList = {
 };
 
 export const JourneySceneDebug: { offset: number; count: number | 'max' } = {
-  offset: 3200,
-  // offset: 0,
+  // offset: 3200,
+  offset: 0,
   count: 'max',
 };
