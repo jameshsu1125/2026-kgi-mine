@@ -29,7 +29,7 @@ const Scene = memo(() => {
   const [offset, setOffset] = useState(JourneySceneDebug.offset);
 
   useEffect(() => {
-    // console.log(offset);
+    console.log(offset);
   }, [offset]);
 
   useEffect(() => {

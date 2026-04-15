@@ -21,7 +21,7 @@ export type TJourneyContext = [TJourneyState, Dispatch<SetStateAction<TJourneySt
 
 export const JourneyState = {
   step: JourneyStepType.unset,
-  scene: JourneySceneType.黃金稻浪,
+  scene: JourneySceneType.花海平原,
   loop: 0,
 };
 export const JourneyContext = createContext<TJourneyContext>([JourneyState, () => {}]);
@@ -43,7 +43,11 @@ export const JourneySceneList = {
     { path: 'goldenRiceField-middleView.png', name: 'scene-middleView' },
     { path: 'goldenRiceField-frontView.png', name: 'scene-frontView' },
   ],
-  [JourneySceneType.花海平原]: [],
+  [JourneySceneType.花海平原]: [
+    { path: 'flowerSeaPlain-backView.jpg', name: 'scene-backView' },
+    { path: 'flowerSeaPlain-middleView.png', name: 'scene-middleView' },
+    { path: 'flowerSeaPlain-frontView.png', name: 'scene-frontView' },
+  ],
   [JourneySceneType.蔚藍海岸]: [],
   [JourneySceneType.月夜雪地]: [],
   [JourneySceneType.翁鬱森林]: [],
@@ -100,14 +104,63 @@ export const JourneyItemsList = {
       left: 3050,
     },
   ],
-  [JourneySceneType.花海平原]: [],
+  [JourneySceneType.花海平原]: [
+    {
+      name: 'flowerSeaPlain-item-1',
+      path: 'flowerSeaPlain-item-1.png',
+      top: -15.7,
+      left: 1750,
+    },
+    {
+      name: 'flowerSeaPlain-item-2',
+      path: 'flowerSeaPlain-item-2.png',
+      top: -10.3,
+      left: 2990,
+    },
+    {
+      name: 'flowerSeaPlain-item-3',
+      path: 'flowerSeaPlain-item-3.png',
+      top: -14,
+      left: 670,
+    },
+    {
+      name: 'flowerSeaPlain-item-4',
+      path: 'flowerSeaPlain-item-4.png',
+      top: -19.3,
+      left: 2780,
+    },
+    {
+      name: 'flowerSeaPlain-item-5',
+      path: 'flowerSeaPlain-item-5.png',
+      top: -11.9,
+      left: 1180,
+    },
+    {
+      name: 'flowerSeaPlain-item-6',
+      path: 'flowerSeaPlain-item-6.png',
+      top: -3,
+      left: 2035,
+    },
+    {
+      name: 'flowerSeaPlain-item-7',
+      path: 'flowerSeaPlain-item-7.png',
+      top: -17.2,
+      left: 2630,
+    },
+    {
+      name: 'flowerSeaPlain-item-8',
+      path: 'flowerSeaPlain-item-8.png',
+      top: -22.7,
+      left: 1495,
+    },
+  ],
   [JourneySceneType.蔚藍海岸]: [],
   [JourneySceneType.月夜雪地]: [],
   [JourneySceneType.翁鬱森林]: [],
 };
 
 export const JourneySceneDebug: { offset: number; count: number | 'max' } = {
-  // offset: 3200,
+  // offset: 2000,
   offset: 0,
   count: 'max',
 };
