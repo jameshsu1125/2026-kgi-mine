@@ -21,7 +21,7 @@ export type TJourneyContext = [TJourneyState, Dispatch<SetStateAction<TJourneySt
 
 export const JourneyState = {
   step: JourneyStepType.unset,
-  scene: JourneySceneType.花海平原,
+  scene: JourneySceneType.蔚藍海岸,
   loop: 0,
 };
 export const JourneyContext = createContext<TJourneyContext>([JourneyState, () => {}]);
@@ -48,7 +48,11 @@ export const JourneySceneList = {
     { path: 'flowerSeaPlain-middleView.png', name: 'scene-middleView' },
     { path: 'flowerSeaPlain-frontView.png', name: 'scene-frontView' },
   ],
-  [JourneySceneType.蔚藍海岸]: [],
+  [JourneySceneType.蔚藍海岸]: [
+    { path: 'azureCoast-backView.jpg', name: 'scene-backView' },
+    { path: 'azureCoast-middleView.png', name: 'scene-middleView' },
+    { path: 'azureCoast-frontView.png', name: 'scene-frontView' },
+  ],
   [JourneySceneType.月夜雪地]: [],
   [JourneySceneType.翁鬱森林]: [],
 };
@@ -82,7 +86,7 @@ export const JourneyItemsList = {
     {
       name: 'goldenRiceField-item-5',
       path: 'goldenRiceField-item-5.png',
-      top: 5,
+      top: 10,
       left: 535,
     },
     {
@@ -154,13 +158,62 @@ export const JourneyItemsList = {
       left: 1495,
     },
   ],
-  [JourneySceneType.蔚藍海岸]: [],
+  [JourneySceneType.蔚藍海岸]: [
+    {
+      name: 'azureCoast-item-1',
+      path: 'azureCoast-item-1.png',
+      top: 10,
+      left: 2680,
+    },
+    {
+      name: 'azureCoast-item-2',
+      path: 'azureCoast-item-2.png',
+      top: -31.5,
+      left: 1040,
+    },
+    {
+      name: 'azureCoast-item-3',
+      path: 'azureCoast-item-3.png',
+      top: -5,
+      left: 2140,
+    },
+    {
+      name: 'azureCoast-item-4',
+      path: 'azureCoast-item-4.png',
+      top: -28.1,
+      left: 2000,
+    },
+    {
+      name: 'azureCoast-item-5',
+      path: 'azureCoast-item-5.png',
+      top: -29.6,
+      left: 3000,
+    },
+    {
+      name: 'azureCoast-item-6',
+      path: 'azureCoast-item-6.png',
+      top: -31.6,
+      left: 550,
+    },
+    {
+      name: 'azureCoast-item-7',
+      path: 'azureCoast-item-7.png',
+      top: -31,
+      left: 60,
+    },
+    {
+      name: 'azureCoast-item-8',
+      path: 'azureCoast-item-8.png',
+      top: 4,
+      left: 550,
+    },
+  ],
   [JourneySceneType.月夜雪地]: [],
   [JourneySceneType.翁鬱森林]: [],
 };
 
 export const JourneySceneDebug: { offset: number; count: number | 'max' } = {
-  // offset: 2000,
-  offset: 0,
+  offset: 3200,
+  // offset: 0,
   count: 'max',
 };

@@ -37,7 +37,7 @@ const Items = memo(({ offset, depth }: { offset: number; depth: 'front' | 'back'
     const items = currentList.sort(() => Math.random() - 0.5).slice(0, pickCount);
 
     return items
-      .filter((item) => (depth === 'back' ? item.top < -5.5 : item.top >= -5.5))
+      .filter((item) => (depth === 'back' ? item.top < 5.5 : item.top >= 5.5))
       .map((item) => {
         setURI({ path: item.path, name: item.name });
         return { name: item.name, top: item.top, left: item.left };

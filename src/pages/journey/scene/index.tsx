@@ -100,10 +100,10 @@ const Scene = memo(() => {
     <div className='Scene'>
       <View offset={offset} depth={JourneyDepth.back} image='back' />
       <View offset={offset} depth={JourneyDepth.middle} image='middle' />
-      <View offset={offset} depth={JourneyDepth.front} image='front' />
       <Items offset={offset} depth='back' />
       <MinerWalker onShowDown={onShowDown} />
       <Items offset={offset} depth='front' />
+      <View offset={offset} depth={JourneyDepth.front} image='front' />
     </div>
   );
 });

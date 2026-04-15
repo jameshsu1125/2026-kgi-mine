@@ -33,7 +33,7 @@ const MinerWalker = memo(({ onShowDown }: MinerWalkerProps) => {
         <Miner
           ref={ref}
           height='20vh'
-          className='mt-[15vh]'
+          className='mt-[25vh]'
           autoplay={JourneySceneDebug.offset === 0}
           onShowDown={onShowDown}
         />
