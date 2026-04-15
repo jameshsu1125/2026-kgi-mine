@@ -11,3 +11,11 @@ export const REST_PATH = {
 export const Debug = {
   resource: true,
 };
+
+export const PATTERN_URI_PROPERTIES = [
+  { path: 'pattern-icon-career.png', name: 'pattern-icon-career' },
+  { path: 'pattern-icon-finance.png', name: 'pattern-icon-finance' },
+  { path: 'pattern-icon-health.png', name: 'pattern-icon-health' },
+  { path: 'pattern-icon-relations.png', name: 'pattern-icon-relations' },
+  { path: 'pattern-icon-society.png', name: 'pattern-icon-society' },
+];

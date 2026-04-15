@@ -2,8 +2,14 @@ import { MINER_SPRITE_FRAME_COUNT, MINER_SPRITE_STOP_FRAME } from '@/components/
 import useTween, { Bezier } from 'lesca-use-tween';
 import { useState } from 'react';
 
+export type CharacterFrame = {
+  step: number;
+  stepShouldGo: number;
+  duration: number;
+} | null;
+
 const useCharacterSlowDown = () => {
-  const [state, setState] = useState<number | null>(null);
+  const [state, setState] = useState<CharacterFrame>(null);
   const [, setFrame] = useTween({ top: 0 });
 
   const fetch = (frame: number) => {
@@ -25,10 +31,18 @@ const useCharacterSlowDown = () => {
               easing: Bezier.outQuad,
               duration,
               onUpdate: ({ top }: { top: number }) => {
-                setState(Math.floor(top) % MINER_SPRITE_FRAME_COUNT);
+                setState({
+                  step: Math.floor(top) % MINER_SPRITE_FRAME_COUNT,
+                  stepShouldGo,
+                  duration,
+                });
               },
               onEnd: ({ top }: { top: number }) => {
-                setState(Math.floor(top) % MINER_SPRITE_FRAME_COUNT);
+                setState({
+                  step: Math.floor(top) % MINER_SPRITE_FRAME_COUNT,
+                  stepShouldGo,
+                  duration,
+                });
                 requestAnimationFrame(() => {
                   setState(null);
                 });

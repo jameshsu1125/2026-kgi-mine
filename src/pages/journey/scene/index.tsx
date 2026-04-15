@@ -3,10 +3,17 @@ import EnterFrame from 'lesca-enterframe';
 import useTween, { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { JourneyContext, JourneyDepth, JourneyStepType } from '../config';
+import {
+  JourneyContext,
+  JourneyDepth,
+  JourneySceneDebug,
+  JourneySceneList,
+  JourneyStepType,
+} from '../config';
 import Items from '../items';
 import MinerWalker from '../miner';
 import './index.less';
+import { CharacterFrame } from '@/hooks/useCharacterSlowDown';
 
 const View = memo(({ offset, depth, image }: { offset: number; depth: number; image: string }) => {
   const currentOffset = offset * depth;
@@ -19,19 +26,22 @@ const Scene = memo(() => {
   const [state, setState] = useContext(JourneyContext);
   const [, setURI] = useURI();
   const [, setStyle] = useTween({ top: 0 });
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(JourneySceneDebug.offset);
 
   useEffect(() => {
-    if (state && state.scene) {
-      setURI({ path: `${state.scene}-backView.jpg`, name: 'scene-backView' });
-      setURI({ path: `${state.scene}-middleView.png`, name: 'scene-middleView' });
-      setURI({ path: `${state.scene}-frontView.png`, name: 'scene-frontView' });
-    }
+    // console.log(offset);
+  }, [offset]);
+
+  useEffect(() => {
+    if (state && state.scene) JourneySceneList[state.scene].forEach((item) => setURI(item));
   }, [state.scene]);
 
   useEffect(() => {
     if (state.step === JourneyStepType.fadeIn) {
-      return;
+      if (JourneySceneDebug.offset) {
+        EnterFrame.stop();
+        return;
+      }
       setStyle(
         { top: 300 },
         {
@@ -46,6 +56,10 @@ const Scene = memo(() => {
           },
         },
       );
+    } else if (state.step === JourneyStepType.fadeOut) {
+      setStyle({ top: offset }, 1);
+    } else if (state.step === JourneyStepType.resume) {
+      EnterFrame.play();
     }
   }, [state.step]);
 
@@ -57,13 +71,38 @@ const Scene = memo(() => {
     }
   }, [state.step]);
 
+  useEffect(() => {
+    if (state.loop) {
+      EnterFrame.stop();
+      console.log(state.loop);
+    }
+  }, [state.loop]);
+
+  const onShowDown = (frame: CharacterFrame) => {
+    if (frame) {
+      setStyle(
+        { top: offset + frame.stepShouldGo },
+        {
+          duration: frame.duration,
+          easing: Bezier.easeOut,
+          onUpdate: (value: { top: number }) => {
+            setOffset(value.top);
+          },
+          onEnd: (value: { top: number }) => {
+            setOffset(value.top);
+          },
+        },
+      );
+    }
+  };
+
   return (
     <div className='Scene'>
       <View offset={offset} depth={JourneyDepth.back} image='back' />
       <View offset={offset} depth={JourneyDepth.middle} image='middle' />
       <View offset={offset} depth={JourneyDepth.front} image='front' />
       <Items offset={offset} depth='back' />
-      <MinerWalker />
+      <MinerWalker onShowDown={onShowDown} />
       <Items offset={offset} depth='front' />
     </div>
   );

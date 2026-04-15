@@ -27,3 +27,30 @@ export const printCSSAnimation = (radius: number = 20, isBlank: boolean = false)
   };
   render();
 };
+
+export const checkElementInViewport = (el: HTMLElement) => {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+};
+
+export const checkElementInViewportWithThreshold = (el: HTMLElement, threshold: number) => {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top >= -threshold &&
+    rect.left >= -threshold &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + threshold &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth) + threshold
+  );
+};
+
+export const checkElementCenterOfScreenWithOffset = (el: HTMLElement, offset: number) => {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.left >= (window.innerWidth - offset) / 2 && rect.left <= (window.innerWidth + offset) / 2
+  );
+};

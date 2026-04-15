@@ -12,16 +12,17 @@ import {
   useState,
 } from 'react';
 import EnterFrame from 'lesca-enterframe';
-import useCharacterSlowDown from '@/hooks/useCharacterSlowDown';
+import useCharacterSlowDown, { CharacterFrame } from '@/hooks/useCharacterSlowDown';
 import useURI from '@/hooks/useURI';
 
 type MinerProps = {
   height?: string;
   className?: string;
   autoplay?: boolean;
+  onShowDown?: (frame: CharacterFrame) => void;
 };
 
-const Miner = forwardRef(({ height, className, autoplay }: MinerProps, ref) => {
+const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProps, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
   const [spriteName, setSpriteName] = useState(0);
@@ -30,14 +31,21 @@ const Miner = forwardRef(({ height, className, autoplay }: MinerProps, ref) => {
   useURI({ path: 'character-blue-sprite-sheet.png', name: 'minerSprite' });
 
   useEffect(() => {
-    if (frame) {
-      setSpriteName(frame);
-    }
+    if (frame) setSpriteName(frame.step);
   }, [frame]);
+
+  useEffect(() => {
+    if (frame) onShowDown?.(frame);
+  }, [frame?.duration]);
 
   const slowDown = useCallback(() => {
     setFrame(spriteName);
+    return frame;
   }, [spriteName, setFrame]);
+
+  const getFrame = useCallback(() => {
+    return frame;
+  }, [frame]);
 
   useImperativeHandle(ref, () => ({
     play() {
@@ -48,7 +56,11 @@ const Miner = forwardRef(({ height, className, autoplay }: MinerProps, ref) => {
     },
     slowDown() {
       EnterFrame.stop();
+
       slowDown();
+    },
+    getFrame() {
+      return getFrame();
     },
   }));
 

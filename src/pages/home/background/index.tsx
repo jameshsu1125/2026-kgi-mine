@@ -1,20 +1,20 @@
 import TweenerProvider from '@/components/tweenProvider';
 import useURI from '@/hooks/useURI';
 import { Bezier } from 'lesca-use-tween';
-import { memo, useContext, useMemo } from 'react';
+import { memo, useContext, useEffect, useMemo } from 'react';
 import { HomeContext, HomeStepType } from '../config';
 import { HOME_BACKGROUND_TWEEN_PROPERTIES } from './config';
 import './index.less';
+import { PATTERN_URI_PROPERTIES } from '@/settings/config';
 
 const Background = memo(() => {
   const [state] = useContext(HomeContext);
   const { page } = state;
+  const [, setURI] = useURI();
 
-  useURI({ path: 'pattern-icon-career.png', name: 'pattern-icon-career' });
-  useURI({ path: 'pattern-icon-finance.png', name: 'pattern-icon-finance' });
-  useURI({ path: 'pattern-icon-health.png', name: 'pattern-icon-health' });
-  useURI({ path: 'pattern-icon-relations.png', name: 'pattern-icon-relations' });
-  useURI({ path: 'pattern-icon-society.png', name: 'pattern-icon-society' });
+  useEffect(() => {
+    PATTERN_URI_PROPERTIES.forEach((item) => setURI(item));
+  }, []);
 
   const shouldFadeIn = useMemo(() => {
     return [

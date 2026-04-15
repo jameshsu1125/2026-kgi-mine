@@ -1,13 +1,22 @@
 import useURI from '@/hooks/useURI';
-import { memo, useContext, useEffect, useMemo, useRef } from 'react';
-import { JourneyContext, JourneyDepth, JourneyItemsList, JourneySceneSize } from '../config';
+import { memo, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  JourneyContext,
+  JourneyDepth,
+  JourneyItemsList,
+  JourneySceneDebug,
+  JourneySceneSize,
+} from '../config';
 import './index.less';
+import Item from './item';
 
 const Items = memo(({ offset, depth }: { offset: number; depth: 'front' | 'back' }) => {
-  const [state] = useContext(JourneyContext);
+  const [state, setState] = useContext(JourneyContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
+  const [offsetRef, setOffsetRef] = useState(0);
+
   const [, setURI] = useURI();
 
   useEffect(() => {
@@ -20,7 +29,13 @@ const Items = memo(({ offset, depth }: { offset: number; depth: 'front' | 'back'
 
   const items = useMemo(() => {
     const { scene } = state;
-    const items = JourneyItemsList[scene];
+    const currentList = JourneyItemsList[scene];
+    const pickCount = Math.min(
+      currentList.length,
+      JourneySceneDebug.count === 'max' ? currentList.length : JourneySceneDebug.count,
+    );
+    const items = currentList.sort(() => Math.random() - 0.5).slice(0, pickCount);
+
     return items
       .filter((item) => (depth === 'back' ? item.top < -5.5 : item.top >= -5.5))
       .map((item) => {
@@ -40,6 +55,8 @@ const Items = memo(({ offset, depth }: { offset: number; depth: 'front' | 'back'
         contentRef.current.style.height = `${currentHeight}px`;
         contentRef.current.style.visibility = 'visible';
         boxRef.current.style.width = `${currentWidth}px`;
+        boxRef.current.style.left = `${currentWidth}px`;
+        setOffsetRef((currentWidth / (currentWidth - width)) * 100);
       }
     };
     resize();
@@ -47,24 +64,26 @@ const Items = memo(({ offset, depth }: { offset: number; depth: 'front' | 'back'
     return () => window.removeEventListener('resize', resize);
   }, []);
 
+  useEffect(() => {
+    if (offsetRef === 0) return;
+    const loop = Math.floor((offset * JourneyDepth.middle) / (offsetRef * 2));
+    setState((S) => ({ ...S, loop }));
+  }, [offset, offsetRef]);
+
+  const left = useMemo(() => {
+    if (offsetRef === 0) return '0%';
+    return `-${(offset * JourneyDepth.middle) % (offsetRef * 2)}%`;
+  }, [offset, offsetRef]);
+
   return (
     <div ref={containerRef} className='Items'>
       <div ref={contentRef}>
-        <div className='content' style={{ left: `-${offset * JourneyDepth.middle}%` }}>
+        <div className='content' style={{ left }}>
           <div ref={boxRef}>
             {items.map((item) => {
               const y = item.top + 5.5;
-              const x = (item.left / 3840) * 100 + 0.5;
-              return (
-                <div
-                  key={item.name}
-                  className={item.name}
-                  style={{
-                    transform: `translateY(${y}vh)`,
-                    left: `${x}%`,
-                  }}
-                />
-              );
+              const x = (item.left / 3840) * 100;
+              return <Item key={item.name} item={item} y={y} x={x} left={left} />;
             })}
           </div>
         </div>

@@ -7,6 +7,7 @@ import NavBar from './navBar';
 import Outline from './outline';
 import { Context } from '@/settings/constant';
 import SliderArrow from './sliderArray';
+import Marker from './marker';
 
 type TRegularProps = IReactProps & {
   id?: string;
@@ -70,5 +71,6 @@ Button.Regular = Regular;
 Button.NavBar = NavBar;
 Button.Outline = Outline;
 Button.SliderArray = SliderArrow;
+Button.Marker = Marker;
 
 export default Button;

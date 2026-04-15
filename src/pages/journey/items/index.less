@@ -12,7 +12,7 @@
       @apply absolute w-full;
 
       & > div {
-        @apply relative h-full;
+        @apply absolute top-0 h-full;
 
         & > div {
           @apply absolute;
@@ -20,6 +20,40 @@
           &::before {
             content: '';
             @apply absolute top-0 w-full bg-contain bg-center bg-no-repeat;
+          }
+
+          .marker {
+            top: -10vh;
+            @apply pointer-events-auto absolute flex h-20 w-full items-end justify-center;
+
+            .box {
+              @apply h-20 w-20 shrink-0 animate-bounce bg-contain bg-center bg-no-repeat;
+            }
+
+            .pattern-icon-career {
+              background-image: var(--pattern-icon-career);
+              animation-delay: 0.5s;
+            }
+
+            .pattern-icon-finance {
+              background-image: var(--pattern-icon-finance);
+              animation-delay: -0.9s;
+            }
+
+            .pattern-icon-health {
+              background-image: var(--pattern-icon-health);
+              animation-delay: -0.5s;
+            }
+
+            .pattern-icon-relations {
+              background-image: var(--pattern-icon-relations);
+              animation-delay: -0.3s;
+            }
+
+            .pattern-icon-society {
+              background-image: var(--pattern-icon-society);
+              animation-delay: 0s;
+            }
           }
         }
 
@@ -31,6 +65,10 @@
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
             background-image: url(@img);
+          }
+
+          .marker > div {
+            margin-left: 0%;
           }
         }
 
@@ -45,6 +83,21 @@
           }
         }
 
+        .goldenRiceField-item-3 {
+          width: (unit(image-height(@img))) / 1080 * 380vh;
+
+          @img: '../../../../public/goldenRiceField-item-3.png';
+
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: url(@img);
+          }
+
+          .marker > div {
+            margin-left: -17%;
+          }
+        }
+
         .goldenRiceField-item-4 {
           width: (unit(image-height(@img))) / 1080 * 210vh;
 
@@ -53,6 +106,70 @@
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
             background-image: var(--goldenRiceField-item-4);
+          }
+
+          .marker > div {
+            margin-left: 30%;
+          }
+        }
+
+        .goldenRiceField-item-5 {
+          width: (unit(image-height(@img))) / 1080 * 210vh;
+
+          @img: '../../../../public/goldenRiceField-item-5.png';
+
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--goldenRiceField-item-5);
+          }
+
+          .marker > div {
+            margin-left: 35%;
+          }
+        }
+
+        .goldenRiceField-item-6 {
+          width: (unit(image-height(@img))) / 1080 * 120vh;
+
+          @img: '../../../../public/goldenRiceField-item-6.png';
+
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--goldenRiceField-item-6);
+          }
+
+          .marker > div {
+            margin-left: 0%;
+          }
+        }
+
+        .goldenRiceField-item-7 {
+          width: (unit(image-height(@img))) / 1080 * 55vh;
+
+          @img: '../../../../public/goldenRiceField-item-7.png';
+
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--goldenRiceField-item-7);
+          }
+
+          .marker > div {
+            margin-left: 0%;
+          }
+        }
+
+        .goldenRiceField-item-8 {
+          width: (unit(image-height(@img))) / 1080 * 200vh;
+
+          @img: '../../../../public/goldenRiceField-item-8.png';
+
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--goldenRiceField-item-8);
+          }
+
+          .marker > div {
+            margin-left: 20%;
           }
         }
       }

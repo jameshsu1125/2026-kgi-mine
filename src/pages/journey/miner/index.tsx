@@ -1,32 +1,42 @@
 import Miner from '@/components/miner';
-import { memo, useContext, useEffect, useRef } from 'react';
-import { JourneyContext, JourneyStepType } from '../config';
+import { CharacterFrame } from '@/hooks/useCharacterSlowDown';
 import useTween, { Bezier } from 'lesca-use-tween';
+import { memo, useContext, useEffect, useRef } from 'react';
+import { JourneyContext, JourneySceneDebug, JourneyStepType } from '../config';
 
-const MinerWalker = memo(() => {
-  const ref = useRef<{ play: () => void; stop: () => void; slowDown: () => void }>(null);
+type MinerWalkerProps = {
+  onShowDown?: (frame: CharacterFrame) => void;
+};
+
+const MinerWalker = memo(({ onShowDown }: MinerWalkerProps) => {
+  const ref = useRef<{
+    play: () => void;
+    stop: () => void;
+    slowDown: () => any;
+    getFrame: () => CharacterFrame | null;
+  }>(null);
   const [style, setStyle] = useTween({
-    x: 0,
-    // x: -window.innerWidth * 0.55
+    x: JourneySceneDebug.offset === 0 ? -window.innerWidth * 0.55 : 0,
   });
   const [state] = useContext(JourneyContext);
   useEffect(() => {
     if (state.step === JourneyStepType.fadeIn) {
-      return;
-      setStyle(
-        { x: 0 },
-        {
-          duration: 10000,
-          onEnd: () => {},
-          easing: Bezier.easeIn,
-        },
-      );
+      if (JourneySceneDebug.offset) return;
+      setStyle({ x: 0 }, { duration: 10000, easing: Bezier.easeIn });
+    } else if (state.step === JourneyStepType.fadeOut) {
+      ref.current?.slowDown();
     }
   }, [state.step]);
   return (
     <div className='pointer-events-none absolute top-0 left-0 flex h-full w-full items-center justify-center'>
       <div style={style}>
-        <Miner ref={ref} height='20vh' className='mt-[15vh]' autoplay />
+        <Miner
+          ref={ref}
+          height='20vh'
+          className='mt-[15vh]'
+          autoplay={JourneySceneDebug.offset === 0}
+          onShowDown={onShowDown}
+        />
       </div>
     </div>
   );
