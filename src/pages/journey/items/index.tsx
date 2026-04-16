@@ -41,7 +41,8 @@ const Items = memo(({ offset, depth }: { offset: number; depth: 'front' | 'back'
       .map((item) => {
         setURI({ path: item.path, name: item.name });
         return { name: item.name, top: item.top, left: item.left };
-      });
+      })
+      .sort((a, b) => a.name.localeCompare(b.name));
   }, [state.scene]);
 
   useEffect(() => {

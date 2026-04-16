@@ -21,7 +21,7 @@ export type TJourneyContext = [TJourneyState, Dispatch<SetStateAction<TJourneySt
 
 export const JourneyState = {
   step: JourneyStepType.unset,
-  scene: JourneySceneType.月夜雪地,
+  scene: JourneySceneType.翁鬱森林,
   loop: 0,
 };
 export const JourneyContext = createContext<TJourneyContext>([JourneyState, () => {}]);
@@ -58,7 +58,11 @@ export const JourneySceneList = {
     { path: 'moonlitSnowfield-middleView.png', name: 'scene-middleView' },
     { path: 'moonlitSnowfield-frontView.png', name: 'scene-frontView' },
   ],
-  [JourneySceneType.翁鬱森林]: [],
+  [JourneySceneType.翁鬱森林]: [
+    { path: 'lushForest-backView.jpg', name: 'scene-backView' },
+    { path: 'lushForest-middleView.png', name: 'scene-middleView' },
+    { path: 'lushForest-frontView.png', name: 'scene-frontView' },
+  ],
 };
 
 export const JourneyItemsList = {
@@ -263,11 +267,60 @@ export const JourneyItemsList = {
       left: 2656,
     },
   ],
-  [JourneySceneType.翁鬱森林]: [],
+  [JourneySceneType.翁鬱森林]: [
+    {
+      name: 'lushForest-item-1',
+      path: 'lushForest-item-1.png',
+      top: -22,
+      left: 860,
+    },
+    {
+      name: 'lushForest-item-2',
+      path: 'lushForest-item-2.png',
+      top: 7,
+      left: 260,
+    },
+    {
+      name: 'lushForest-item-3',
+      path: 'lushForest-item-3.png',
+      top: -11,
+      left: 2970,
+    },
+    {
+      name: 'lushForest-item-4',
+      path: 'lushForest-item-4.png',
+      top: -57.2,
+      left: 2740,
+    },
+    {
+      name: 'lushForest-item-5',
+      path: 'lushForest-item-5.png',
+      top: -54,
+      left: 1630,
+    },
+    {
+      name: 'lushForest-item-6',
+      path: 'lushForest-item-6.png',
+      top: -55.3,
+      left: 630,
+    },
+    {
+      name: 'lushForest-item-7',
+      path: 'lushForest-item-7.png',
+      top: -27.5,
+      left: 1880,
+    },
+    {
+      name: 'lushForest-item-8',
+      path: 'lushForest-item-8.png',
+      top: -3.5,
+      left: 1880,
+    },
+  ],
 };
 
 export const JourneySceneDebug: { offset: number; count: number | 'max' } = {
-  // offset: 1500,
+  // offset: 1930,
   offset: 0,
   count: 'max',
 };

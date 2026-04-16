@@ -22,6 +22,7 @@ const View = memo(({ offset, depth, image }: { offset: number; depth: number; im
   );
 });
 
+let leftRef = 1;
 const Scene = memo(() => {
   const [state, setState] = useContext(JourneyContext);
   const [, setURI] = useURI();
@@ -29,6 +30,7 @@ const Scene = memo(() => {
   const [offset, setOffset] = useState(JourneySceneDebug.offset);
 
   useEffect(() => {
+    leftRef = offset;
     // console.log(offset);
   }, [offset]);
 
@@ -77,6 +79,15 @@ const Scene = memo(() => {
       console.log(state.loop);
     }
   }, [state.loop]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', (e) => {
+      if (e.key === ' ') {
+        EnterFrame.stop();
+        console.log(leftRef);
+      }
+    });
+  });
 
   const onShowDown = (frame: CharacterFrame) => {
     if (frame) {
