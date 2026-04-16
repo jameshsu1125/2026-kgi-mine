@@ -10,6 +10,7 @@ export const REST_PATH = {
 
 export const Debug = {
   resource: true,
+  randomScene: true,
 };
 
 export const PATTERN_URI_PROPERTIES = [

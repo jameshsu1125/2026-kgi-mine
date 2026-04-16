@@ -2,13 +2,21 @@ import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useState } from 'react';
-import { JourneyContext, JourneyState, JourneyStepType } from './config';
+import { JourneyContext, JourneySceneType, JourneyState, JourneyStepType } from './config';
 import './index.less';
 import Scene from './scene';
+import { Debug } from '@/settings/config';
 
 const Journey = memo(() => {
   const [, setContext] = useContext(Context);
-  const [state, setState] = useState(JourneyState);
+  const [state, setState] = useState({
+    ...JourneyState,
+    scene: Debug.randomScene
+      ? Object.values(JourneySceneType)[
+          Math.floor(Math.random() * Object.values(JourneySceneType).length)
+        ]
+      : JourneyState.scene,
+  });
 
   return (
     <JourneyContext.Provider value={[state, setState]}>

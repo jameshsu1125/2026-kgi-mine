@@ -8,7 +8,13 @@ type SoundTrackProps = {
   onError?: (message: string) => void;
 };
 
-type PreloadType = 'onStart';
+type PreloadType =
+  | 'onStart'
+  | 'onAzureCoast'
+  | 'onFlowerSeaPlain'
+  | 'onGoldenRiceField'
+  | 'onLushForest'
+  | 'onMoonlitSnowfield';
 
 export default class Sounds {
   public track: Record<
@@ -49,6 +55,41 @@ export default class Sounds {
       onload: false,
       track: null,
       preloadType: 'onStart',
+    },
+    azureCoast: {
+      src: [MP3List.azureCoast],
+      loop: true,
+      onload: false,
+      track: null,
+      preloadType: 'onAzureCoast',
+    },
+    flowerSeaPlain: {
+      src: [MP3List.flowerSeaPlain],
+      loop: true,
+      onload: false,
+      track: null,
+      preloadType: 'onFlowerSeaPlain',
+    },
+    goldenRiceField: {
+      src: [MP3List.goldenRiceField],
+      loop: true,
+      onload: false,
+      track: null,
+      preloadType: 'onGoldenRiceField',
+    },
+    lushForest: {
+      src: [MP3List.lushForest],
+      loop: true,
+      onload: false,
+      track: null,
+      preloadType: 'onLushForest',
+    },
+    moonlitSnowfield: {
+      src: [MP3List.moonlitSnowfield],
+      loop: true,
+      onload: false,
+      track: null,
+      preloadType: 'onMoonlitSnowfield',
     },
   };
 

@@ -1,3 +1,4 @@
+import { CharacterFrame } from '@/hooks/useCharacterSlowDown';
 import useURI from '@/hooks/useURI';
 import EnterFrame from 'lesca-enterframe';
 import useTween, { Bezier } from 'lesca-use-tween';
@@ -13,7 +14,6 @@ import {
 import Items from '../items';
 import MinerWalker from '../miner';
 import './index.less';
-import { CharacterFrame } from '@/hooks/useCharacterSlowDown';
 
 const View = memo(({ offset, depth, image }: { offset: number; depth: number; image: string }) => {
   const currentOffset = offset * depth;
@@ -87,7 +87,7 @@ const Scene = memo(() => {
         console.log(leftRef);
       }
     });
-  });
+  }, []);
 
   const onShowDown = (frame: CharacterFrame) => {
     if (frame) {

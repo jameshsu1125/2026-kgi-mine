@@ -1,5 +1,5 @@
 import useTween from 'lesca-use-tween';
-import { MINER_SIZE, MINER_SPRITE_FRAME_COUNT } from './config';
+import { MINER_SIZE, MINER_SPRITE_FPS, MINER_SPRITE_FRAME_COUNT } from './config';
 import './index.less';
 
 import {
@@ -27,6 +27,7 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
   const [scale, setScale] = useState(0);
   const [spriteName, setSpriteName] = useState(0);
   const [frame, setFrame] = useCharacterSlowDown();
+  const timeRef = useRef({ lastTime: 0 });
 
   useURI({ path: 'character-blue-sprite-sheet.png', name: 'minerSprite' });
 
@@ -56,7 +57,6 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
     },
     slowDown() {
       EnterFrame.stop();
-
       slowDown();
     },
     getFrame() {
@@ -76,7 +76,15 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
       resize();
       window.addEventListener('resize', resize);
 
-      EnterFrame.add(() => {
+      EnterFrame.add(({ delta }) => {
+        const now = new Date().getTime();
+        const fpsTime = MINER_SPRITE_FPS ? 1000 / MINER_SPRITE_FPS : 0;
+        const fpsFrame = now - timeRef.current.lastTime;
+        if (fpsFrame < fpsTime) {
+          return;
+        }
+        timeRef.current.lastTime = delta;
+        if (timeRef.current.lastTime === 0) return;
         setSpriteName((prev) => (prev + 1) % MINER_SPRITE_FRAME_COUNT);
       });
 
