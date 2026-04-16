@@ -28,7 +28,6 @@ const View = memo(({ offset, depth, image }: { offset: number; depth: number; im
 });
 
 let leftRef = 1;
-let AddEnterFrameBefore = false;
 type TJourneySceneProps = {
   onLooped?: (index: number) => void;
   onItemSelected?: (item: string) => void;

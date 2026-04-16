@@ -12,8 +12,6 @@ type MinerProps = {
   onShowDown?: (frame: CharacterFrame) => void;
 };
 
-let AddEnterFrameBefore = false;
-
 const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProps, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
