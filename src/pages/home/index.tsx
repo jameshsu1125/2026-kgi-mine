@@ -1,4 +1,3 @@
-import Article from '@/components/article';
 import Sounds from '@/components/sounds';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';

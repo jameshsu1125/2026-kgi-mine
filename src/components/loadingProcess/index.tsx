@@ -1,10 +1,10 @@
+import useURI from '@/hooks/useURI';
 import { Context } from '@/settings/constant';
 import { ActionType, IReactProps, LoadingProcessType } from '@/settings/type';
-import { memo, useContext, useEffect } from 'react';
+import { memo, useContext } from 'react';
 import { twMerge } from 'tailwind-merge';
-import './index.less';
-import useURI from '@/hooks/useURI';
 import { LoadingProcessIconList } from './config';
+import './index.less';
 
 const Background = () => (
   <div className='bg-bg-gray-light absolute top-0 h-full w-full opacity-90' />

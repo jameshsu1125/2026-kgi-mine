@@ -1,6 +1,6 @@
 import { IReactProps } from '@/settings/type';
 import useTween from 'lesca-use-tween';
-import { CSSProperties, memo, use, useEffect, useRef, useState } from 'react';
+import { CSSProperties, memo, useEffect } from 'react';
 
 interface CSS extends Omit<CSSProperties, 'rotate'> {
   x?: string | number;
