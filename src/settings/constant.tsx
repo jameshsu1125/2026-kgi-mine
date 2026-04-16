@@ -25,10 +25,18 @@ export const DatasetState: TDatasetState = {
 };
 
 export const ModalState: TModalState = {
-  enabled: false,
+  enabled: true,
   title: '',
-  body: '是否探索一條新的路線?',
-  label: ['確定', '暫時不要'],
+  body: (
+    <>
+      請開啟聲音鍵和調大音量
+      <br />
+      並且關掉省電模式
+      <br />
+      才能獲得最佳體驗喔！
+    </>
+  ),
+  label: ['好的'],
 };
 
 export const UserDataState: TUserDataState = {

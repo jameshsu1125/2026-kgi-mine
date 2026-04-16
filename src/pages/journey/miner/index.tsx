@@ -17,7 +17,7 @@ const MinerWalker = memo(({ onShowDown }: MinerWalkerProps) => {
   }>(null);
 
   const [style, setStyle] = useTween({
-    x: JourneySceneDebug.offset === 0 ? -window.innerWidth * 0.55 : 0,
+    x: JourneySceneDebug.offset === 0 ? -window.innerWidth * 0.6 : 0,
   });
   const [state] = useContext(JourneyContext);
   useEffect(() => {
