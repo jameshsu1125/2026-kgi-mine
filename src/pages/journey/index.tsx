@@ -20,7 +20,7 @@ const Journey = memo(() => {
       : JourneyState.scene,
   });
 
-  const onLooped = useCallback((index: number) => {
+  const onLooped = useCallback((_: number) => {
     setContext({
       type: ActionType.Modal,
       state: {
@@ -41,6 +41,7 @@ const Journey = memo(() => {
               const scenes = Object.values(JourneySceneType).filter((scene) => scene !== S.scene);
               return {
                 ...S,
+                loop: 0,
                 scene: scenes[Math.floor(Math.random() * scenes.length)],
               };
             });

@@ -1,5 +1,9 @@
+import { PreloadType } from '@/components/sounds';
+import { SoundName } from '@/components/sounds/type';
 import { CharacterFrame } from '@/hooks/useCharacterSlowDown';
 import useURI from '@/hooks/useURI';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
 import EnterFrame from 'lesca-enterframe';
 import useTween, { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useEffect, useState } from 'react';
@@ -15,10 +19,6 @@ import {
 import Items from '../items';
 import MinerWalker from '../miner';
 import './index.less';
-import { Context } from '@/settings/constant';
-import { ActionType } from '@/settings/type';
-import { PreloadType } from '@/components/sounds';
-import { SoundName } from '@/components/sounds/type';
 
 const View = memo(({ offset, depth, image }: { offset: number; depth: number; image: string }) => {
   const currentOffset = offset * depth;
@@ -29,7 +29,7 @@ const View = memo(({ offset, depth, image }: { offset: number; depth: number; im
 
 let leftRef = 1;
 const Scene = memo(({ onLooped }: { onLooped?: (index: number) => void }) => {
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const sounds = context[ActionType.Sounds];
 
   const [state, setState] = useContext(JourneyContext);
@@ -39,7 +39,6 @@ const Scene = memo(({ onLooped }: { onLooped?: (index: number) => void }) => {
 
   useEffect(() => {
     leftRef = offset;
-    // console.log(offset);
   }, [offset]);
 
   useEffect(() => {
@@ -127,10 +126,7 @@ const Scene = memo(({ onLooped }: { onLooped?: (index: number) => void }) => {
 
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
-      if (e.key === ' ') {
-        //  EnterFrame.stop();
-        console.log(leftRef);
-      }
+      if (e.key === '1') console.log(leftRef);
     });
   }, []);
 
