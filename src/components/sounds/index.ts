@@ -1,11 +1,7 @@
 import { Howl } from 'howler';
 import './mobile-audio-unlock';
-import bgm from './mp3/bgm.mp3';
-import click from './mp3/click.mp3';
-import wrong from './mp3/wrong.mp3';
-import correct from './mp3/correct.mp3';
-import levelUp from './mp3/levelUp.mp3';
 import { SoundName } from './type';
+import { MP3List } from './config';
 
 type SoundTrackProps = {
   onload?: (type: PreloadType) => void;
@@ -19,11 +15,41 @@ export default class Sounds {
     SoundName,
     { src: string[]; loop: boolean; onload: boolean; track: Howl | null; preloadType: PreloadType }
   > = {
-    bgm: { src: [bgm], loop: true, onload: false, track: null, preloadType: 'onStart' },
-    click: { src: [click], loop: false, onload: false, track: null, preloadType: 'onStart' },
-    correct: { src: [correct], loop: false, onload: false, track: null, preloadType: 'onStart' },
-    wrong: { src: [wrong], loop: false, onload: false, track: null, preloadType: 'onStart' },
-    levelUp: { src: [levelUp], loop: false, onload: false, track: null, preloadType: 'onStart' },
+    bgm: {
+      src: [MP3List.bgm],
+      loop: true,
+      onload: false,
+      track: null,
+      preloadType: 'onStart',
+    },
+    click: {
+      src: [MP3List.click],
+      loop: false,
+      onload: false,
+      track: null,
+      preloadType: 'onStart',
+    },
+    correct: {
+      src: [MP3List.correct],
+      loop: false,
+      onload: false,
+      track: null,
+      preloadType: 'onStart',
+    },
+    wrong: {
+      src: [MP3List.wrong],
+      loop: false,
+      onload: false,
+      track: null,
+      preloadType: 'onStart',
+    },
+    levelUp: {
+      src: [MP3List.levelUp],
+      loop: false,
+      onload: false,
+      track: null,
+      preloadType: 'onStart',
+    },
   };
 
   private onload: (type: PreloadType) => void;
