@@ -1,0 +1,61 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.UserData {
+  @apply absolute top-0 flex h-full w-full items-end;
+
+  & > div {
+    @apply mb-16 flex w-full flex-col items-center justify-center gap-2;
+
+    & > div:nth-child(1) {
+      @apply font-roboto-condensed flex w-full flex-row items-center justify-center gap-2 text-[#333333];
+
+      & > div:nth-child(1) {
+        @apply font-montserrat font-bold;
+      }
+
+      & > div:nth-child(3) {
+        @apply font-bold;
+      }
+    }
+
+    & > div:nth-child(2) {
+      @apply flex w-full flex-row items-center justify-center;
+      & > div:not(:last-child) {
+        @apply border-r;
+      }
+
+      & > div {
+        @apply flex w-20 flex-row items-center justify-center gap-1;
+
+        & > div {
+          @apply h-6 w-6 bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .pattern-xs-icon-base {
+        background-image: var(--pattern-xs-icon-base);
+      }
+
+      .pattern-xs-icon-career {
+        background-image: var(--pattern-xs-icon-career);
+      }
+
+      .pattern-xs-icon-finance {
+        background-image: var(--pattern-xs-icon-finance);
+      }
+
+      .pattern-xs-icon-health {
+        background-image: var(--pattern-xs-icon-health);
+      }
+
+      .pattern-xs-icon-relations {
+        background-image: var(--pattern-xs-icon-relations);
+      }
+
+      .pattern-xs-icon-society {
+        background-image: var(--pattern-xs-icon-society);
+      }
+    }
+  }
+}

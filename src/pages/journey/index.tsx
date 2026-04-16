@@ -6,6 +6,7 @@ import { memo, useCallback, useContext, useState } from 'react';
 import { JourneyContext, JourneySceneType, JourneyState, JourneyStepType } from './config';
 import './index.less';
 import Scene from './scene';
+import UserData from './userData';
 
 const Journey = memo(() => {
   const [context, setContext] = useContext(Context);
@@ -102,6 +103,7 @@ const Journey = memo(() => {
       >
         <div className='Journey'>
           <Scene onLooped={onLooped} onItemSelected={onItemSelected} />
+          <UserData />
         </div>
       </OnloadProvider>
     </JourneyContext.Provider>

@@ -33,7 +33,14 @@ const Home = memo(() => {
     const { journeyData } = state;
     if (journeyData) {
       const [{ name }] = journeyData;
-      setContext({ type: ActionType.UserData, state: { journey: name } });
+      setContext({
+        type: ActionType.UserData,
+        state: {
+          journey:
+            (name as '金黃稻浪' | '花海平原' | '蔚藍海岸' | '月夜雪地' | '晴光森林' | undefined) ||
+            '晴光森林',
+        },
+      });
     }
   }, [state.journeyData]);
 
