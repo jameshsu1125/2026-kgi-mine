@@ -108,7 +108,7 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
                       active={dat.active === 'true'}
                       disabled={state.step === HomeStepType.decadeFadeOut}
                     >
-                      <Button.Outline size='full'>{dat.name}</Button.Outline>
+                      <Button.Outline size='w-full'>{dat.name}</Button.Outline>
                     </Button>
                   </div>
                 </TweenerProvider>

@@ -89,7 +89,7 @@ const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType[
                       active={dat.active === 'true'}
                       disabled={state.step === HomeStepType.journeyFadeOut}
                     >
-                      <Button.Outline size='full'>{dat.name}</Button.Outline>
+                      <Button.Outline size='w-full'>{dat.name}</Button.Outline>
                     </Button>
                   </div>
                 </TweenerProvider>

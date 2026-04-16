@@ -1,11 +1,11 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 export enum JourneySceneType {
-  黃金稻浪 = 'goldenRiceField',
+  金黃稻浪 = 'goldenRiceField',
   花海平原 = 'flowerSeaPlain',
   蔚藍海岸 = 'azureCoast',
   月夜雪地 = 'moonlitSnowfield',
-  翁鬱森林 = 'lushForest',
+  晴光森林 = 'lushForest',
 }
 
 export enum JourneyStepType {
@@ -21,7 +21,7 @@ export type TJourneyContext = [TJourneyState, Dispatch<SetStateAction<TJourneySt
 
 export const JourneyState = {
   step: JourneyStepType.unset,
-  scene: JourneySceneType.翁鬱森林,
+  scene: JourneySceneType.晴光森林,
   loop: 0,
 };
 export const JourneyContext = createContext<TJourneyContext>([JourneyState, () => {}]);
@@ -38,7 +38,7 @@ export const JourneySceneSize = {
 };
 
 export const JourneySceneList = {
-  [JourneySceneType.黃金稻浪]: [
+  [JourneySceneType.金黃稻浪]: [
     { path: 'scene-goldenRiceField-view-back.jpg', name: 'scene-backView' },
     { path: 'scene-goldenRiceField-view-middle.png', name: 'scene-middleView' },
     { path: 'scene-goldenRiceField-view-front.png', name: 'scene-frontView' },
@@ -58,7 +58,7 @@ export const JourneySceneList = {
     { path: 'scene-moonlitSnowfield-view-middle.png', name: 'scene-middleView' },
     { path: 'scene-moonlitSnowfield-view-front.png', name: 'scene-frontView' },
   ],
-  [JourneySceneType.翁鬱森林]: [
+  [JourneySceneType.晴光森林]: [
     { path: 'scene-lushForest-view-back.jpg', name: 'scene-backView' },
     { path: 'scene-lushForest-view-middle.png', name: 'scene-middleView' },
     { path: 'scene-lushForest-view-front.png', name: 'scene-frontView' },
@@ -66,7 +66,7 @@ export const JourneySceneList = {
 };
 
 export const JourneyItemsList = {
-  [JourneySceneType.黃金稻浪]: [
+  [JourneySceneType.金黃稻浪]: [
     { name: 'goldenRiceField-item-1', path: 'scene-goldenRiceField-item-1.png', top: -20.7, left: 2739 },
     { name: 'goldenRiceField-item-2', path: 'scene-goldenRiceField-item-2.png', top: -18.4, left: 1320 },
     { name: 'goldenRiceField-item-3', path: 'scene-goldenRiceField-item-3.png', top: -7, left: 1900 },
@@ -106,7 +106,7 @@ export const JourneyItemsList = {
     { name: 'moonlitSnowfield-item-7', path: 'scene-moonlitSnowfield-item-7.png', top: -8, left: 326 },
     { name: 'moonlitSnowfield-item-8', path: 'scene-moonlitSnowfield-item-8.png', top: -1, left: 2656 },
   ],
-  [JourneySceneType.翁鬱森林]: [
+  [JourneySceneType.晴光森林]: [
     { name: 'lushForest-item-1', path: 'scene-lushForest-item-1.png', top: -22, left: 860 },
     { name: 'lushForest-item-2', path: 'scene-lushForest-item-2.png', top: 7, left: 260 },
     { name: 'lushForest-item-3', path: 'scene-lushForest-item-3.png', top: -11, left: 2970 },

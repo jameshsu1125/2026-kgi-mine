@@ -7,6 +7,7 @@ export enum ActionType {
   Dataset = 'dataset',
   Sounds = 'sounds',
   Modal = 'modal',
+  UserData = 'userData',
 }
 
 export enum LoadingProcessType {
@@ -54,12 +55,18 @@ export type TModalState = {
   onConfirm?: (label: string) => void;
 };
 
+export type TUserDataState = {
+  journey?: string;
+  character?: string;
+};
+
 export interface IState {
   [ActionType.Page]?: string;
   [ActionType.LoadingProcess]?: TLoadingProcessState;
   [ActionType.Dataset]?: TDatasetState;
   [ActionType.Sounds]?: TSounds;
   [ActionType.Modal]?: TModalState;
+  [ActionType.UserData]?: TUserDataState;
 }
 
 export interface IAction {
@@ -69,6 +76,7 @@ export interface IAction {
     | IState[ActionType.Dataset]
     | IState[ActionType.Sounds]
     | IState[ActionType.Modal]
+    | IState[ActionType.UserData]
     | string;
   type: ActionType;
 }

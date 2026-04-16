@@ -29,6 +29,14 @@ const Home = memo(() => {
     }
   }, [preloadState]);
 
+  useEffect(() => {
+    const { journeyData } = state;
+    if (journeyData) {
+      const [{ name }] = journeyData;
+      setContext({ type: ActionType.UserData, state: { journey: name } });
+    }
+  }, [state.journeyData]);
+
   if (!preloadState.sounds) return null;
 
   return (

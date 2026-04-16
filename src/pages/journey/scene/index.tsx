@@ -55,7 +55,7 @@ const Scene = memo(() => {
         let name: SoundName = 'azureCoast';
 
         switch (state.scene) {
-          case JourneySceneType.黃金稻浪:
+          case JourneySceneType.金黃稻浪:
             type = 'onGoldenRiceField';
             name = 'goldenRiceField';
             break;
@@ -71,7 +71,7 @@ const Scene = memo(() => {
             type = 'onMoonlitSnowfield';
             name = 'moonlitSnowfield';
             break;
-          case JourneySceneType.翁鬱森林:
+          case JourneySceneType.晴光森林:
             type = 'onLushForest';
             name = 'lushForest';
             break;
