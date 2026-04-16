@@ -63,9 +63,6 @@ const SliderArrows = memo(({ onClick }: { onClick: (direct: 'left' | 'right') =>
 });
 
 const SliderContainer = memo(({ data }: SliderContainerProps) => {
-  // const [context] = useContext(Context);
-  // const sounds = context[ActionType.Sounds]!;
-
   const [state, setState] = useContext(HomeContext);
   const [index, setIndex] = useState(window.innerWidth >= 768 ? 2 : 0);
   const swiperRef = useRef<S | null>(null);
@@ -73,7 +70,6 @@ const SliderContainer = memo(({ data }: SliderContainerProps) => {
   useEffect(() => {
     if (!data) return;
     setState((S) => ({ ...S, characterData: data[index] }));
-    // sounds?.play('levelUp');
   }, [index, data]);
 
   return (

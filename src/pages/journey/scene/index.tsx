@@ -28,144 +28,145 @@ const View = memo(({ offset, depth, image }: { offset: number; depth: number; im
 });
 
 let leftRef = 1;
-const Scene = memo(
-  ({
-    onLooped,
-    onItemSelected,
-  }: {
-    onLooped?: (index: number) => void;
-    onItemSelected?: (item: string) => void;
-  }) => {
-    const [context] = useContext(Context);
-    const sounds = context[ActionType.Sounds];
+let AddEnterFrameBefore = false;
+type TJourneySceneProps = {
+  onLooped?: (index: number) => void;
+  onItemSelected?: (item: string) => void;
+};
 
-    const [state, setState] = useContext(JourneyContext);
-    const [, setURI] = useURI();
-    const [, setStyle] = useTween({ top: 0 });
-    const [offset, setOffset] = useState(JourneySceneDebug.offset);
+const Scene = memo(({ onLooped, onItemSelected }: TJourneySceneProps) => {
+  const [context] = useContext(Context);
+  const sounds = context[ActionType.Sounds];
 
-    useEffect(() => {
-      leftRef = offset;
-    }, [offset]);
+  const [state, setState] = useContext(JourneyContext);
+  const [, setURI] = useURI();
+  const [, setStyle] = useTween({ top: 0 });
+  const [offset, setOffset] = useState(JourneySceneDebug.offset);
 
-    useEffect(() => {
-      if (state && state.scene) {
-        JourneySceneList[state.scene].forEach((item) => setURI(item));
-      }
-    }, [state.scene]);
+  useEffect(() => {
+    leftRef = offset;
+  }, [offset]);
 
-    useEffect(() => {
-      if (sounds && sounds.track) {
-        if (sounds?.track) {
-          let type: PreloadType = 'onAzureCoast';
-          let name: SoundName = 'azureCoast';
+  useEffect(() => {
+    if (state && state.scene) {
+      JourneySceneList[state.scene].forEach((item) => setURI(item));
+      sounds?.track?.stopAll();
+    }
+  }, [state.scene]);
 
-          switch (state.scene) {
-            case JourneySceneType.金黃稻浪:
-              type = 'onGoldenRiceField';
-              name = 'goldenRiceField';
-              break;
-            case JourneySceneType.花海平原:
-              type = 'onFlowerSeaPlain';
-              name = 'flowerSeaPlain';
-              break;
-            case JourneySceneType.蔚藍海岸:
-              type = 'onAzureCoast';
-              name = 'azureCoast';
-              break;
-            case JourneySceneType.月夜雪地:
-              type = 'onMoonlitSnowfield';
-              name = 'moonlitSnowfield';
-              break;
-            case JourneySceneType.晴光森林:
-              type = 'onLushForest';
-              name = 'lushForest';
-              break;
-          }
-          sounds.track?.preload(type, () => {
-            sounds.track?.play(name);
-            sounds.track?.fadeOut('bgm', 500);
-          });
+  useEffect(() => {
+    if (sounds && sounds.track) {
+      if (sounds?.track) {
+        let type: PreloadType = 'onAzureCoast';
+        let name: SoundName = 'azureCoast';
+
+        switch (state.scene) {
+          case JourneySceneType.金黃稻浪:
+            type = 'onGoldenRiceField';
+            name = 'goldenRiceField';
+            break;
+          case JourneySceneType.花海平原:
+            type = 'onFlowerSeaPlain';
+            name = 'flowerSeaPlain';
+            break;
+          case JourneySceneType.蔚藍海岸:
+            type = 'onAzureCoast';
+            name = 'azureCoast';
+            break;
+          case JourneySceneType.月夜雪地:
+            type = 'onMoonlitSnowfield';
+            name = 'moonlitSnowfield';
+            break;
+          case JourneySceneType.晴光森林:
+            type = 'onLushForest';
+            name = 'lushForest';
+            break;
         }
-      }
-    }, [state.scene, sounds]);
-
-    useEffect(() => {
-      if (state.step === JourneyStepType.fadeIn) {
-        if (JourneySceneDebug.offset) {
-          EnterFrame.stop();
-          return;
-        }
-        setStyle(
-          { top: 300 },
-          {
-            duration: 10000,
-            easing: Bezier.easeIn,
-            onUpdate: (value: { top: number }) => {
-              setOffset(value.top);
-            },
-            onEnd: (value: { top: number }) => {
-              setOffset(value.top);
-              setState((S) => ({ ...S, step: JourneyStepType.loop }));
-            },
-          },
-        );
-      } else if (state.step === JourneyStepType.fadeOut) {
-        setStyle({ top: offset }, 1);
-      } else if (state.step === JourneyStepType.resume) {
-        EnterFrame.play();
-      }
-    }, [state.step]);
-
-    useEffect(() => {
-      if (state.step === JourneyStepType.loop) {
-        EnterFrame.add(() => {
-          setOffset((S) => S + 1);
+        sounds.track?.preload(type, () => {
+          sounds.track?.play(name);
+          sounds.track?.fadeOut('bgm', 500);
         });
       }
-    }, [state.step]);
+    }
+  }, [state.scene, sounds]);
 
-    useEffect(() => {
-      if (state.loop) {
-        onLooped?.(state.loop);
+  useEffect(() => {
+    if (state.step === JourneyStepType.fadeIn) {
+      if (JourneySceneDebug.offset) {
+        EnterFrame.stop();
+        return;
       }
-    }, [state.loop]);
-
-    useEffect(() => {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === '1') console.log(leftRef);
-      });
-    }, []);
-
-    const onShowDown = (frame: CharacterFrame) => {
-      if (frame) {
-        setStyle(
-          { top: offset + frame.stepShouldGo },
-          {
-            duration: frame.duration,
-            easing: Bezier.easeOut,
-            onUpdate: (value: { top: number }) => {
-              setOffset(value.top);
-            },
-            onEnd: (value: { top: number }) => {
-              setOffset(value.top);
-              onItemSelected?.(state.selectedItem || '');
-            },
+      setStyle(
+        { top: 300 },
+        {
+          duration: 10000,
+          easing: Bezier.easeIn,
+          onUpdate: (value: { top: number }) => {
+            setOffset(value.top);
           },
-        );
-      }
-    };
+          onEnd: (value: { top: number }) => {
+            setOffset(value.top);
+            setState((S) => ({ ...S, step: JourneyStepType.loop }));
+          },
+        },
+      );
+    } else if (state.step === JourneyStepType.fadeOut) {
+      setStyle({ top: offset }, 1);
+    } else if (state.step === JourneyStepType.resume) {
+      EnterFrame.play();
+    }
+  }, [state.step]);
 
-    return (
-      <div className='Scene'>
-        <View offset={offset} depth={JourneyDepth.back} image='back' />
-        <View offset={offset} depth={JourneyDepth.middle} image='middle' />
-        <Items offset={offset} depth='back' />
-        <MinerWalker onShowDown={onShowDown} />
-        <Items offset={offset} depth='front' />
-        <View offset={offset} depth={JourneyDepth.front} image='front' />
-      </div>
-    );
-  },
-);
+  useEffect(() => {
+    if (state.step === JourneyStepType.loop) {
+      console.log('loop');
+
+      EnterFrame.add(() => {
+        setOffset((S) => S + 1);
+      });
+    }
+  }, [state.step]);
+
+  useEffect(() => {
+    if (state.loop) {
+      onLooped?.(state.loop);
+    }
+  }, [state.loop]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '1') console.log(leftRef);
+    });
+  }, []);
+
+  const onShowDown = (frame: CharacterFrame) => {
+    if (frame) {
+      setStyle(
+        { top: offset + frame.stepShouldGo },
+        {
+          duration: frame.duration,
+          easing: Bezier.easeOut,
+          onUpdate: (value: { top: number }) => {
+            setOffset(value.top);
+          },
+          onEnd: (value: { top: number }) => {
+            setOffset(value.top);
+            onItemSelected?.(state.selectedItem || '');
+          },
+        },
+      );
+    }
+  };
+
+  return (
+    <div className='Scene'>
+      <View offset={offset} depth={JourneyDepth.back} image='back' />
+      <View offset={offset} depth={JourneyDepth.middle} image='middle' />
+      <Items offset={offset} depth='back' />
+      <MinerWalker onShowDown={onShowDown} />
+      <Items offset={offset} depth='front' />
+      <View offset={offset} depth={JourneyDepth.front} image='front' />
+    </div>
+  );
+});
 export default Scene;

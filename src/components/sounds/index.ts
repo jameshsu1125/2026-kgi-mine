@@ -292,6 +292,14 @@ export default class Sounds {
     }
   }
 
+  stopAll() {
+    Object.values(this.track).forEach((trackInfo) => {
+      if (trackInfo.onload && trackInfo.track) {
+        trackInfo.track.stop();
+      }
+    });
+  }
+
   fadeOut(name: SoundName, duration = 1000) {
     if (this.track[name] && this.track[name].onload && this.track[name].track) {
       const track = this.track[name].track!;

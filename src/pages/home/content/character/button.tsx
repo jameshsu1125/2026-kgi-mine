@@ -20,7 +20,9 @@ const SelectButton = memo(({ onClick }: { onClick: () => void }) => {
       optionsFadeOut={{
         duration: 600,
         onEnd: () => {
-          setContext({ type: ActionType.Page, state: PAGE.journey });
+          setTimeout(() => {
+            setContext({ type: ActionType.Page, state: PAGE.journey });
+          }, 2000);
         },
       }}
     >

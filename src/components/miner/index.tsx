@@ -12,6 +12,8 @@ type MinerProps = {
   onShowDown?: (frame: CharacterFrame) => void;
 };
 
+let AddEnterFrameBefore = false;
+
 const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProps, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
@@ -66,7 +68,6 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
       resize();
       window.addEventListener('resize', resize);
 
-      EnterFrame.destroy();
       EnterFrame.add(({ delta }) => {
         const now = new Date().getTime();
         const fpsTime = MINER_SPRITE_FPS ? 1000 / MINER_SPRITE_FPS : 0;
@@ -83,7 +84,7 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
         EnterFrame.play();
       }
       return () => {
-        EnterFrame.destroy();
+        EnterFrame.undo();
         window.removeEventListener('resize', resize);
       };
     }
