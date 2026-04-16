@@ -6,6 +6,7 @@ export enum ActionType {
   LoadingProcess = 'loadingProcess',
   Dataset = 'dataset',
   Sounds = 'sounds',
+  Modal = 'modal',
 }
 
 export enum LoadingProcessType {
@@ -45,15 +46,30 @@ export type TSounds = {
   track?: Sounds;
 };
 
+export type TModalState = {
+  enabled?: boolean;
+  title?: string;
+  body?: ReactNode;
+  label?: [string, string?];
+  onConfirm?: (label: string) => void;
+};
+
 export interface IState {
-  page?: string;
-  loadingProcess?: TLoadingProcessState;
-  dataset?: TDatasetState;
-  sounds?: TSounds;
+  [ActionType.Page]?: string;
+  [ActionType.LoadingProcess]?: TLoadingProcessState;
+  [ActionType.Dataset]?: TDatasetState;
+  [ActionType.Sounds]?: TSounds;
+  [ActionType.Modal]?: TModalState;
 }
 
 export interface IAction {
-  state: IState | TLoadingProcessState | TDatasetState | TSounds | string;
+  state:
+    | IState
+    | IState[ActionType.Page]
+    | IState[ActionType.Dataset]
+    | IState[ActionType.Sounds]
+    | IState[ActionType.Modal]
+    | string;
   type: ActionType;
 }
 

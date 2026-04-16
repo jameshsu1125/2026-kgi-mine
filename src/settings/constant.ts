@@ -8,6 +8,7 @@ import {
   TContext,
   TDatasetState,
   TLoadingProcessState,
+  TModalState,
 } from './type';
 
 export const LoadingProcessState: TLoadingProcessState = {
@@ -22,11 +23,19 @@ export const DatasetState: TDatasetState = {
   },
 };
 
+export const ModalState: TModalState = {
+  enabled: true,
+  title: '',
+  body: '是否探索一條新的路線?',
+  label: ['確定', '暫時不要'],
+};
+
 export const InitialState: IState = {
   [ActionType.Page]: PAGE.home,
   [ActionType.LoadingProcess]: LoadingProcessState,
   [ActionType.Dataset]: DatasetState,
   [ActionType.Sounds]: { track: undefined },
+  [ActionType.Modal]: ModalState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);

@@ -13,6 +13,12 @@
       "options": {
         "useTabs": false
       }
+    },
+    {
+      "files": ["**/config.ts", "**/config.tsx"],
+      "options": {
+        "printWidth": 120
+      }
     }
   ]
 }

@@ -1,0 +1,38 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Modal {
+  @apply fixed top-0 left-0 z-50 h-full w-full;
+
+  & > .bg {
+    @apply absolute top-0 h-full w-full bg-transparent;
+  }
+
+  & > .ctx {
+    @apply pointer-events-none absolute top-0 flex h-full w-full items-center justify-center;
+
+    & > .dialog {
+      min-width: 394px;
+      border-width: 1px;
+      border-color: #999;
+      border-radius: 35px;
+      background: linear-gradient(216.99deg, rgba(0, 0, 0, 0.8) 7.98%, rgba(0, 0, 0, 0) 102.3%);
+      box-shadow: 0px 0px 20px 0px #ffffff80;
+      opacity: 1;
+
+      backdrop-filter: blur(20px);
+
+      @apply pointer-events-auto flex flex-col items-center justify-center gap-8 px-10 py-10 text-white;
+
+      .title {
+        @apply text-xl font-bold;
+      }
+      .body {
+        @apply text-base;
+      }
+      .footer {
+        @apply flex w-full flex-row items-center justify-center gap-5;
+      }
+    }
+  }
+}

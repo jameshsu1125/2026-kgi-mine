@@ -8,7 +8,8 @@ import './index.less';
 import Scene from './scene';
 
 const Journey = memo(() => {
-  const [, setContext] = useContext(Context);
+  const [context, setContext] = useContext(Context);
+
   const [state, setState] = useState({
     ...JourneyState,
     scene: Debug.randomScene

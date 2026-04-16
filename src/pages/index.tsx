@@ -10,6 +10,7 @@ import { useEffect, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from './home';
 import Journey from './journey';
+import Modal from '@/components/modal';
 
 Click.install('#immersive_experience_section');
 
@@ -61,6 +62,7 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
       <Context.Provider {...{ value }}>
         <Container>{currentPage}</Container>
         {context[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
+        {context[ActionType.Modal]?.enabled && <Modal />}
       </Context.Provider>
     </div>
   );
