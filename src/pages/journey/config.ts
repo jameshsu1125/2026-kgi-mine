@@ -39,29 +39,29 @@ export const JourneySceneSize = {
 
 export const JourneySceneList = {
   [JourneySceneType.黃金稻浪]: [
-    { path: 'goldenRiceField-backView.jpg', name: 'scene-backView' },
-    { path: 'goldenRiceField-middleView.png', name: 'scene-middleView' },
-    { path: 'goldenRiceField-frontView.png', name: 'scene-frontView' },
+    { path: 'scene-goldenRiceField-view-back.jpg', name: 'scene-backView' },
+    { path: 'scene-goldenRiceField-view-middle.png', name: 'scene-middleView' },
+    { path: 'scene-goldenRiceField-view-front.png', name: 'scene-frontView' },
   ],
   [JourneySceneType.花海平原]: [
-    { path: 'flowerSeaPlain-backView.jpg', name: 'scene-backView' },
-    { path: 'flowerSeaPlain-middleView.png', name: 'scene-middleView' },
-    { path: 'flowerSeaPlain-frontView.png', name: 'scene-frontView' },
+    { path: 'scene-flowerSeaPlain-view-back.jpg', name: 'scene-backView' },
+    { path: 'scene-flowerSeaPlain-view-middle.png', name: 'scene-middleView' },
+    { path: 'scene-flowerSeaPlain-view-front.png', name: 'scene-frontView' },
   ],
   [JourneySceneType.蔚藍海岸]: [
-    { path: 'azureCoast-backView.jpg', name: 'scene-backView' },
-    { path: 'azureCoast-middleView.png', name: 'scene-middleView' },
-    { path: 'azureCoast-frontView.png', name: 'scene-frontView' },
+    { path: 'scene-azureCoast-view-back.jpg', name: 'scene-backView' },
+    { path: 'scene-azureCoast-view-middle.png', name: 'scene-middleView' },
+    { path: 'scene-azureCoast-view-front.png', name: 'scene-frontView' },
   ],
   [JourneySceneType.月夜雪地]: [
-    { path: 'moonlitSnowfield-backView.jpg', name: 'scene-backView' },
-    { path: 'moonlitSnowfield-middleView.png', name: 'scene-middleView' },
-    { path: 'moonlitSnowfield-frontView.png', name: 'scene-frontView' },
+    { path: 'scene-moonlitSnowfield-view-back.jpg', name: 'scene-backView' },
+    { path: 'scene-moonlitSnowfield-view-middle.png', name: 'scene-middleView' },
+    { path: 'scene-moonlitSnowfield-view-front.png', name: 'scene-frontView' },
   ],
   [JourneySceneType.翁鬱森林]: [
-    { path: 'lushForest-backView.jpg', name: 'scene-backView' },
-    { path: 'lushForest-middleView.png', name: 'scene-middleView' },
-    { path: 'lushForest-frontView.png', name: 'scene-frontView' },
+    { path: 'scene-lushForest-view-back.jpg', name: 'scene-backView' },
+    { path: 'scene-lushForest-view-middle.png', name: 'scene-middleView' },
+    { path: 'scene-lushForest-view-front.png', name: 'scene-frontView' },
   ],
 };
 

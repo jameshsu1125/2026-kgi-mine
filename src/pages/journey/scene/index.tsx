@@ -83,7 +83,7 @@ const Scene = memo(() => {
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
       if (e.key === ' ') {
-        EnterFrame.stop();
+        //  EnterFrame.stop();
         console.log(leftRef);
       }
     });
