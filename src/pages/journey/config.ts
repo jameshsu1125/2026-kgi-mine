@@ -16,7 +16,7 @@ export enum JourneyStepType {
   resume,
 }
 
-export type TJourneyState = { step: JourneyStepType; scene: JourneySceneType; loop: number };
+export type TJourneyState = { step: JourneyStepType; scene: JourneySceneType; loop: number; selectedItem?: string };
 export type TJourneyContext = [TJourneyState, Dispatch<SetStateAction<TJourneyState>>];
 
 export const JourneyState = {

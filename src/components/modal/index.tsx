@@ -43,6 +43,7 @@ const Modal = memo(() => {
                   setContext({ type: ActionType.Modal, state: { enabled: false } });
                   if (item) onConfirm?.(item);
                 }}
+                clickOnce={false}
               >
                 {index === 0 ? (
                   <Button.Regular size='w-full'>{item}</Button.Regular>

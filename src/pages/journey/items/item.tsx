@@ -2,7 +2,6 @@ import Button from '@/components/button';
 import useURI from '@/hooks/useURI';
 import { PATTERN_URI_PROPERTIES } from '@/settings/config';
 import { checkElementCenterOfScreenWithOffset, checkElementInViewport } from '@/utils';
-import EnterFrame from 'lesca-enterframe';
 import { memo, useContext, useEffect, useRef } from 'react';
 import { JourneyContext, JourneyStepType } from '../config';
 
@@ -11,10 +10,14 @@ type TItemProps = {
   y: number;
   x: number;
   left: string;
+  onCenter?: () => void;
+  onInView?: () => void;
 };
 
-const Item = memo(({ item, y, x, left }: TItemProps) => {
+const Item = memo(({ item, y, x, left, onCenter, onInView }: TItemProps) => {
   const [, setState] = useContext(JourneyContext);
+  const [, setURI] = useURI();
+
   const ref = useRef<HTMLDivElement>(null);
 
   const randomPattern = useRef(
@@ -25,10 +28,11 @@ const Item = memo(({ item, y, x, left }: TItemProps) => {
     if (ref.current && !left.includes('NaN')) {
       const inCenter = checkElementCenterOfScreenWithOffset(ref.current, 50);
       const inView = checkElementInViewport(ref.current);
+      if (inCenter) onCenter?.();
+      if (inView) onInView?.();
     }
   }, [left]);
 
-  const [, setURI] = useURI();
   useEffect(() => {
     PATTERN_URI_PROPERTIES.forEach((item) => setURI(item));
   }, []);
@@ -46,7 +50,7 @@ const Item = memo(({ item, y, x, left }: TItemProps) => {
       <div className='marker'>
         <Button
           onClick={() => {
-            setState((S) => ({ ...S, step: JourneyStepType.fadeOut }));
+            setState((S) => ({ ...S, step: JourneyStepType.fadeOut, selectedItem: item.name }));
           }}
         >
           <Button.Marker>
