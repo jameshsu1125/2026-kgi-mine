@@ -2,7 +2,7 @@ import useCharacterSlowDown, { CharacterFrame } from '@/hooks/useCharacterSlowDo
 import useURI from '@/hooks/useURI';
 import EnterFrame from 'lesca-enterframe';
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { MINER_SIZE, MINER_SPRITE_FPS, MINER_SPRITE_FRAME_COUNT } from './config';
+import { MINER_SIZE, MINER_SPRITE_FRAME_COUNT } from './config';
 import './index.less';
 
 type MinerProps = {
