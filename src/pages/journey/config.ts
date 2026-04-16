@@ -212,12 +212,62 @@ export const JourneyItemsList = {
       left: 550,
     },
   ],
-  [JourneySceneType.月夜雪地]: [],
+  [JourneySceneType.月夜雪地]: [
+    {
+      name: 'moonlitSnowfield-item-1',
+      path: 'moonlitSnowfield-item-1.png',
+      top: -40,
+      left: 1930,
+    },
+    {
+      name: 'moonlitSnowfield-item-2',
+      path: 'moonlitSnowfield-item-2.png',
+      top: -18,
+      left: 1290,
+    },
+    {
+      name: 'moonlitSnowfield-item-3',
+      path: 'moonlitSnowfield-item-3.png',
+      top: -28,
+      left: 690,
+    },
+    {
+      name: 'moonlitSnowfield-item-4',
+      path: 'moonlitSnowfield-item-4.png',
+      top: -27,
+      left: 2220,
+    },
+    {
+      name: 'moonlitSnowfield-item-5',
+      path: 'moonlitSnowfield-item-5.png',
+      top: -6.8,
+      left: 2116,
+    },
+
+    {
+      name: 'moonlitSnowfield-item-6',
+      path: 'moonlitSnowfield-item-6.png',
+      top: -18,
+      left: 2816,
+    },
+    {
+      name: 'moonlitSnowfield-item-7',
+      path: 'moonlitSnowfield-item-7.png',
+      top: -8,
+      left: 326,
+    },
+    {
+      name: 'moonlitSnowfield-item-8',
+      path: 'moonlitSnowfield-item-8.png',
+      top: -1,
+      left: 2656,
+    },
+  ],
   [JourneySceneType.翁鬱森林]: [],
 };
 
 export const JourneySceneDebug: { offset: number; count: number | 'max' } = {
-  // offset: 3200,
+  // offset: 1500,
   offset: 0,
   count: 'max',
 };
