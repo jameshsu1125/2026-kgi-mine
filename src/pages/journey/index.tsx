@@ -1,14 +1,15 @@
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
-import { memo, useContext, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { JourneyContext, JourneySceneType, JourneyState, JourneyStepType } from './config';
 import './index.less';
 import Scene from './scene';
 import { Debug } from '@/settings/config';
+import Sounds from '@/components/sounds';
 
 const Journey = memo(() => {
-  const [, setContext] = useContext(Context);
+  const [context, setContext] = useContext(Context);
   const [state, setState] = useState({
     ...JourneyState,
     scene: Debug.randomScene

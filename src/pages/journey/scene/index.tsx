@@ -9,11 +9,16 @@ import {
   JourneyDepth,
   JourneySceneDebug,
   JourneySceneList,
+  JourneySceneType,
   JourneyStepType,
 } from '../config';
 import Items from '../items';
 import MinerWalker from '../miner';
 import './index.less';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
+import { PreloadType } from '@/components/sounds';
+import { SoundName } from '@/components/sounds/type';
 
 const View = memo(({ offset, depth, image }: { offset: number; depth: number; image: string }) => {
   const currentOffset = offset * depth;
@@ -24,6 +29,9 @@ const View = memo(({ offset, depth, image }: { offset: number; depth: number; im
 
 let leftRef = 1;
 const Scene = memo(() => {
+  const [context] = useContext(Context);
+  const sounds = context[ActionType.Sounds];
+
   const [state, setState] = useContext(JourneyContext);
   const [, setURI] = useURI();
   const [, setStyle] = useTween({ top: 0 });
@@ -35,8 +43,45 @@ const Scene = memo(() => {
   }, [offset]);
 
   useEffect(() => {
-    if (state && state.scene) JourneySceneList[state.scene].forEach((item) => setURI(item));
+    if (state && state.scene) {
+      JourneySceneList[state.scene].forEach((item) => setURI(item));
+    }
   }, [state.scene]);
+
+  useEffect(() => {
+    if (sounds && sounds.track) {
+      if (sounds?.track) {
+        let type: PreloadType = 'onAzureCoast';
+        let name: SoundName = 'azureCoast';
+
+        switch (state.scene) {
+          case JourneySceneType.黃金稻浪:
+            type = 'onGoldenRiceField';
+            name = 'goldenRiceField';
+            break;
+          case JourneySceneType.花海平原:
+            type = 'onFlowerSeaPlain';
+            name = 'flowerSeaPlain';
+            break;
+          case JourneySceneType.蔚藍海岸:
+            type = 'onAzureCoast';
+            name = 'azureCoast';
+            break;
+          case JourneySceneType.月夜雪地:
+            type = 'onMoonlitSnowfield';
+            name = 'moonlitSnowfield';
+            break;
+          case JourneySceneType.翁鬱森林:
+            type = 'onLushForest';
+            name = 'lushForest';
+            break;
+        }
+        sounds.track?.preload(type, () => {
+          sounds.track?.play(name);
+        });
+      }
+    }
+  }, [state.scene, sounds]);
 
   useEffect(() => {
     if (state.step === JourneyStepType.fadeIn) {

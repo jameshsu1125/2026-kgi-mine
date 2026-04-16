@@ -8,7 +8,7 @@ type SoundTrackProps = {
   onError?: (message: string) => void;
 };
 
-type PreloadType =
+export type PreloadType =
   | 'onStart'
   | 'onAzureCoast'
   | 'onFlowerSeaPlain'
