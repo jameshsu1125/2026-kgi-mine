@@ -28,8 +28,8 @@ const View = memo(({ offset, depth, image }: { offset: number; depth: number; im
 });
 
 let leftRef = 1;
-const Scene = memo(() => {
-  const [context] = useContext(Context);
+const Scene = memo(({ onLooped }: { onLooped?: (index: number) => void }) => {
+  const [context, setContext] = useContext(Context);
   const sounds = context[ActionType.Sounds];
 
   const [state, setState] = useContext(JourneyContext);
@@ -121,8 +121,7 @@ const Scene = memo(() => {
 
   useEffect(() => {
     if (state.loop) {
-      // EnterFrame.stop();
-      console.log(state.loop);
+      onLooped?.(state.loop);
     }
   }, [state.loop]);
 

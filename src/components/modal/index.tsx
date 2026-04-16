@@ -5,6 +5,7 @@ import { memo, useContext, useEffect, useId } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Button from '../button';
 import './index.less';
+import EnterFrame from 'lesca-enterframe';
 
 const Modal = memo(() => {
   const id = useId();
@@ -20,6 +21,11 @@ const Modal = memo(() => {
       Click.remove(`#${id}`);
     };
   }, [id]);
+
+  useEffect(() => {
+    EnterFrame.stop();
+    return () => EnterFrame.play();
+  }, []);
 
   return (
     <div className='Modal'>

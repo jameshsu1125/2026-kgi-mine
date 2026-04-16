@@ -56,7 +56,7 @@ export type TModalState = {
 };
 
 export type TUserDataState = {
-  journey?: string;
+  journey?: '金黃稻浪' | '花海平原' | '蔚藍海岸' | '月夜雪地' | '晴光森林';
   character?: string;
 };
 

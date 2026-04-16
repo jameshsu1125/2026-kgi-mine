@@ -31,7 +31,7 @@ const Items = memo(({ offset, depth }: { offset: number; depth: 'front' | 'back'
     const { scene } = state;
     const currentList = JourneyItemsList[scene];
     const pickCount = Math.min(
-      currentList.length,
+      currentList?.length || 1,
       JourneySceneDebug.count === 'max' ? currentList.length : JourneySceneDebug.count,
     );
     const items = currentList.sort(() => Math.random() - 0.5).slice(0, pickCount);

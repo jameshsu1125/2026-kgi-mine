@@ -76,6 +76,7 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
       resize();
       window.addEventListener('resize', resize);
 
+      EnterFrame.destroy();
       EnterFrame.add(({ delta }) => {
         const now = new Date().getTime();
         const fpsTime = MINER_SPRITE_FPS ? 1000 / MINER_SPRITE_FPS : 0;
