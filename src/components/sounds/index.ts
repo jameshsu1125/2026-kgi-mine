@@ -292,6 +292,18 @@ export default class Sounds {
     }
   }
 
+  fadeOut(name: SoundName, duration = 1000) {
+    if (this.track[name] && this.track[name].onload && this.track[name].track) {
+      const track = this.track[name].track!;
+      const currentVolume = track.volume();
+      track.fade(currentVolume, 0, duration);
+      setTimeout(() => {
+        track.stop();
+        track.volume(currentVolume); // 恢復原始音量以便下次播放
+      }, duration);
+    }
+  }
+
   // 檢查音頻狀態的方法
   public checkAudioStatus(): { available: boolean; context: string } {
     const sampleTrack = Object.values(this.track).find((track) => track.track);

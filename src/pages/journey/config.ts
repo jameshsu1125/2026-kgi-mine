@@ -29,7 +29,7 @@ export const JourneyContext = createContext<TJourneyContext>([JourneyState, () =
 export const JourneyDepth = {
   back: 0.01,
   middle: 0.1,
-  front: 0.9,
+  front: 0.6,
 };
 
 export const JourneySceneSize = {

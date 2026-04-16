@@ -78,6 +78,7 @@ const Scene = memo(() => {
         }
         sounds.track?.preload(type, () => {
           sounds.track?.play(name);
+          sounds.track?.fadeOut('bgm', 500);
         });
       }
     }
