@@ -11,6 +11,8 @@ import ReactDOM from 'react-dom/client';
 import Home from './home';
 import Journey from './journey';
 import Modal from '@/components/modal';
+import EnterFrame from 'lesca-enterframe';
+import { MINER_SPRITE_FPS } from '@/components/miner/config';
 
 Click.install('#immersive_experience_section');
 
@@ -19,6 +21,12 @@ Fetcher.install({
   contentType: contentType.URL_ENCODED,
   formatType: formatType.JSON,
 });
+
+if (import.meta.env.VITE_MOCKING === 'true') {
+  import('@/mocks/browser').then((e) => {
+    e.worker.start({ serviceWorker: { url: './mockServiceWorker.js' } });
+  });
+}
 
 const rootAppElement = document.getElementById('immersive_experience_section');
 const rooAppDataset = Object.fromEntries(Object.entries(rootAppElement?.dataset || {}));
@@ -32,8 +40,6 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
   const value: TContext = useMemo(() => [context, setContext], [context]);
   const page = context[ActionType.Page] || PAGE.home;
 
-  const [mockLoaded, setMockLoaded] = useState(false);
-
   useEffect(() => {
     const baseUri = `${context[ActionType.Dataset]?.dataset.baseUri || location.origin}`.replace(
       /\/?$/,
@@ -41,28 +47,19 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
     );
     window.KGI_MINE_BASE_URI = baseUri;
     document.documentElement.style.setProperty('--base-uri', baseUri);
+    EnterFrame.setFPS(MINER_SPRITE_FPS);
   }, []);
 
   const currentPage = useMemo(() => {
     switch (page) {
       default:
       case PAGE.home:
-        return <Home mockLoaded={mockLoaded} />;
+        return <Home />;
 
       case PAGE.journey:
         return <Journey />;
     }
-  }, [page, mockLoaded]);
-
-  useEffect(() => {
-    if (import.meta.env.VITE_MOCKING === 'true') {
-      import('@/mocks/browser').then((e) => {
-        e.worker.start({ serviceWorker: { url: './mockServiceWorker.js' } }).then(() => {
-          setMockLoaded(true);
-        });
-      });
-    }
-  }, []);
+  }, [page]);
 
   return (
     <div className='App'>

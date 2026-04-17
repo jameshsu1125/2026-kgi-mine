@@ -118,11 +118,11 @@ const Scene = memo(({ onLooped, onItemSelected }: TJourneySceneProps) => {
 
   useEffect(() => {
     if (state.step === JourneyStepType.loop) {
-      console.log('loop');
-
+      EnterFrame.destroy();
       EnterFrame.add(() => {
         setOffset((S) => S + 1);
       });
+      EnterFrame.play();
     }
   }, [state.step]);
 

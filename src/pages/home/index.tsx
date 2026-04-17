@@ -1,4 +1,3 @@
-import Sounds from '@/components/sounds';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
@@ -8,7 +7,7 @@ import { HomeContext, HomeState, HomeStepType, THomeState } from './config';
 import Content from './content';
 import './index.less';
 
-const Home = memo(({ mockLoaded }: { mockLoaded: boolean }) => {
+const Home = memo(() => {
   const [, setContext] = useContext(Context);
   const [state, setState] = useState<THomeState>(HomeState);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -29,10 +28,10 @@ const Home = memo(({ mockLoaded }: { mockLoaded: boolean }) => {
   }, [state.journeyData]);
 
   useEffect(() => {
-    if (mockLoaded && imageLoaded) {
+    if (imageLoaded) {
       setState((S) => ({ ...S, step: HomeStepType.landingFadeIn }));
     }
-  }, [mockLoaded, imageLoaded]);
+  }, [imageLoaded]);
 
   return (
     <HomeContext.Provider value={[state, setState]}>

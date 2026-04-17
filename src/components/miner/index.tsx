@@ -65,7 +65,7 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
       resize();
       window.addEventListener('resize', resize);
 
-      EnterFrame.add(() => {
+      EnterFrame.addStatic(() => {
         setSpriteName((prev) => (prev + 1) % MINER_SPRITE_FRAME_COUNT);
       });
 

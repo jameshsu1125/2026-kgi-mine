@@ -7,7 +7,6 @@ import { JourneyContext, JourneySceneType, JourneyState, JourneyStepType } from 
 import './index.less';
 import Scene from './scene';
 import UserData from './userData';
-import EnterFrame from 'lesca-enterframe';
 
 const Journey = memo(() => {
   const [context, setContext] = useContext(Context);
@@ -48,7 +47,6 @@ const Journey = memo(() => {
         label,
         onConfirm: (label) => {
           if (label === '好的' || label === '許願新路線') {
-            EnterFrame.destroy();
             setState((S) => {
               const scenes = Object.values(JourneySceneType).filter((scene) => scene !== S.scene);
               return {
