@@ -34,4 +34,5 @@
   --animate-infinite-circle-reverse-r20-100s: infiniteCircle_reverse_20 100s linear infinite;
 
   --animate-fadeIn: fadeIn 0.3s ease-in-out forwards;
+  --animate-fadeInWithY: fadeInWithY 0.3s ease-in-out forwards;
 }

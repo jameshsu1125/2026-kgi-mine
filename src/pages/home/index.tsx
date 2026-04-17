@@ -8,25 +8,10 @@ import { HomeContext, HomeState, HomeStepType, THomeState } from './config';
 import Content from './content';
 import './index.less';
 
-const Home = memo(() => {
+const Home = memo(({ mockLoaded }: { mockLoaded: boolean }) => {
   const [, setContext] = useContext(Context);
   const [state, setState] = useState<THomeState>(HomeState);
-  const [preloadState, setPreloadState] = useState({ doms: false, sounds: false });
-
-  useEffect(() => {
-    const sounds = new Sounds({
-      onload: () => setPreloadState((S) => ({ ...S, sounds: true })),
-    });
-
-    setContext({ type: ActionType.Sounds, state: { track: sounds } });
-  }, []);
-
-  useEffect(() => {
-    if (preloadState.doms && preloadState.sounds) {
-      setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
-      setState((S) => ({ ...S, step: HomeStepType.landingFadeIn }));
-    }
-  }, [preloadState]);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const { journeyData } = state;
@@ -43,14 +28,19 @@ const Home = memo(() => {
     }
   }, [state.journeyData]);
 
-  if (!preloadState.sounds) return null;
+  useEffect(() => {
+    if (mockLoaded && imageLoaded) {
+      setState((S) => ({ ...S, step: HomeStepType.landingFadeIn }));
+    }
+  }, [mockLoaded, imageLoaded]);
 
   return (
     <HomeContext.Provider value={[state, setState]}>
       <OnloadProvider
         onStart={() => setContext({ type: ActionType.LoadingProcess, state: { enabled: true } })}
         onload={() => {
-          setPreloadState((S) => ({ ...S, doms: true }));
+          setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
+          setImageLoaded(true);
         }}
       >
         <div className='Home'>

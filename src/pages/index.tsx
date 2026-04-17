@@ -6,7 +6,7 @@ import '@/settings/global.css';
 import { ActionType, TContext } from '@/settings/type';
 import Click from 'lesca-click';
 import Fetcher, { contentType, formatType } from 'lesca-fetcher';
-import { useEffect, useMemo, useReducer } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from './home';
 import Journey from './journey';
@@ -20,12 +20,6 @@ Fetcher.install({
   formatType: formatType.JSON,
 });
 
-if (import.meta.env.VITE_MOCKING === 'true') {
-  import('@/mocks/browser').then((e) => {
-    e.worker.start({ serviceWorker: { url: './mockServiceWorker.js' } });
-  });
-}
-
 const rootAppElement = document.getElementById('immersive_experience_section');
 const rooAppDataset = Object.fromEntries(Object.entries(rootAppElement?.dataset || {}));
 
@@ -37,6 +31,8 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
 
   const value: TContext = useMemo(() => [context, setContext], [context]);
   const page = context[ActionType.Page] || PAGE.home;
+
+  const [mockLoaded, setMockLoaded] = useState(false);
 
   useEffect(() => {
     const baseUri = `${context[ActionType.Dataset]?.dataset.baseUri || location.origin}`.replace(
@@ -51,12 +47,22 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
     switch (page) {
       default:
       case PAGE.home:
-        return <Home />;
+        return <Home mockLoaded={mockLoaded} />;
 
       case PAGE.journey:
         return <Journey />;
     }
-  }, [page]);
+  }, [page, mockLoaded]);
+
+  useEffect(() => {
+    if (import.meta.env.VITE_MOCKING === 'true') {
+      import('@/mocks/browser').then((e) => {
+        e.worker.start({ serviceWorker: { url: './mockServiceWorker.js' } }).then(() => {
+          setMockLoaded(true);
+        });
+      });
+    }
+  }, []);
 
   return (
     <div className='App'>

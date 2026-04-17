@@ -1,5 +1,6 @@
 import Heading from '@/components/heading';
 import Paragraph from '@/components/paragraph';
+import Sounds from '@/components/sounds';
 import TweenerProvider from '@/components/tweenProvider';
 import useStart from '@/hooks/useStart';
 import { Context } from '@/settings/constant';
@@ -20,17 +21,8 @@ const animationSetting = {
 };
 
 const Landing = memo(() => {
-  const [context] = useContext(Context);
-  const sounds = context[ActionType.Sounds]!;
   const [{ step }] = useContext(HomeContext);
   const [response, getStart] = useStart();
-
-  useEffect(() => {
-    if (response?.isSuccess)
-      requestAnimationFrame(() => {
-        sounds.track?.play('bgm');
-      });
-  }, [response]);
 
   return (
     <>

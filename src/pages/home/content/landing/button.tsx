@@ -1,10 +1,14 @@
 import Button from '@/components/button';
+import Sounds from '@/components/sounds';
 import TweenerProvider from '@/components/tweenProvider';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useState } from 'react';
 import { HomeContext, HomeStepType } from '../../config';
 
 const Buttons = memo(({ type, getStart }: { type: 'login' | 'entry'; getStart: () => void }) => {
+  const [, setContext] = useContext(Context);
   const [{ step }, setState] = useContext(HomeContext);
   const [onButtonFadeIn, setOnButtonFadeIn] = useState(false);
 
@@ -36,7 +40,19 @@ const Buttons = memo(({ type, getStart }: { type: 'login' | 'entry'; getStart: (
             <Button.Regular>開始探索</Button.Regular>
           </Button>
         ) : (
-          <Button clickOnce onClick={() => getStart()} disabled={!onButtonFadeIn}>
+          <Button
+            clickOnce
+            onClick={() => {
+              const sounds = new Sounds({
+                onload: () => {
+                  getStart();
+                  sounds.play('bgm');
+                },
+              });
+              setContext({ type: ActionType.Sounds, state: { track: sounds } });
+            }}
+            disabled={!onButtonFadeIn}
+          >
             <Button.Outline>登入／註冊會員</Button.Outline>
           </Button>
         )}

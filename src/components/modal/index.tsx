@@ -31,7 +31,7 @@ const Modal = memo(() => {
     <div className='Modal'>
       <div id={id} className='bg' />
       <div className='ctx'>
-        <div className='dialog animate-fadeIn'>
+        <div className='dialog animate-fadeInWithY'>
           {title && <div className='title'>{title}</div>}
           <div className='body'>{body}</div>
           <div className='footer'>
