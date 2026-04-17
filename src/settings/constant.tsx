@@ -25,7 +25,7 @@ export const DatasetState: TDatasetState = {
 };
 
 export const ModalState: TModalState = {
-  enabled: true,
+  enabled: false,
   title: '',
   body: (
     <>

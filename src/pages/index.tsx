@@ -43,6 +43,7 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
       /\/?$/,
       '/',
     );
+    window.KGI_MINE_BASE_URI = baseUri;
     document.documentElement.style.setProperty('--base-uri', baseUri);
   }, []);
 

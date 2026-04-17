@@ -2,6 +2,7 @@ import { Howl } from 'howler';
 import './mobile-audio-unlock';
 import { SoundName } from './type';
 import { MP3List } from './config';
+import { mergePath } from '@/utils';
 
 type SoundTrackProps = {
   onload?: (type: PreloadType) => void;
@@ -22,70 +23,70 @@ export default class Sounds {
     { src: string[]; loop: boolean; onload: boolean; track: Howl | null; preloadType: PreloadType }
   > = {
     bgm: {
-      src: [MP3List.bgm],
+      src: [mergePath(MP3List.bgm)],
       loop: true,
       onload: false,
       track: null,
       preloadType: 'onStart',
     },
     click: {
-      src: [MP3List.click],
+      src: [mergePath(MP3List.click)],
       loop: false,
       onload: false,
       track: null,
       preloadType: 'onStart',
     },
     correct: {
-      src: [MP3List.correct],
+      src: [mergePath(MP3List.correct)],
       loop: false,
       onload: false,
       track: null,
       preloadType: 'onStart',
     },
     wrong: {
-      src: [MP3List.wrong],
+      src: [mergePath(MP3List.wrong)],
       loop: false,
       onload: false,
       track: null,
       preloadType: 'onStart',
     },
     levelUp: {
-      src: [MP3List.levelUp],
+      src: [mergePath(MP3List.levelUp)],
       loop: false,
       onload: false,
       track: null,
       preloadType: 'onStart',
     },
     azureCoast: {
-      src: [MP3List.azureCoast],
+      src: [mergePath(MP3List.azureCoast)],
       loop: true,
       onload: false,
       track: null,
       preloadType: 'onAzureCoast',
     },
     flowerSeaPlain: {
-      src: [MP3List.flowerSeaPlain],
+      src: [mergePath(MP3List.flowerSeaPlain)],
       loop: true,
       onload: false,
       track: null,
       preloadType: 'onFlowerSeaPlain',
     },
     goldenRiceField: {
-      src: [MP3List.goldenRiceField],
+      src: [mergePath(MP3List.goldenRiceField)],
       loop: true,
       onload: false,
       track: null,
       preloadType: 'onGoldenRiceField',
     },
     lushForest: {
-      src: [MP3List.lushForest],
+      src: [mergePath(MP3List.lushForest)],
       loop: true,
       onload: false,
       track: null,
       preloadType: 'onLushForest',
     },
     moonlitSnowfield: {
-      src: [MP3List.moonlitSnowfield],
+      src: [mergePath(MP3List.moonlitSnowfield)],
       loop: true,
       onload: false,
       track: null,
