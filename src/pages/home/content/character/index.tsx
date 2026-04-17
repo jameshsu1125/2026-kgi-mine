@@ -7,8 +7,11 @@ import { memo, useContext, useEffect } from 'react';
 import { HomeContext, HomeStepType } from '../../config';
 import SelectButton from './button';
 import Carousel from './slider';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
 
 const 選擇你的Miner角色 = memo(({ data }: { data?: ResponseType['result']['minerList'] }) => {
+  const [, setContext] = useContext(Context);
   const [state, setState] = useContext(HomeContext);
   const [, setURI] = useURI();
 
@@ -23,8 +26,12 @@ const 選擇你的Miner角色 = memo(({ data }: { data?: ResponseType['result'][
 
   return (
     <OnloadProvider
+      onStart={() => {
+        setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
+      }}
       onload={() => {
         setState((S) => ({ ...S, step: HomeStepType.characterFadeIn }));
+        setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
       }}
     >
       <div className='w-full'>
