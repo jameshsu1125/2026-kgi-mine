@@ -1,4 +1,3 @@
-import { Debug } from '@/settings/config';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
@@ -7,6 +6,7 @@ import { JourneyContext, JourneySceneType, JourneyState, JourneyStepType } from 
 import './index.less';
 import Scene from './scene';
 import UserData from './userData';
+import Nav from '@/components/nav';
 
 const Journey = memo(() => {
   const [context, setContext] = useContext(Context);
@@ -14,10 +14,8 @@ const Journey = memo(() => {
 
   const [state, setState] = useState({
     ...JourneyState,
-    scene: Debug.randomScene
-      ? journey
-        ? Object.entries(JourneySceneType).filter(([key]) => key === journey)[0][1]
-        : JourneyState.scene
+    scene: journey
+      ? Object.entries(JourneySceneType).filter(([key]) => key === journey)[0][1]
       : JourneyState.scene,
   });
 
@@ -104,6 +102,7 @@ const Journey = memo(() => {
         <div className='Journey'>
           <Scene onLooped={onLooped} onItemSelected={onItemSelected} />
           <UserData />
+          {state.nav.enabled && <Nav />}
         </div>
       </OnloadProvider>
     </JourneyContext.Provider>

@@ -3,7 +3,7 @@ import useURI from '@/hooks/useURI';
 import { PATTERN_URI_PROPERTIES } from '@/settings/config';
 import { checkElementCenterOfScreenWithOffset, checkElementInViewport } from '@/utils';
 import { memo, useContext, useEffect, useRef } from 'react';
-import { JourneyContext, JourneyStepType } from '../config';
+import { JourneyContext, JourneySceneDebug, JourneyStepType } from '../config';
 
 type TItemProps = {
   item: { name: string; top: number; left: number };
@@ -19,6 +19,7 @@ const Item = memo(({ item, y, x, left, onCenter, onInView }: TItemProps) => {
   const [, setURI] = useURI();
 
   const ref = useRef<HTMLDivElement>(null);
+  const leftRef = useRef(parseFloat(left));
 
   const randomPattern = useRef(
     PATTERN_URI_PROPERTIES[Math.floor(Math.random() * PATTERN_URI_PROPERTIES.length)].name,
@@ -26,9 +27,17 @@ const Item = memo(({ item, y, x, left, onCenter, onInView }: TItemProps) => {
 
   useEffect(() => {
     if (ref.current && !left.includes('NaN')) {
-      const inCenter = checkElementCenterOfScreenWithOffset(ref.current, 50);
+      const inCenter = checkElementCenterOfScreenWithOffset(
+        ref.current,
+        JourneySceneDebug.itemsCenterThreshold,
+      );
       const inView = checkElementInViewport(ref.current);
-      if (inCenter) onCenter?.();
+      if (inCenter) {
+        if (Math.abs(leftRef.current - parseFloat(left)) > JourneySceneDebug.itemsCenterThreshold) {
+          onCenter?.();
+          leftRef.current = parseFloat(left);
+        }
+      }
       if (inView) onInView?.();
     }
   }, [left]);
@@ -50,7 +59,8 @@ const Item = memo(({ item, y, x, left, onCenter, onInView }: TItemProps) => {
       <div className='marker'>
         <Button
           onClick={() => {
-            setState((S) => ({ ...S, step: JourneyStepType.fadeOut, selectedItem: item.name }));
+            // setState((S) => ({ ...S, step: JourneyStepType.fadeOut, selectedItem: item.name }));
+            setState((S) => ({ ...S, nav: { enabled: true } }));
           }}
         >
           <Button.Marker>

@@ -1,3 +1,4 @@
+import QueryString from 'lesca-url-parameters';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 export enum JourneySceneType {
@@ -16,13 +17,20 @@ export enum JourneyStepType {
   resume,
 }
 
-export type TJourneyState = { step: JourneyStepType; scene: JourneySceneType; loop: number; selectedItem?: string };
+export type TJourneyState = {
+  step: JourneyStepType;
+  scene: JourneySceneType;
+  loop: number;
+  selectedItem?: string;
+  nav: { enabled: boolean };
+};
 export type TJourneyContext = [TJourneyState, Dispatch<SetStateAction<TJourneyState>>];
 
 export const JourneyState = {
   step: JourneyStepType.unset,
   scene: JourneySceneType.晴光森林,
   loop: 0,
+  nav: { enabled: false },
 };
 export const JourneyContext = createContext<TJourneyContext>([JourneyState, () => {}]);
 
@@ -118,8 +126,9 @@ export const JourneyItemsList = {
   ],
 };
 
-export const JourneySceneDebug: { offset: number; count: number | 'max' } = {
+export const JourneySceneDebug: { offset: number; count: number | 'max'; itemsCenterThreshold: number } = {
   // offset: 1930,
   offset: 0,
-  count: 'max',
+  count: QueryString.get('count') === 'max' ? 'max' : 1,
+  itemsCenterThreshold: 150,
 };

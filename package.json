@@ -18,6 +18,7 @@
     "lesca-enterframe": "^2.1.0",
     "lesca-fetcher": "^2.1.0",
     "lesca-react-onload": "^3.0.0",
+    "lesca-url-parameters": "^2.0.8",
     "lesca-use-tween": "^4.0.2",
     "react": "^19.2.5",
     "react-div-100vh": "^0.7.0",

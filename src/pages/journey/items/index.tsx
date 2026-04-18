@@ -1,16 +1,16 @@
 import useURI from '@/hooks/useURI';
 import { memo, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  JourneyContext,
-  JourneyDepth,
-  JourneyItemsList,
-  JourneySceneDebug,
-  JourneySceneSize,
-} from '../config';
+import { JourneyContext, JourneyDepth, JourneyItemsList, JourneySceneSize } from '../config';
 import './index.less';
 import Item from './item';
 
-const Items = memo(({ offset, depth }: { offset: number; depth: 'front' | 'back' }) => {
+type TJourneyItemsProps = {
+  offset: number;
+  items: { name: string; top: number; left: number }[];
+  onCenter?: (item: string) => void;
+};
+
+const Items = memo(({ offset, items, onCenter }: TJourneyItemsProps) => {
   const [state, setState] = useContext(JourneyContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -25,24 +25,6 @@ const Items = memo(({ offset, depth }: { offset: number; depth: 'front' | 'back'
     items.forEach((item) => {
       setURI({ path: item.path, name: item.name });
     });
-  }, [state.scene]);
-
-  const items = useMemo(() => {
-    const { scene } = state;
-    const currentList = JourneyItemsList[scene];
-    const pickCount = Math.min(
-      currentList?.length || 1,
-      JourneySceneDebug.count === 'max' ? currentList.length : JourneySceneDebug.count,
-    );
-    const items = currentList.sort(() => Math.random() - 0.5).slice(0, pickCount);
-
-    return items
-      .filter((item) => (depth === 'back' ? item.top < 5.5 : item.top >= 5.5))
-      .map((item) => {
-        setURI({ path: item.path, name: item.name });
-        return { name: item.name, top: item.top, left: item.left };
-      })
-      .sort((a, b) => a.name.localeCompare(b.name));
   }, [state.scene]);
 
   useEffect(() => {
@@ -84,7 +66,16 @@ const Items = memo(({ offset, depth }: { offset: number; depth: 'front' | 'back'
             {items.map((item) => {
               const y = item.top + 5.5;
               const x = (item.left / 3840) * 100;
-              return <Item key={item.name} item={item} y={y} x={x} left={left} />;
+              return (
+                <Item
+                  key={item.name}
+                  item={item}
+                  y={y}
+                  x={x}
+                  left={left}
+                  onCenter={() => onCenter?.(item.name)}
+                />
+              );
             })}
           </div>
         </div>
