@@ -20,7 +20,7 @@ export const LoadingProcessState: TLoadingProcessState = {
 
 export const DatasetState: TDatasetState = {
   dataset: {
-    baseUri: 'https://localhost:5173/',
+    baseUri: window.location.origin,
   },
 };
 

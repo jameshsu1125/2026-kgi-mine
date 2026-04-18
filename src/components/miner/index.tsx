@@ -17,6 +17,7 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
   const [scale, setScale] = useState(0);
   const [spriteName, setSpriteName] = useState(0);
   const [frame, setFrame] = useCharacterSlowDown();
+  const targetWidth = useRef(0);
 
   useURI({ path: 'character-blue-sprite-sheet.png', name: 'minerSprite' });
 
@@ -51,6 +52,9 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
     getFrame() {
       return getFrame();
     },
+    getTargetWidth() {
+      return targetWidth.current;
+    },
   }));
 
   useEffect(() => {
@@ -60,6 +64,7 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
         const ratio = MINER_SIZE.width / MINER_SIZE.height;
         const currentWidth = height * ratio;
         const scale = currentWidth / MINER_SIZE.width;
+        targetWidth.current = currentWidth;
         setScale(scale);
       };
       resize();

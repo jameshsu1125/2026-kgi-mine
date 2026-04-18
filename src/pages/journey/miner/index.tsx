@@ -14,10 +14,11 @@ const MinerWalker = memo(({ onShowDown }: MinerWalkerProps) => {
     stop: () => void;
     slowDown: () => any;
     getFrame: () => CharacterFrame | null;
+    getTargetWidth: () => number;
   }>(null);
 
   const [style, setStyle] = useTween({
-    x: JourneySceneDebug.offset === 0 ? -window.innerWidth * 0.6 : 0,
+    x: JourneySceneDebug.offset === 0 ? -window.innerWidth * 0.5 - 75 : 0,
   });
   const [state] = useContext(JourneyContext);
 

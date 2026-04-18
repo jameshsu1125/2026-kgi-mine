@@ -1,5 +1,4 @@
 import { Howl } from 'howler';
-import './mobile-audio-unlock';
 import { SoundName } from './type';
 import { MP3List } from './config';
 import { mergePath } from '@/utils';
@@ -102,65 +101,6 @@ export default class Sounds {
     this.onError = props.onError || (() => {});
 
     this.preload('onStart');
-    this.initMobileSupport();
-  }
-
-  private initMobileSupport(): void {
-    // 等待用戶交互以解鎖音頻
-    const events = ['touchstart', 'click', 'tap', 'keydown'];
-    const unlock = () => {
-      this.unlockAllTracks();
-      events.forEach((event) => {
-        document.removeEventListener(event, unlock, { capture: true });
-      });
-    };
-
-    events.forEach((event) => {
-      document.addEventListener(event, unlock, { capture: true, once: true });
-    });
-
-    // 處理頁面可見性變化
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) {
-        setTimeout(() => this.restoreAudio(), 300);
-      }
-    });
-  }
-
-  private unlockAllTracks(): void {
-    // 為每個已載入的音軌播放極短的靜音來解鎖
-    Object.values(this.track).forEach((trackInfo) => {
-      if (trackInfo.track && trackInfo.onload) {
-        try {
-          const currentVolume = trackInfo.track.volume();
-          trackInfo.track.volume(0);
-          trackInfo.track.play();
-          setTimeout(() => {
-            trackInfo.track?.stop();
-            trackInfo.track?.volume(currentVolume);
-          }, 1);
-        } catch {
-          this.onError('音頻解鎖失敗');
-        }
-      }
-    });
-  }
-
-  private restoreAudio(): void {
-    // 重新初始化可能失效的音軌
-    Object.entries(this.track).forEach(([name, trackInfo]) => {
-      if (trackInfo.track && trackInfo.onload) {
-        // 檢查音軌是否還能正常工作
-        const testVolume = trackInfo.track.volume();
-        try {
-          trackInfo.track.volume(testVolume);
-        } catch {
-          // 如果出錯，重新創建音軌
-          // console.log(`重新創建音軌: ${name}`);
-          this.recreateTrack(name as SoundName);
-        }
-      }
-    });
   }
 
   private recreateTrack(name: SoundName): void {

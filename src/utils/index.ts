@@ -61,3 +61,41 @@ export const mergePath = (file: String) => {
   const currentHostWithoutSlash = host.slice(-1) === '/' ? host.slice(0, -1) : host;
   return `${currentHostWithoutSlash}${currentApiWithSlash}`;
 };
+
+export const normalizeAudioSrc = (path: string): string => {
+  const raw = mergePath(path);
+
+  try {
+    const url = new URL(raw, window.location.origin);
+    const reqIsLocalhost = /^(localhost|127\.0\.0\.1)$/i.test(url.hostname);
+    const pageIsRemote = !/^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
+
+    if (pageIsRemote && reqIsLocalhost) {
+      url.protocol = window.location.protocol;
+      url.host = window.location.host;
+    }
+
+    return url.toString();
+  } catch {
+    return raw;
+  }
+};
+
+export const resolveAudioSrc = (src: string) => {
+  const normalized = normalizeAudioSrc(src);
+
+  try {
+    const url = new URL(normalized, window.location.origin);
+    const reqIsLocalhost = /^(localhost|127\.0\.0\.1)$/i.test(url.hostname);
+    const pageIsRemote = !/^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
+
+    if (pageIsRemote && reqIsLocalhost) {
+      url.protocol = window.location.protocol;
+      url.host = window.location.host;
+    }
+
+    return url.toString();
+  } catch {
+    return normalized;
+  }
+};
