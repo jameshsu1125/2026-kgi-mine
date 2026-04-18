@@ -13,5 +13,5 @@ body {
 #immersive_experience_section {
   min-width: 320px;
 
-  @apply font-roboto-condensed absolute h-full w-full;
+  @apply font-roboto-condensed absolute h-full w-full overflow-hidden;
 }

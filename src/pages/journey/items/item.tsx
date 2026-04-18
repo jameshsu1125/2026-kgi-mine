@@ -3,7 +3,7 @@ import useURI from '@/hooks/useURI';
 import { PATTERN_URI_PROPERTIES } from '@/settings/config';
 import { checkElementCenterOfScreenWithOffset, checkElementInViewport } from '@/utils';
 import { memo, useContext, useEffect, useRef } from 'react';
-import { JourneyContext, JourneySceneDebug, JourneyStepType } from '../config';
+import { JourneyContext, JourneySceneDebug } from '../config';
 
 type TItemProps = {
   item: { name: string; top: number; left: number };

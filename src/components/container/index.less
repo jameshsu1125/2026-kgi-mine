@@ -2,11 +2,11 @@
 @import url('@/settings/config.less');
 
 .Container {
-  @apply w-full;
+  @apply w-full overflow-hidden;
 
   & > .bg {
     background-image: var(--scene-bg);
-    @apply fixed h-full w-full bg-cover bg-center bg-no-repeat;
+    @apply absolute h-full w-full bg-cover bg-center bg-no-repeat;
 
     @media only screen and (max-width: @MD) {
       & {

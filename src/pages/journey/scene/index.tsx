@@ -34,8 +34,8 @@ type TJourneySceneProps = {
   onItemSelected?: (item: string) => void;
 };
 
-const Scene = memo(({ onLooped, onItemSelected }: TJourneySceneProps) => {
-  const [context, setContext] = useContext(Context);
+const Scene = memo(({ onLooped }: TJourneySceneProps) => {
+  const [context] = useContext(Context);
   const sounds = context[ActionType.Sounds];
 
   const [state, setState] = useContext(JourneyContext);
