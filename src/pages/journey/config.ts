@@ -130,5 +130,5 @@ export const JourneySceneDebug: { offset: number; count: number | 'max'; itemsCe
   // offset: 1930,
   offset: 0,
   count: QueryString.get('count') === 'max' ? 'max' : 1,
-  itemsCenterThreshold: 150,
+  itemsCenterThreshold: 75,
 };

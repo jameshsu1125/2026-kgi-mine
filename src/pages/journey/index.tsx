@@ -11,6 +11,7 @@ import Nav from '@/components/nav';
 const Journey = memo(() => {
   const [context, setContext] = useContext(Context);
   const journey = context[ActionType.UserData]?.journey;
+  const sounds = context[ActionType.Sounds]!;
 
   const [state, setState] = useState({
     ...JourneyState,
@@ -97,6 +98,7 @@ const Journey = memo(() => {
         onload={() => {
           setState((S) => ({ ...S, step: JourneyStepType.fadeIn }));
           setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
+          sounds.track?.stop('bgm');
         }}
       >
         <div className='Journey'>
