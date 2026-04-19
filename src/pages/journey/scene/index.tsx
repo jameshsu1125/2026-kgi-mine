@@ -111,7 +111,7 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
             break;
         }
         sounds.track?.preload(type, () => {
-          sounds.track?.play(name);
+          sounds.track?.play(name, 1, false);
           sounds.track?.fadeOut('bgm', 500);
         });
       }

@@ -46,7 +46,7 @@ const Buttons = memo(({ type, getStart }: { type: 'login' | 'entry'; getStart: (
               const sounds = new Sounds({
                 onload: () => {
                   getStart();
-                  sounds.play('bgm');
+                  sounds.play('bgm', 1, false);
                 },
               });
               setContext({ type: ActionType.Sounds, state: { track: sounds } });

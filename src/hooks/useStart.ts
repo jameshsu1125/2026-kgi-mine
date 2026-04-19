@@ -23,13 +23,11 @@ const useStart = (props?: { auto?: boolean; backgroundAppProcess?: boolean }) =>
       response = { isSuccess: false, result: [] };
     }
 
-    setTimeout(() => {
-      if (!backgroundAppProcess) {
-        setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
-      }
+    if (!backgroundAppProcess) {
+      setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
+    }
 
-      setState(response as ResponseType);
-    }, 1000);
+    setState(response as ResponseType);
   };
 
   useEffect(() => {

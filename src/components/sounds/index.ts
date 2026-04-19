@@ -228,6 +228,7 @@ export default class Sounds {
   }
 
   stop(name: SoundName) {
+    // alert(`${this.track[name]}, ${this.track[name]?.track}, ${this.track[name].onload}`);
     if (this.track[name] && this.track[name].onload && this.track[name].track) {
       this.track[name].track!.stop();
     }

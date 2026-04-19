@@ -7,7 +7,8 @@ import { ActionType } from '@/settings/type';
 import { PAGE } from '@/settings/config';
 
 const SelectButton = memo(({ onClick }: { onClick: () => void }) => {
-  const [, setContext] = useContext(Context);
+  const [context, setContext] = useContext(Context);
+  const sounds = context[ActionType.Sounds]!;
   const [state] = useContext(HomeContext);
   return (
     <TweenerProvider
@@ -21,6 +22,7 @@ const SelectButton = memo(({ onClick }: { onClick: () => void }) => {
         duration: 600,
         onEnd: () => {
           setTimeout(() => {
+            sounds.track?.stop('bgm');
             setContext({ type: ActionType.Page, state: PAGE.journey });
           }, 2000);
         },
