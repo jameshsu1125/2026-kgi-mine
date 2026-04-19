@@ -43,6 +43,7 @@ const Buttons = memo(({ type, getStart }: { type: 'login' | 'entry'; getStart: (
           <Button
             clickOnce
             onClick={() => {
+              setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
               const sounds = new Sounds({
                 onload: () => {
                   getStart();

@@ -45,7 +45,7 @@ export const UserDataState: TUserDataState = {
 };
 
 export const InitialState: IState = {
-  [ActionType.Page]: PAGE.journey,
+  [ActionType.Page]: PAGE.home,
   [ActionType.LoadingProcess]: LoadingProcessState,
   [ActionType.Dataset]: DatasetState,
   [ActionType.Sounds]: { track: undefined },
