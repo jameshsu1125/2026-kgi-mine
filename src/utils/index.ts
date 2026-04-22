@@ -1,3 +1,5 @@
+import { SceneDepth } from '@/settings/config';
+
 export const printCSSAnimation = (radius: number = 20, isBlank: boolean = false) => {
   let i = 0;
   if (isBlank) {
@@ -98,4 +100,11 @@ export const resolveAudioSrc = (src: string) => {
   } catch {
     return normalized;
   }
+};
+
+export const getViewBackgroundImagePositionXPercentByDirection = (percent: number) => {
+  const ratio = innerWidth / 1680;
+  const currentOffset = percent / SceneDepth.middle / ratio;
+  console.log(currentOffset);
+  return currentOffset;
 };

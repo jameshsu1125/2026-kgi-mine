@@ -12,6 +12,18 @@ export const Debug = {
   resource: true,
   randomScene: true,
   sceneItems: false,
+  fps: 60,
+};
+
+export const SceneSize = {
+  width: 3840,
+  height: 1080,
+};
+
+export const SceneDepth = {
+  back: 0.01,
+  middle: 0.1,
+  front: 0.6,
 };
 
 export const PATTERN_URI_PROPERTIES = [

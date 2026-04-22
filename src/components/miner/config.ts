@@ -6,5 +6,3 @@ export const MINER_SIZE = {
 export const MINER_SPRITE_FRAME_COUNT = 26;
 
 export const MINER_SPRITE_STOP_FRAME = 1;
-
-export const MINER_SPRITE_FPS = 120;

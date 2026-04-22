@@ -1,8 +1,7 @@
 import Container from '@/components/container';
 import LoadingProcess from '@/components/loadingProcess';
-import { MINER_SPRITE_FPS } from '@/components/miner/config';
 import Modal from '@/components/modal';
-import { PAGE } from '@/settings/config';
+import { Debug, PAGE } from '@/settings/config';
 import { Context, DatasetState, InitialState, Reducer } from '@/settings/constant';
 import '@/settings/global.css';
 import { ActionType, TContext } from '@/settings/type';
@@ -42,7 +41,7 @@ const App = ({ dataset }: { dataset: typeof rooAppDataset }) => {
 
     window.KGI_MINE_BASE_URI = baseUri;
     document.documentElement.style.setProperty('--base-uri', baseUri);
-    EnterFrame.setFPS(MINER_SPRITE_FPS);
+    EnterFrame.setFPS(Debug.fps);
   }, []);
 
   const currentPage = useMemo(() => {

@@ -1,3 +1,4 @@
+import { getViewBackgroundImagePositionXPercentByDirection } from '@/utils';
 import QueryString from 'lesca-url-parameters';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
@@ -33,17 +34,6 @@ export const JourneyState = {
   nav: { enabled: false },
 };
 export const JourneyContext = createContext<TJourneyContext>([JourneyState, () => {}]);
-
-export const JourneyDepth = {
-  back: 0.01,
-  middle: 0.1,
-  front: 0.6,
-};
-
-export const JourneySceneSize = {
-  width: 3840,
-  height: 1080,
-};
 
 export const JourneySceneList = {
   [JourneySceneType.金黃稻浪]: [
@@ -126,9 +116,17 @@ export const JourneyItemsList = {
   ],
 };
 
-export const JourneySceneDebug: { offset: number; count: number | 'max'; itemsCenterThreshold: number } = {
-  // offset: 1930,
-  offset: 0,
-  count: QueryString.get('count') === 'max' ? 'max' : 1,
+type JourneySceneDebugType = {
+  enabled: boolean;
+  count: number | 'max';
+};
+
+export const JourneySceneSetting = {
   itemsCenterThreshold: 75,
+  offset: getViewBackgroundImagePositionXPercentByDirection(100),
+};
+
+export const JourneySceneDebug: JourneySceneDebugType = {
+  enabled: true,
+  count: QueryString.get('count') === 'max' ? 'max' : 1,
 };

@@ -1,8 +1,9 @@
 import useURI from '@/hooks/useURI';
 import { memo, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { JourneyContext, JourneyDepth, JourneyItemsList, JourneySceneSize } from '../config';
+import { JourneyContext, JourneyItemsList } from '../config';
 import './index.less';
 import Item from './item';
+import { SceneDepth, SceneSize } from '@/settings/config';
 
 type TJourneyItemsProps = {
   offset: number;
@@ -31,7 +32,7 @@ const Items = memo(({ offset, items, onCenter }: TJourneyItemsProps) => {
     const resize = () => {
       if (containerRef.current && contentRef.current && boxRef.current) {
         const { width, height } = containerRef.current.getBoundingClientRect();
-        const ratio = JourneySceneSize.width / JourneySceneSize.height;
+        const ratio = SceneSize.width / SceneSize.height;
         const currentWidth = width / height < ratio ? height * ratio : width;
         const currentHeight = width / height < ratio ? height : width / ratio;
         contentRef.current.style.width = `${currentWidth - width}px`;
@@ -49,13 +50,13 @@ const Items = memo(({ offset, items, onCenter }: TJourneyItemsProps) => {
 
   useEffect(() => {
     if (offsetRef === 0) return;
-    const loop = Math.floor((offset * JourneyDepth.middle) / (offsetRef * 2));
+    const loop = Math.floor((offset * SceneDepth.middle) / (offsetRef * 2));
     setState((S) => ({ ...S, loop }));
   }, [offset, offsetRef]);
 
   const left = useMemo(() => {
     if (offsetRef === 0) return '0%';
-    return `-${(offset * JourneyDepth.middle) % (offsetRef * 2)}%`;
+    return `-${(offset * SceneDepth.middle) % (offsetRef * 2)}%`;
   }, [offset, offsetRef]);
 
   return (

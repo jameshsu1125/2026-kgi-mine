@@ -2,6 +2,7 @@ import { PreloadType } from '@/components/sounds';
 import { SoundName } from '@/components/sounds/type';
 import { CharacterFrame } from '@/hooks/useCharacterSlowDown';
 import useURI from '@/hooks/useURI';
+import { Debug, SceneDepth } from '@/settings/config';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import EnterFrame from 'lesca-enterframe';
@@ -10,10 +11,10 @@ import { memo, useContext, useEffect, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import {
   JourneyContext,
-  JourneyDepth,
   JourneyItemsList,
   JourneySceneDebug,
   JourneySceneList,
+  JourneySceneSetting,
   JourneySceneType,
   JourneyStepType,
 } from '../config';
@@ -22,7 +23,21 @@ import MinerWalker from '../miner';
 import './index.less';
 
 const View = memo(({ offset, depth, image }: { offset: number; depth: number; image: string }) => {
-  const currentOffset = offset * depth;
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const resize = () => {
+      setWidth(window.innerWidth);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, []);
+  console.log(offset);
+
+  const ratio = width / 1680;
+  const currentOffset = offset * depth * ratio; // 根據深度調整偏移量
+
   return (
     <div className={twMerge('view', image)} style={{ backgroundPositionX: `${currentOffset}%` }} />
   );
@@ -41,7 +56,7 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
   const [state, setState] = useContext(JourneyContext);
   const [, setURI] = useURI();
   const [, setStyle] = useTween({ top: 0 });
-  const [offset, setOffset] = useState(JourneySceneDebug.offset);
+  const [offset, setOffset] = useState(JourneySceneSetting.offset);
 
   useEffect(() => {
     leftRef = offset;
@@ -120,14 +135,14 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
 
   useEffect(() => {
     if (state.step === JourneyStepType.fadeIn) {
-      if (JourneySceneDebug.offset) {
+      if (JourneySceneDebug.enabled) {
         EnterFrame.stop();
         return;
       }
       setStyle(
         { top: 300 },
         {
-          duration: 10000,
+          duration: (60 / Debug.fps) * 20000,
           easing: Bezier.easeIn,
           onUpdate: (value: { top: number }) => {
             setOffset(value.top);
@@ -148,6 +163,7 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
   useEffect(() => {
     if (state.step === JourneyStepType.loop) {
       EnterFrame.destroy();
+      EnterFrame.reset();
       EnterFrame.add(() => {
         setOffset((S) => S + 1);
       });
@@ -192,12 +208,12 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
 
   return (
     <div className='Scene'>
-      <View offset={offset} depth={JourneyDepth.back} image='back' />
-      <View offset={offset} depth={JourneyDepth.middle} image='middle' />
+      <View offset={offset} depth={SceneDepth.back} image='back' />
+      <View offset={offset} depth={SceneDepth.middle} image='middle' />
       <Items offset={offset} items={back} onCenter={onCenter} />
       <MinerWalker onShowDown={onShowDown} />
       <Items offset={offset} items={front} onCenter={onCenter} />
-      <View offset={offset} depth={JourneyDepth.front} image='front' />
+      <View offset={offset} depth={SceneDepth.front} image='front' />
     </div>
   );
 });

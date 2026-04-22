@@ -3,7 +3,7 @@ import useURI from '@/hooks/useURI';
 import { PATTERN_URI_PROPERTIES } from '@/settings/config';
 import { checkElementCenterOfScreenWithOffset, checkElementInViewport } from '@/utils';
 import { memo, useContext, useEffect, useRef } from 'react';
-import { JourneyContext, JourneySceneDebug } from '../config';
+import { JourneyContext, JourneySceneDebug, JourneySceneSetting } from '../config';
 
 type TItemProps = {
   item: { name: string; top: number; left: number };
@@ -29,11 +29,13 @@ const Item = memo(({ item, y, x, left, onCenter, onInView }: TItemProps) => {
     if (ref.current && !left.includes('NaN')) {
       const inCenter = checkElementCenterOfScreenWithOffset(
         ref.current,
-        JourneySceneDebug.itemsCenterThreshold,
+        JourneySceneSetting.itemsCenterThreshold,
       );
       const inView = checkElementInViewport(ref.current);
       if (inCenter) {
-        if (Math.abs(leftRef.current - parseFloat(left)) > JourneySceneDebug.itemsCenterThreshold) {
+        if (
+          Math.abs(leftRef.current - parseFloat(left)) > JourneySceneSetting.itemsCenterThreshold
+        ) {
           onCenter?.();
           leftRef.current = parseFloat(left);
         }

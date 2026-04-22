@@ -18,13 +18,13 @@ const MinerWalker = memo(({ onShowDown }: MinerWalkerProps) => {
   }>(null);
 
   const [style, setStyle] = useTween({
-    x: JourneySceneDebug.offset === 0 ? -window.innerWidth * 0.5 - 75 : 0,
+    x: !JourneySceneDebug.enabled ? -window.innerWidth * 0.5 - 75 : 0,
   });
   const [state] = useContext(JourneyContext);
 
   useEffect(() => {
     if (state.step === JourneyStepType.fadeIn) {
-      if (JourneySceneDebug.offset) return;
+      if (JourneySceneDebug.enabled) return;
       setStyle(
         { x: 0 },
         { duration: 10000, easing: Bezier.easeIn, onStart: () => ref.current?.play() },
