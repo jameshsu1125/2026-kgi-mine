@@ -5,6 +5,7 @@ import { JourneyContext, JourneyStepType } from '../config';
 import { UserDataURIList } from './config';
 import './index.less';
 import useTween from 'lesca-use-tween';
+import { faker } from '@faker-js/faker';
 
 const TweenNumber = memo(({ number }: { number: number }) => {
   const [style, setStyle] = useTween({ top: 0 });
@@ -37,7 +38,7 @@ const UserData = memo(() => {
         shouldFadeIn={state.step === JourneyStepType.fadeIn}
       >
         <div>
-          <div>Dustin</div>
+          <div>{faker.person.firstName()}</div>
           <div>
             <svg
               width='24'

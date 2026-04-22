@@ -55,7 +55,7 @@ const Item = memo(({ item, y, x, left, onCenter, onInView }: TItemProps) => {
       className={item.name}
       style={{
         transform: `translateY(${y}vh)`,
-        left: `${x}%`,
+        left: `${x.toFixed(2)}%`,
       }}
     >
       <div className='marker'>
