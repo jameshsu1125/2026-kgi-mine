@@ -121,8 +121,8 @@ type JourneySceneDebugType = {
 };
 
 export const JourneySceneSetting = {
-  itemsCenterThreshold: 75,
-  offset: 100,
+  itemsCenterThreshold: 150,
+  offset: 80,
 };
 
 export const JourneySceneDebug: JourneySceneDebugType = {

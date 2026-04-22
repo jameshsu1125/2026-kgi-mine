@@ -2,7 +2,7 @@ import { memo, useContext, useEffect, useId } from 'react';
 import Article from '../article';
 import './index.less';
 import Click from 'lesca-click';
-import { JourneyContext } from '@/pages/journey/config';
+import { JourneyContext, JourneyStepType } from '@/pages/journey/config';
 import EnterFrame from 'lesca-enterframe';
 import useURI from '@/hooks/useURI';
 import { Context } from '@/settings/constant';
@@ -36,15 +36,11 @@ const Nav = memo(() => {
   useEffect(() => {
     Click.addPreventExcept(`#${id}`);
     EnterFrame.stop();
-
-    return () => {
-      EnterFrame.play();
-    };
   }, []);
 
   useEffect(() => {
     Click.add(`#${id2}`, () => {
-      setState((S) => ({ ...S, nav: { enabled: false } }));
+      setState((S) => ({ ...S, step: JourneyStepType.resume, nav: { enabled: false } }));
     });
     return () => {
       Click.remove(`#${id2}`);

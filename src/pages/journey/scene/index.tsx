@@ -26,7 +26,14 @@ import {
   getViewBackgroundImagePositionXPercentByDirection,
 } from '@/utils';
 
-const View = memo(({ offset, depth, image }: { offset: number; depth: number; image: string }) => {
+type ViewProps = {
+  offset: number;
+  depth: number;
+  image: string;
+  isAlpha?: boolean;
+};
+
+const View = memo(({ offset, depth, image, isAlpha }: ViewProps) => {
   const [context] = useContext(Context);
   const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
 
@@ -34,7 +41,10 @@ const View = memo(({ offset, depth, image }: { offset: number; depth: number; im
   const currentOffset = offset * depth * ratio; // 根據深度調整偏移量
 
   return (
-    <div className={twMerge('view', image)} style={{ backgroundPositionX: `${currentOffset}%` }} />
+    <div
+      className={twMerge('view', isAlpha && 'opacity-50 duration-500', image)}
+      style={{ backgroundPositionX: `${currentOffset}%` }}
+    />
   );
 });
 
@@ -57,6 +67,8 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
   const [offset, setOffset] = useState(
     getViewBackgroundImagePositionXPercentByDirection(JourneySceneSetting.offset, width),
   );
+
+  const [isAlpha, setIsAlpha] = useState(false);
 
   useEffect(() => {
     leftRef = offset;
@@ -162,6 +174,7 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
       setStyle({ top: offset }, 1);
     } else if (state.step === JourneyStepType.resume) {
       EnterFrame.play();
+      setIsAlpha(false);
     }
   }, [state.step]);
 
@@ -177,7 +190,6 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
   }, [state.step]);
 
   useEffect(() => {
-    console.log(state.loop);
     if (state.loop) {
       onLooped?.(state.loop);
     }
@@ -201,7 +213,9 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
           },
           onEnd: (value: { top: number }) => {
             setOffset(value.top);
-            // onItemSelected?.(state.selectedItem || '');
+            if (state.scene === JourneySceneType.晴光森林) {
+              setIsAlpha(true);
+            }
           },
         },
       );
@@ -209,8 +223,6 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
   };
 
   const onCenter = (name: string) => {
-    console.log(name, state.scene);
-
     setState((S) => ({ ...S, step: JourneyStepType.fadeOut }));
   };
 
@@ -221,7 +233,7 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
       <Items offset={offset} items={back} onCenter={onCenter} />
       <MinerWalker onShowDown={onShowDown} />
       <Items offset={offset} items={front} onCenter={onCenter} />
-      <View offset={offset} depth={SceneDepth.front} image='front' />
+      <View offset={offset} depth={SceneDepth.front} image='front' isAlpha={isAlpha} />
     </div>
   );
 });
