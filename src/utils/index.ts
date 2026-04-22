@@ -1,4 +1,4 @@
-import { SceneDepth } from '@/settings/config';
+import { SceneDepth, SceneSize } from '@/settings/config';
 
 export const printCSSAnimation = (radius: number = 20, isBlank: boolean = false) => {
   let i = 0;
@@ -52,8 +52,10 @@ export const checkElementInViewportWithThreshold = (el: HTMLElement, threshold: 
 
 export const checkElementCenterOfScreenWithOffset = (el: HTMLElement, offset: number) => {
   const rect = el.getBoundingClientRect();
+
   return (
-    rect.left >= (window.innerWidth - offset) / 2 && rect.left <= (window.innerWidth + offset) / 2
+    rect.left >= (window.innerWidth - offset + 70) / 2 &&
+    rect.left <= (window.innerWidth + offset + 70) / 2
   );
 };
 
@@ -102,9 +104,17 @@ export const resolveAudioSrc = (src: string) => {
   }
 };
 
-export const getViewBackgroundImagePositionXPercentByDirection = (percent: number) => {
-  const ratio = innerWidth / 1680;
+export const getViewBackgroundImagePositionXPercentByDirection = (
+  percent: number,
+  width: number,
+) => {
+  const ratio = getSceneBackgroundPositionXRatio({ width });
   const currentOffset = percent / SceneDepth.middle / ratio;
-  console.log(currentOffset);
   return currentOffset;
+};
+
+export const getSceneBackgroundPositionXRatio = ({ width }: { width: number }) => {
+  const basicBackgroundPanOffset = SceneSize.width - 1680;
+  const targetBackgroundPanOffset = width - window.innerWidth;
+  return targetBackgroundPanOffset / basicBackgroundPanOffset;
 };

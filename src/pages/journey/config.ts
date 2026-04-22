@@ -1,4 +1,3 @@
-import { getViewBackgroundImagePositionXPercentByDirection } from '@/utils';
 import QueryString from 'lesca-url-parameters';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
@@ -123,10 +122,10 @@ type JourneySceneDebugType = {
 
 export const JourneySceneSetting = {
   itemsCenterThreshold: 75,
-  offset: getViewBackgroundImagePositionXPercentByDirection(100),
+  offset: 100,
 };
 
 export const JourneySceneDebug: JourneySceneDebugType = {
-  enabled: true,
+  enabled: false,
   count: QueryString.get('count') === 'max' ? 'max' : 1,
 };

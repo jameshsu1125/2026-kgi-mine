@@ -2,7 +2,7 @@ import { PreloadType } from '@/components/sounds';
 import { SoundName } from '@/components/sounds/type';
 import { CharacterFrame } from '@/hooks/useCharacterSlowDown';
 import useURI from '@/hooks/useURI';
-import { Debug, SceneDepth } from '@/settings/config';
+import { SceneDepth } from '@/settings/config';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import EnterFrame from 'lesca-enterframe';
@@ -21,21 +21,16 @@ import {
 import Items from '../items';
 import MinerWalker from '../miner';
 import './index.less';
+import {
+  getSceneBackgroundPositionXRatio,
+  getViewBackgroundImagePositionXPercentByDirection,
+} from '@/utils';
 
 const View = memo(({ offset, depth, image }: { offset: number; depth: number; image: string }) => {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [context] = useContext(Context);
+  const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
 
-  useEffect(() => {
-    const resize = () => {
-      setWidth(window.innerWidth);
-    };
-    resize();
-    window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
-  }, []);
-  console.log(offset);
-
-  const ratio = width / 1680;
+  const ratio = getSceneBackgroundPositionXRatio({ width });
   const currentOffset = offset * depth * ratio; // 根據深度調整偏移量
 
   return (
@@ -51,12 +46,17 @@ type TJourneySceneProps = {
 
 const Scene = memo(({ onLooped }: TJourneySceneProps) => {
   const [context] = useContext(Context);
+  const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
   const sounds = context[ActionType.Sounds];
 
   const [state, setState] = useContext(JourneyContext);
   const [, setURI] = useURI();
-  const [, setStyle] = useTween({ top: 0 });
-  const [offset, setOffset] = useState(JourneySceneSetting.offset);
+  const [, setStyle] = useTween({
+    top: getViewBackgroundImagePositionXPercentByDirection(JourneySceneSetting.offset, width),
+  });
+  const [offset, setOffset] = useState(
+    getViewBackgroundImagePositionXPercentByDirection(JourneySceneSetting.offset, width),
+  );
 
   useEffect(() => {
     leftRef = offset;
@@ -140,9 +140,14 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
         return;
       }
       setStyle(
-        { top: 300 },
         {
-          duration: (60 / Debug.fps) * 20000,
+          top:
+            getViewBackgroundImagePositionXPercentByDirection(JourneySceneSetting.offset, width) +
+            300,
+        },
+        {
+          // duration: (60 / Debug.fps) * 20000,
+          duration: 10000,
           easing: Bezier.easeIn,
           onUpdate: (value: { top: number }) => {
             setOffset(value.top);
@@ -172,6 +177,7 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
   }, [state.step]);
 
   useEffect(() => {
+    console.log(state.loop);
     if (state.loop) {
       onLooped?.(state.loop);
     }
@@ -202,7 +208,9 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
     }
   };
 
-  const onCenter = (_: string) => {
+  const onCenter = (name: string) => {
+    console.log(name, state.scene);
+
     setState((S) => ({ ...S, step: JourneyStepType.fadeOut }));
   };
 

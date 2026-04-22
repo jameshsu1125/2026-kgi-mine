@@ -4,19 +4,28 @@ import { JourneyContext, JourneyItemsList } from '../config';
 import './index.less';
 import Item from './item';
 import { SceneDepth, SceneSize } from '@/settings/config';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
+import { getSceneBackgroundPositionXRatio } from '@/utils';
 
 type TJourneyItemsProps = {
   offset: number;
   items: { name: string; top: number; left: number }[];
   onCenter?: (item: string) => void;
+  loop?: boolean;
 };
 
-const Items = memo(({ offset, items, onCenter }: TJourneyItemsProps) => {
+const Items = memo(({ offset, items, onCenter, loop }: TJourneyItemsProps) => {
+  const [context] = useContext(Context);
+  const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
+  const ratio = useMemo(() => getSceneBackgroundPositionXRatio({ width }), [width]);
+
   const [state, setState] = useContext(JourneyContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
-  const [offsetRef, setOffsetRef] = useState(0);
+
+  const [offsetRef, setOffsetRef] = useState(offset);
 
   const [, setURI] = useURI();
 
@@ -50,14 +59,15 @@ const Items = memo(({ offset, items, onCenter }: TJourneyItemsProps) => {
 
   useEffect(() => {
     if (offsetRef === 0) return;
-    const loop = Math.floor((offset * SceneDepth.middle) / (offsetRef * 2));
-    setState((S) => ({ ...S, loop }));
-  }, [offset, offsetRef]);
+
+    const currentLoop = Math.floor((offset * SceneDepth.middle * ratio) / (offsetRef * 2));
+    if (loop) setState((S) => ({ ...S, loop: currentLoop }));
+  }, [offset, offsetRef, ratio]);
 
   const left = useMemo(() => {
     if (offsetRef === 0) return '0%';
-    return `-${(offset * SceneDepth.middle) % (offsetRef * 2)}%`;
-  }, [offset, offsetRef]);
+    return `-${(offset * SceneDepth.middle * ratio) % (offsetRef * 2)}%`;
+  }, [offset, offsetRef, width, ratio]);
 
   return (
     <div ref={containerRef} className='Items'>

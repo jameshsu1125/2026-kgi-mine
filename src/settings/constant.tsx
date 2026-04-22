@@ -44,6 +44,10 @@ export const UserDataState: TUserDataState = {
   character: undefined,
 };
 
+export const ContainerState = {
+  height: undefined,
+};
+
 export const InitialState: IState = {
   [ActionType.Page]: PAGE.journey,
   [ActionType.LoadingProcess]: LoadingProcessState,
@@ -51,6 +55,7 @@ export const InitialState: IState = {
   [ActionType.Sounds]: { track: undefined },
   [ActionType.Modal]: ModalState,
   [ActionType.UserData]: UserDataState,
+  [ActionType.Container]: ContainerState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);

@@ -8,6 +8,7 @@ export enum ActionType {
   Sounds = 'sounds',
   Modal = 'modal',
   UserData = 'userData',
+  SceneImageSize = 'sceneImageSize',
 }
 
 export enum LoadingProcessType {
@@ -60,6 +61,11 @@ export type TUserDataState = {
   character?: string;
 };
 
+export type TSceneImageSizeState = {
+  height?: number;
+  width?: number;
+};
+
 export interface IState {
   [ActionType.Page]?: string;
   [ActionType.LoadingProcess]?: TLoadingProcessState;
@@ -67,6 +73,7 @@ export interface IState {
   [ActionType.Sounds]?: TSounds;
   [ActionType.Modal]?: TModalState;
   [ActionType.UserData]?: TUserDataState;
+  [ActionType.SceneImageSize]?: TSceneImageSizeState;
 }
 
 export interface IAction {
@@ -77,6 +84,7 @@ export interface IAction {
     | IState[ActionType.Sounds]
     | IState[ActionType.Modal]
     | IState[ActionType.UserData]
+    | IState[ActionType.SceneImageSize]
     | string;
   type: ActionType;
 }

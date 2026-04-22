@@ -1,13 +1,31 @@
 import useURI from '@/hooks/useURI';
-import { IReactProps } from '@/settings/type';
-import { memo } from 'react';
+import { SceneSize } from '@/settings/config';
+import { Context } from '@/settings/constant';
+import { ActionType, IReactProps } from '@/settings/type';
+import { memo, useContext, useEffect, useRef } from 'react';
 import Div100vh from 'react-div-100vh';
 import NavBar from '../navBar';
 import './index.less';
 
 const Container = memo(({ children }: IReactProps) => {
+  const [context, setContext] = useContext(Context);
+  const sceneImageSize = context[ActionType.SceneImageSize];
+  const ref = useRef<HTMLDivElement>(null);
   useURI({ path: 'scene-bg.jpg', name: 'scene-bg' });
   useURI({ path: 'scene-bg-m.jpg', name: 'scene-bg-m' });
+
+  useEffect(() => {
+    const resize = () => {
+      if (ref.current) {
+        const { height } = ref.current.getBoundingClientRect();
+        const width = (height * SceneSize.width) / SceneSize.height;
+        setContext({ type: ActionType.SceneImageSize, state: { height, width } });
+      }
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, []);
 
   return (
     <Div100vh className='Container'>
@@ -15,7 +33,9 @@ const Container = memo(({ children }: IReactProps) => {
       <div className='ctx'>
         <div>
           <NavBar />
-          <div className='content'>{children}</div>
+          <div ref={ref} className='content'>
+            {sceneImageSize && sceneImageSize.width && children}
+          </div>
         </div>
       </div>
     </Div100vh>
