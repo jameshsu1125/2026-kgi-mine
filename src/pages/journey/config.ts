@@ -105,7 +105,7 @@ export const JourneyItemsList = {
   ],
   [JourneySceneType.晴光森林]: [
     { name: 'lushForest-roadSign', path: 'scene-lushForest-roadSign.png', top: -3.5, left: 1880 },
-    { name: 'lushForest-item-1', path: 'scene-lushForest-item-1.png', top: -22, left: 860 },
+    // { name: 'lushForest-item-1', path: 'scene-lushForest-item-1.png', top: -22, left: 860 },
     { name: 'lushForest-item-2', path: 'scene-lushForest-item-2.png', top: 7, left: 260 },
     { name: 'lushForest-item-3', path: 'scene-lushForest-item-3.png', top: -11, left: 2970 },
     { name: 'lushForest-item-4', path: 'scene-lushForest-item-4.png', top: -57.2, left: 2740 },
