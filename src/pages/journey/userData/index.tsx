@@ -1,10 +1,10 @@
 import TweenerProvider from '@/components/tweenProvider';
 import useURI from '@/hooks/useURI';
-import { memo, useContext, useEffect, useMemo } from 'react';
+import { memo, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { JourneyContext, JourneyStepType } from '../config';
 import { UserDataURIList } from './config';
 import './index.less';
-import useTween from 'lesca-use-tween';
+import useTween, { Bezier } from 'lesca-use-tween';
 import { faker } from '@faker-js/faker';
 
 const TweenNumber = memo(({ number }: { number: number }) => {
@@ -17,12 +17,41 @@ const TweenNumber = memo(({ number }: { number: number }) => {
   return <span>{Math.floor(Number(style.top))}</span>;
 });
 
+const Icon = memo(() => {
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [offsetIndex, setOffsetIndex] = useState(0);
+
+  const [style, setStyle] = useTween({ backgroundPositionY: '0%' });
+
+  useEffect(() => {
+    setStyle(
+      { backgroundPositionY: `${(offsetIndex % 4) * 25}%` },
+      { duration: 500, easing: Bezier.inOutBack },
+    );
+  }, [offsetIndex]);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setOffsetIndex((S) => S + 1);
+    }, 5000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  return <div className='ico' style={style} />;
+});
+
 const UserData = memo(() => {
   const [state] = useContext(JourneyContext);
 
   const [, setURI] = useURI();
   useEffect(() => {
     UserDataURIList.forEach((uri) => setURI(uri));
+    setURI({ path: 'userData-flap-patterns.svg', name: 'userData-flap-patterns' });
   }, []);
 
   const currentRandomScene = useMemo(() => {
@@ -44,18 +73,7 @@ const UserData = memo(() => {
         <div>
           <div>{firstName}</div>
           <div>
-            <svg
-              width='24'
-              height='24'
-              viewBox='0 0 24 24'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                d='M10.543 8.12892C10.771 6.54732 10.9702 5.04972 11.2126 3.56172C11.2966 3.05052 11.4478 2.53692 11.659 2.06652C11.7838 1.78812 12.0838 1.58652 12.3046 1.35132C12.5086 1.58412 12.8158 1.78572 12.8998 2.05692C13.1686 2.93052 13.4086 3.82332 13.5622 4.72332C13.7494 5.82012 13.8358 6.93612 13.9774 8.13372C14.1406 8.01372 14.2726 7.92012 14.4046 7.82172C15.691 6.86892 16.9654 5.89692 18.2734 4.97292C18.631 4.72092 19.0798 4.56972 19.5094 4.45212C19.9342 4.33692 20.1574 4.54812 20.0638 4.97772C19.9822 5.35692 19.8574 5.76012 19.6366 6.07452C18.7102 7.40172 17.7406 8.70012 16.7854 10.0057C16.6702 10.1617 16.5406 10.3081 16.3438 10.5529C17.035 10.6225 17.6374 10.6441 18.2278 10.7473C19.555 10.9777 20.8822 11.2225 22.1998 11.5153C22.5958 11.6041 23.1862 11.7481 23.1214 12.2473C23.0854 12.5233 22.5694 12.8761 22.219 12.9457C20.4934 13.2937 18.751 13.5601 17.0158 13.8529C16.8286 13.8841 16.639 13.8913 16.3366 13.9201C16.5358 14.1625 16.675 14.3161 16.7998 14.4817C17.7214 15.7249 18.6574 16.9585 19.5454 18.2257C19.7974 18.5833 19.9534 19.0297 20.0638 19.4593C20.179 19.9081 19.9438 20.1361 19.4926 20.0161C19.063 19.9009 18.619 19.7401 18.259 19.4905C17.0614 18.6601 15.8974 17.7817 14.7262 16.9153C14.4982 16.7473 14.287 16.5505 13.9726 16.2865C13.9078 16.9249 13.8862 17.4721 13.795 18.0049C13.5622 19.3681 13.3222 20.7337 13.0342 22.0873C12.9454 22.5073 12.8182 23.0929 12.2902 23.0977C11.7574 23.1001 11.623 22.5097 11.5438 22.0945C11.2222 20.3809 10.9558 18.6577 10.675 16.9369C10.6462 16.7665 10.6414 16.5913 10.6126 16.3009C10.3894 16.4761 10.2478 16.5937 10.099 16.7041C8.87257 17.6185 7.65097 18.5377 6.41497 19.4401C6.15577 19.6273 5.85577 19.7953 5.55097 19.8745C5.24377 19.9537 4.90537 19.9129 4.58137 19.9273C4.60297 19.6009 4.55977 19.2505 4.66537 18.9529C4.80697 18.5497 5.02057 18.1585 5.27257 17.8129C6.10057 16.6777 6.95977 15.5665 7.80697 14.4481C7.92217 14.2969 8.04937 14.1553 8.23657 13.9297C7.31257 13.8337 6.48937 13.7905 5.68537 13.6513C4.53577 13.4497 3.38857 13.2097 2.26057 12.9121C1.93897 12.8281 1.68697 12.4849 1.40137 12.2593C1.68937 12.0193 1.94137 11.6785 2.27257 11.5561C3.94537 10.9417 5.71177 10.7977 7.47097 10.6369C7.68217 10.6177 7.89337 10.6009 8.21737 10.5745C8.05897 10.3633 7.95817 10.2337 7.86217 10.0993C6.87577 8.74812 5.87737 7.40652 4.91257 6.03852C4.71097 5.75292 4.59337 5.39052 4.51177 5.04492C4.39897 4.56012 4.63657 4.31052 5.10457 4.46892C5.66137 4.65612 6.23017 4.88892 6.70537 5.22252C7.86937 6.03852 8.98537 6.92412 10.1182 7.78332C10.2574 7.88892 10.3894 8.00172 10.5502 8.13132L10.543 8.12892Z'
-                fill='#333333'
-              />
-            </svg>
+            <Icon />
           </div>
           <div>探索中</div>
         </div>
