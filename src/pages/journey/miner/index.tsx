@@ -37,7 +37,7 @@ const MinerWalker = memo(({ onShowDown }: MinerWalkerProps) => {
   return (
     <div className='pointer-events-none absolute top-0 left-0 flex h-full w-full items-center justify-center'>
       <div style={style}>
-        <Miner ref={ref} height='20vh' className='mt-[25vh]' onShowDown={onShowDown} autoplay />
+        <Miner ref={ref} height='20vh' className='mt-[27vh]' onShowDown={onShowDown} autoplay />
       </div>
     </div>
   );

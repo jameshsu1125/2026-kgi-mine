@@ -74,7 +74,7 @@ export const JourneyItemsList = {
     { name: 'goldenRiceField-item-7', path: 'scene-goldenRiceField-item-7.png', top: -5.6, left: 3050 },
   ],
   [JourneySceneType.花海平原]: [
-    { name: 'flowerSeaPlain-roadSign', path: 'scene-flowerSeaPlain-roadSign.png', top: -3, left: 2035 },
+    { name: 'flowerSeaPlain-roadSign', path: 'scene-flowerSeaPlain-roadSign.png', top: -4.5, left: 2035 },
     { name: 'flowerSeaPlain-item-1', path: 'scene-flowerSeaPlain-item-1.png', top: -15.7, left: 1750 },
     { name: 'flowerSeaPlain-item-2', path: 'scene-flowerSeaPlain-item-2.png', top: -10.3, left: 2990 },
     { name: 'flowerSeaPlain-item-3', path: 'scene-flowerSeaPlain-item-3.png', top: -14, left: 670 },
@@ -95,7 +95,7 @@ export const JourneyItemsList = {
   ],
   [JourneySceneType.月夜雪地]: [
     { name: 'moonlitSnowfield-roadSign', path: 'scene-moonlitSnowfield-roadSign.png', top: -6.8, left: 2116 },
-    { name: 'moonlitSnowfield-item-1', path: 'scene-moonlitSnowfield-item-1.png', top: -40, left: 1930 },
+    // { name: 'moonlitSnowfield-item-1', path: 'scene-moonlitSnowfield-item-1.png', top: -40, left: 1930 },
     { name: 'moonlitSnowfield-item-2', path: 'scene-moonlitSnowfield-item-2.png', top: -18, left: 1290 },
     { name: 'moonlitSnowfield-item-3', path: 'scene-moonlitSnowfield-item-3.png', top: -28, left: 690 },
     { name: 'moonlitSnowfield-item-4', path: 'scene-moonlitSnowfield-item-4.png', top: -27, left: 2220 },
@@ -105,12 +105,12 @@ export const JourneyItemsList = {
   ],
   [JourneySceneType.晴光森林]: [
     { name: 'lushForest-roadSign', path: 'scene-lushForest-roadSign.png', top: -3.5, left: 1880 },
-    // { name: 'lushForest-item-1', path: 'scene-lushForest-item-1.png', top: -22, left: 860 },
+    { name: 'lushForest-item-1', path: 'scene-lushForest-item-1.png', top: -22, left: 860 },
     { name: 'lushForest-item-2', path: 'scene-lushForest-item-2.png', top: 7, left: 260 },
     { name: 'lushForest-item-3', path: 'scene-lushForest-item-3.png', top: -11, left: 2970 },
     { name: 'lushForest-item-4', path: 'scene-lushForest-item-4.png', top: -57.2, left: 2740 },
     { name: 'lushForest-item-5', path: 'scene-lushForest-item-5.png', top: -54, left: 1630 },
-    { name: 'lushForest-item-6', path: 'scene-lushForest-item-6.png', top: -55.3, left: 630 },
+    { name: 'lushForest-item-6', path: 'scene-lushForest-item-6.png', top: -57, left: 630 },
     { name: 'lushForest-item-7', path: 'scene-lushForest-item-7.png', top: -27.5, left: 1880 },
   ],
 };
@@ -123,7 +123,7 @@ type JourneySceneDebugType = {
 export const JourneySceneSetting = {
   itemsCenterThreshold: 300,
   offset: 100,
-  // offset: 280,
+  // offset: 200,
   shouldReloadWhenWindowResized: true,
 };
 

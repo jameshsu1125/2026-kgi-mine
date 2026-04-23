@@ -217,6 +217,20 @@ const Scene = memo(({ onLooped, onEncounteringRoadSign }: TJourneySceneProps) =>
     setState((S) => ({ ...S, step: JourneyStepType.fadeOut }));
   };
 
+  useEffect(() => {
+    if (!JourneySceneDebug.enabled) return;
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        setOffset((S) => S + 20);
+        EnterFrame.stop();
+      }
+      if (e.key === 'ArrowLeft') {
+        setOffset((S) => S - 20);
+        EnterFrame.stop();
+      }
+    });
+  }, []);
+
   return (
     <div className='Scene'>
       <View offset={offset} depth={SceneDepth.back} image='back' />

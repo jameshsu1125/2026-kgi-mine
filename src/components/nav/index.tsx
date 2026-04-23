@@ -1,13 +1,12 @@
+import useURI from '@/hooks/useURI';
+import { JourneyContext, JourneyStepType } from '@/pages/journey/config';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
+import Click from 'lesca-click';
+import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useEffect, useId } from 'react';
 import Article from '../article';
 import './index.less';
-import Click from 'lesca-click';
-import { JourneyContext, JourneyStepType } from '@/pages/journey/config';
-import EnterFrame from 'lesca-enterframe';
-import useURI from '@/hooks/useURI';
-import { Context } from '@/settings/constant';
-import OnloadProvider from 'lesca-react-onload';
-import { ActionType } from '@/settings/type';
 
 const BG = memo(() => {
   const [, setState] = useContext(JourneyContext);
