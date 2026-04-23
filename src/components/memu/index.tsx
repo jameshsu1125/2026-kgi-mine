@@ -5,6 +5,7 @@ import Contain from '../contain';
 import Button from '../button';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
+import TweenerProvider from '../tweenProvider';
 
 const Menu = memo(() => {
   const [context] = useContext(Context);
@@ -28,13 +29,20 @@ const Menu = memo(() => {
             <Button>
               <Button.Menu type='share' />
             </Button>
-            <Button
-              onClick={() => {
-                setMuteActive((S) => !S);
-              }}
+            <TweenerProvider
+              initialStyle={{ y: -100 }}
+              tweenTo={{ y: 0 }}
+              options={{ duration: 500 }}
+              shouldFadeIn={sounds?.track ? true : false}
             >
-              <Button.Menu type='mute' menu={muteActive} />
-            </Button>
+              <Button
+                onClick={() => {
+                  setMuteActive((S) => !S);
+                }}
+              >
+                <Button.Menu type='mute' menu={muteActive} />
+              </Button>
+            </TweenerProvider>
           </div>
         </Contain>
       </Article>

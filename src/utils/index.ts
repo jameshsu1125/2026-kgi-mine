@@ -111,3 +111,19 @@ export const getViewPxRatio = ({ width }: { width: number }) => {
   const targetBackgroundPanOffset = width - window.innerWidth;
   return targetBackgroundPanOffset / basicBackgroundPanOffset;
 };
+
+export function shareURL({ onError }: { onError?: () => void }) {
+  if (navigator.share) {
+    const shareData = {
+      title: '--2026 KGI MINE--',
+      text: '來自2026 KGI MINE的邀請，快來一起體驗吧！',
+      url: window.location.href,
+    };
+    navigator
+      .share(shareData)
+      .then(() => console.log('URL shared successfully'))
+      .catch((error) => console.error('Error sharing URL:', error));
+  } else {
+    onError?.();
+  }
+}

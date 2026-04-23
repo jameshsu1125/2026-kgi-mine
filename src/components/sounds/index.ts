@@ -95,6 +95,7 @@ export default class Sounds {
 
   private onload: (type: PreloadType) => void;
   private onError: (message: string) => void;
+  private isMuted = false;
 
   constructor(props: SoundTrackProps) {
     this.onload = props.onload || (() => {});
@@ -154,6 +155,7 @@ export default class Sounds {
           onload: () => {
             value.onload = true;
             this.checkIsLoaded(type);
+            if (this.isMuted) this.track[key as SoundName].track?.mute(true);
           },
         });
       });
@@ -180,6 +182,7 @@ export default class Sounds {
           onload: () => {
             this.track[soundName].onload = true;
             if (onload) onload(preload);
+            if (this.isMuted) this.track[soundName].track?.mute(true);
           },
           onloaderror: () => {
             this.onError(`音軌 ${n} 重新載入失敗`);
@@ -255,6 +258,7 @@ export default class Sounds {
   }
 
   public mute() {
+    this.isMuted = true;
     Object.values(this.track).forEach((trackInfo) => {
       if (trackInfo.onload && trackInfo.track) {
         trackInfo.track.mute(true);
@@ -263,6 +267,7 @@ export default class Sounds {
   }
 
   public unmute() {
+    this.isMuted = false;
     Object.values(this.track).forEach((trackInfo) => {
       if (trackInfo.onload && trackInfo.track) {
         trackInfo.track.mute(false);
