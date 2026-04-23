@@ -29,6 +29,10 @@ const UserData = memo(() => {
     return UserDataURIList.map(() => Math.floor(Math.random() * 100));
   }, []);
 
+  const firstName = useMemo(() => {
+    return faker.person.firstName();
+  }, []);
+
   return (
     <div className='UserData'>
       <TweenerProvider
@@ -38,7 +42,7 @@ const UserData = memo(() => {
         shouldFadeIn={state.step === JourneyStepType.fadeIn}
       >
         <div>
-          <div>{faker.person.firstName()}</div>
+          <div>{firstName}</div>
           <div>
             <svg
               width='24'

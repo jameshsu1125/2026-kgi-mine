@@ -2,20 +2,20 @@ import Button from '@/components/button';
 import useURI from '@/hooks/useURI';
 import { PATTERN_URI_PROPERTIES } from '@/settings/config';
 import { checkElementCenterOfScreenWithOffset, checkElementInViewport } from '@/utils';
-import { memo, useContext, useEffect, useRef, useState } from 'react';
-import { JourneyContext, JourneySceneSetting } from '../config';
+import { memo, useEffect, useRef, useState } from 'react';
+import { JourneySceneSetting } from '../config';
 
 type TItemProps = {
-  item: { name: string; top: number; left: number };
+  item: { name: string; top: number; left: number; clicked: boolean };
   y: number;
   x: number;
   left: string;
   onCenter?: () => void;
   onInView?: () => void;
+  onItemSelected?: (item: string) => void;
 };
 
-const Item = memo(({ item, y, x, left, onCenter, onInView }: TItemProps) => {
-  const [, setState] = useContext(JourneyContext);
+const Item = memo(({ item, y, x, left, onCenter, onInView, onItemSelected }: TItemProps) => {
   const [, setURI] = useURI();
 
   const ref = useRef<HTMLDivElement>(null);
@@ -59,15 +59,18 @@ const Item = memo(({ item, y, x, left, onCenter, onInView }: TItemProps) => {
       }}
     >
       <div className='marker'>
-        <Button
-          onClick={() => {
-            setState((S) => ({ ...S, nav: { enabled: true } }));
-          }}
-        >
-          <Button.Marker>
-            <div className={`box ${randomPattern.current}`}></div>
-          </Button.Marker>
-        </Button>
+        {!item.name.includes('roadSign') && !item.clicked && (
+          <Button
+            onClick={() => {
+              setStatus((S) => ({ ...S, isCenter: true, isInView: true }));
+              onItemSelected?.(item.name);
+            }}
+          >
+            <Button.Marker>
+              <div className={`box ${randomPattern.current}`}></div>
+            </Button.Marker>
+          </Button>
+        )}
       </div>
     </div>
   );

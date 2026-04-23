@@ -1,16 +1,16 @@
 import useURI from '@/hooks/useURI';
-import { memo, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { JourneyContext, JourneyItemsList } from '../config';
 import './index.less';
 import Item from './item';
 import { SceneDepth, SceneSize } from '@/settings/config';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
-import { getSceneBackgroundPositionXRatio } from '@/utils';
+import { getViewPxRatio } from '@/utils';
 
 type TJourneyItemsProps = {
   offset: number;
-  items: { name: string; top: number; left: number }[];
+  items: { name: string; top: number; left: number; clicked: boolean }[];
   onCenter?: (item: string) => void;
   loop?: boolean;
 };
@@ -18,14 +18,15 @@ type TJourneyItemsProps = {
 const Items = memo(({ offset, items, onCenter, loop }: TJourneyItemsProps) => {
   const [context] = useContext(Context);
   const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
-  const ratio = useMemo(() => getSceneBackgroundPositionXRatio({ width }), [width]);
+  const ratio = useMemo(() => getViewPxRatio({ width }), [width]);
 
   const [state, setState] = useContext(JourneyContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const [offsetRef, setOffsetRef] = useState(offset);
+  const [offsetRef, setOffsetRef] = useState(window.innerWidth);
+  const [currentItems, setCurrentItems] = useState(items);
 
   const [, setURI] = useURI();
 
@@ -59,7 +60,6 @@ const Items = memo(({ offset, items, onCenter, loop }: TJourneyItemsProps) => {
 
   useEffect(() => {
     if (offsetRef === 0) return;
-
     const currentLoop = Math.floor((offset * SceneDepth.middle * ratio) / (offsetRef * 2));
     if (loop) setState((S) => ({ ...S, loop: currentLoop }));
   }, [offset, offsetRef, ratio]);
@@ -69,12 +69,20 @@ const Items = memo(({ offset, items, onCenter, loop }: TJourneyItemsProps) => {
     return `-${(offset * SceneDepth.middle * ratio) % (offsetRef * 2)}%`;
   }, [offset, offsetRef, width, ratio]);
 
+  const onItemSelected = useCallback(
+    (item: string) => {
+      setCurrentItems((items) => items.map((i) => (i.name === item ? { ...i, clicked: true } : i)));
+      setState((S) => ({ ...S, nav: { enabled: true } }));
+    },
+    [setState],
+  );
+
   return (
     <div ref={containerRef} className='Items'>
       <div ref={contentRef}>
         <div className='content' style={{ left }}>
           <div ref={boxRef}>
-            {items.map((item) => {
+            {currentItems.map((item) => {
               const y = item.top + 5.5;
               const x = (item.left / 3840) * 100;
               return (
@@ -85,6 +93,7 @@ const Items = memo(({ offset, items, onCenter, loop }: TJourneyItemsProps) => {
                   x={x}
                   left={left}
                   onCenter={() => onCenter?.(item.name)}
+                  onItemSelected={onItemSelected}
                 />
               );
             })}

@@ -9,6 +9,7 @@ import {
   TDatasetState,
   TLoadingProcessState,
   TModalState,
+  TSceneImageSizeState,
   TUserDataState,
 } from './type';
 
@@ -37,6 +38,7 @@ export const ModalState: TModalState = {
     </>
   ),
   label: ['好的'],
+  onClose: () => {},
 };
 
 export const UserDataState: TUserDataState = {
@@ -44,8 +46,9 @@ export const UserDataState: TUserDataState = {
   character: undefined,
 };
 
-export const ContainerState = {
+export const SceneImageSizeState: TSceneImageSizeState = {
   height: undefined,
+  width: undefined,
 };
 
 export const InitialState: IState = {
@@ -55,7 +58,7 @@ export const InitialState: IState = {
   [ActionType.Sounds]: { track: undefined },
   [ActionType.Modal]: ModalState,
   [ActionType.UserData]: UserDataState,
-  [ActionType.Container]: ContainerState,
+  [ActionType.SceneImageSize]: SceneImageSizeState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);

@@ -100,16 +100,13 @@ export const resolveAudioSrc = (src: string) => {
   }
 };
 
-export const getViewBackgroundImagePositionXPercentByDirection = (
-  percent: number,
-  width: number,
-) => {
-  const ratio = getSceneBackgroundPositionXRatio({ width });
+export const getViewPxByDirection = (percent: number, width: number) => {
+  const ratio = getViewPxRatio({ width });
   const currentOffset = percent / SceneDepth.middle / ratio;
   return currentOffset;
 };
 
-export const getSceneBackgroundPositionXRatio = ({ width }: { width: number }) => {
+export const getViewPxRatio = ({ width }: { width: number }) => {
   const basicBackgroundPanOffset = SceneSize.width - 1680;
   const targetBackgroundPanOffset = width - window.innerWidth;
   return targetBackgroundPanOffset / basicBackgroundPanOffset;

@@ -54,6 +54,7 @@ export type TModalState = {
   body?: ReactNode;
   label?: [string, string?];
   onConfirm?: (label: string) => void;
+  onClose?: () => void;
 };
 
 export type TUserDataState = {

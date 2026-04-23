@@ -7,7 +7,7 @@ import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import EnterFrame from 'lesca-enterframe';
 import useTween, { Bezier } from 'lesca-use-tween';
-import { memo, useContext, useEffect, useMemo, useState } from 'react';
+import { memo, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import {
   JourneyContext,
@@ -21,10 +21,7 @@ import {
 import Items from '../items';
 import MinerWalker from '../miner';
 import './index.less';
-import {
-  getSceneBackgroundPositionXRatio,
-  getViewBackgroundImagePositionXPercentByDirection,
-} from '@/utils';
+import { getViewPxRatio as getRatio, getViewPxByDirection as getPx } from '@/utils';
 
 type ViewProps = {
   offset: number;
@@ -37,7 +34,7 @@ const View = memo(({ offset, depth, image, isAlpha }: ViewProps) => {
   const [context] = useContext(Context);
   const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
 
-  const ratio = getSceneBackgroundPositionXRatio({ width });
+  const ratio = getRatio({ width });
   const currentOffset = offset * depth * ratio; // 根據深度調整偏移量
 
   return (
@@ -48,31 +45,26 @@ const View = memo(({ offset, depth, image, isAlpha }: ViewProps) => {
   );
 });
 
-let leftRef = 1;
 type TJourneySceneProps = {
-  onLooped?: (index: number) => void;
+  onLooped: (index: number) => void;
+  onEncounteringRoadSign: () => void;
   onItemSelected?: (item: string) => void;
 };
 
-const Scene = memo(({ onLooped }: TJourneySceneProps) => {
+const Scene = memo(({ onLooped, onEncounteringRoadSign }: TJourneySceneProps) => {
   const [context] = useContext(Context);
   const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
   const sounds = context[ActionType.Sounds];
 
   const [state, setState] = useContext(JourneyContext);
+
   const [, setURI] = useURI();
   const [, setStyle] = useTween({
-    top: getViewBackgroundImagePositionXPercentByDirection(JourneySceneSetting.offset, width),
+    left: getPx(JourneySceneSetting.offset, width) - 300,
   });
-  const [offset, setOffset] = useState(
-    getViewBackgroundImagePositionXPercentByDirection(JourneySceneSetting.offset, width),
-  );
-
+  const [offset, setOffset] = useState(getPx(JourneySceneSetting.offset, width) - 300);
   const [isAlpha, setIsAlpha] = useState(false);
-
-  useEffect(() => {
-    leftRef = offset;
-  }, [offset]);
+  const encounteringRoadSignRef = useRef('');
 
   useEffect(() => {
     if (state && state.scene) {
@@ -88,13 +80,18 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
       currentList?.length || 1,
       JourneySceneDebug.count === 'max' ? currentList.length : JourneySceneDebug.count,
     );
-    const items = currentList.sort(() => Math.random() - 0.5).slice(0, pickCount);
+    const roadSign = currentList.find((item) => item.name.includes('roadSign'));
+    const currentListWithoutRoadSign = currentList.filter(
+      (item) => !item.name.includes('roadSign'),
+    );
+    const items = currentListWithoutRoadSign.sort(() => Math.random() - 0.5).slice(0, pickCount);
+    if (roadSign) items.push(roadSign);
 
     const backOfMinerItems = items
       .filter((item) => item.top < 5.5)
       .map((item) => {
         setURI({ path: item.path, name: item.name });
-        return { name: item.name, top: item.top, left: item.left };
+        return { name: item.name, top: item.top, left: item.left, clicked: false };
       })
       .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -102,7 +99,7 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
       .filter((item) => item.top >= 5.5)
       .map((item) => {
         setURI({ path: item.path, name: item.name });
-        return { name: item.name, top: item.top, left: item.left };
+        return { name: item.name, top: item.top, left: item.left, clicked: false };
       })
       .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -152,26 +149,19 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
         return;
       }
       setStyle(
+        { left: getPx(JourneySceneSetting.offset, width) },
         {
-          top:
-            getViewBackgroundImagePositionXPercentByDirection(JourneySceneSetting.offset, width) +
-            300,
-        },
-        {
-          // duration: (60 / Debug.fps) * 20000,
-          duration: 10000,
+          duration: 12000, // duration: (60 / Debug.fps) * 20000,
           easing: Bezier.easeIn,
-          onUpdate: (value: { top: number }) => {
-            setOffset(value.top);
-          },
-          onEnd: (value: { top: number }) => {
-            setOffset(value.top);
+          onUpdate: (value: { left: number }) => setOffset(value.left),
+          onEnd: (value: { left: number }) => {
+            setOffset(value.left);
             setState((S) => ({ ...S, step: JourneyStepType.loop }));
           },
         },
       );
     } else if (state.step === JourneyStepType.fadeOut) {
-      setStyle({ top: offset }, 1);
+      setStyle({ left: offset }, 1);
     } else if (state.step === JourneyStepType.resume) {
       EnterFrame.play();
       setIsAlpha(false);
@@ -182,9 +172,7 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
     if (state.step === JourneyStepType.loop) {
       EnterFrame.destroy();
       EnterFrame.reset();
-      EnterFrame.add(() => {
-        setOffset((S) => S + 1);
-      });
+      EnterFrame.add(() => setOffset((S) => S + 1));
       EnterFrame.play();
     }
   }, [state.step]);
@@ -195,26 +183,22 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
     }
   }, [state.loop]);
 
-  useEffect(() => {
-    window.addEventListener('keydown', (e) => {
-      if (e.key === '1') console.log(leftRef);
-    });
-  }, []);
-
   const onShowDown = (frame: CharacterFrame) => {
     if (frame) {
       setStyle(
-        { top: offset + frame.stepShouldGo },
+        { left: offset + frame.stepShouldGo },
         {
           duration: frame.duration,
           easing: Bezier.easeOut,
-          onUpdate: (value: { top: number }) => {
-            setOffset(value.top);
+          onUpdate: (value: { left: number }) => {
+            setOffset(value.left);
           },
-          onEnd: (value: { top: number }) => {
-            setOffset(value.top);
-            if (state.scene === JourneySceneType.晴光森林) {
-              setIsAlpha(true);
+          onEnd: (value: { left: number }) => {
+            setOffset(value.left);
+            const isRoadSign = encounteringRoadSignRef.current.includes('roadSign');
+            if (isRoadSign) onEncounteringRoadSign?.();
+            else {
+              if (state.scene === JourneySceneType.晴光森林) setIsAlpha(true);
             }
           },
         },
@@ -223,6 +207,8 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
   };
 
   const onCenter = (name: string) => {
+    console.log(name);
+    encounteringRoadSignRef.current = name;
     setState((S) => ({ ...S, step: JourneyStepType.fadeOut }));
   };
 
@@ -230,7 +216,7 @@ const Scene = memo(({ onLooped }: TJourneySceneProps) => {
     <div className='Scene'>
       <View offset={offset} depth={SceneDepth.back} image='back' />
       <View offset={offset} depth={SceneDepth.middle} image='middle' />
-      <Items offset={offset} items={back} onCenter={onCenter} />
+      <Items offset={offset} items={back} onCenter={onCenter} loop />
       <MinerWalker onShowDown={onShowDown} />
       <Items offset={offset} items={front} onCenter={onCenter} />
       <View offset={offset} depth={SceneDepth.front} image='front' isAlpha={isAlpha} />

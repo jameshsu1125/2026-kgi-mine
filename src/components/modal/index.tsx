@@ -10,11 +10,12 @@ import EnterFrame from 'lesca-enterframe';
 const Modal = memo(() => {
   const id = useId();
   const [context, setContext] = useContext(Context);
-  const { body, title, label, onConfirm } = context[ActionType.Modal]!;
+  const { body, title, label, onConfirm, onClose } = context[ActionType.Modal]!;
 
   useEffect(() => {
     Click.add(`#${id}`, () => {
       setContext({ type: ActionType.Modal, state: { enabled: false } });
+      onClose?.();
     });
 
     return () => {
