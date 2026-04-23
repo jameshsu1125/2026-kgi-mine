@@ -87,7 +87,7 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
   return (
     <div ref={containerRef} className={`Miner ${className}`} style={{ height }}>
       <div
-        className={`sprite sprite-MINER-WALK_${String(spriteName).padStart(5, '0')}`}
+        className={`sprite sprite-MINER_WALK_01_${String(spriteName).padStart(5, '0')}`}
         style={{ transform: `scale(${scale})` }}
       />
     </div>

@@ -24,7 +24,7 @@ const Menu = memo(() => {
     <div className='Menu'>
       <Article className='flex max-w-7xl flex-row items-center justify-end'>
         <Contain>
-          <div className='pointer-events-auto flex flex-row items-center justify-center gap-1 p-5'>
+          <div className='pointer-events-auto m-5 flex flex-row items-center justify-center gap-1'>
             <Button
               onClick={() =>
                 shareURL({

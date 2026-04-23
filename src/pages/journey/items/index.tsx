@@ -1,6 +1,6 @@
 import useURI from '@/hooks/useURI';
 import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { JourneyContext, JourneyItemsList } from '../config';
+import { JourneyContext, JourneyItemsList, JourneySceneSetting } from '../config';
 import './index.less';
 import Item from './item';
 import { SceneDepth, SceneSize } from '@/settings/config';
@@ -55,6 +55,11 @@ const Items = memo(({ offset, items, onCenter, loop }: TJourneyItemsProps) => {
     };
     resize();
     window.addEventListener('resize', resize);
+    if (JourneySceneSetting.shouldReloadWhenWindowResized) {
+      window.addEventListener('resize', () => {
+        window.location.reload();
+      });
+    }
     return () => window.removeEventListener('resize', resize);
   }, []);
 

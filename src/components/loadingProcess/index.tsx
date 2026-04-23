@@ -1,10 +1,11 @@
 import useURI from '@/hooks/useURI';
 import { Context } from '@/settings/constant';
 import { ActionType, IReactProps, LoadingProcessType } from '@/settings/type';
-import { memo, useContext } from 'react';
+import { memo, useContext, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { LoadingProcessIconList } from './config';
 import './index.less';
+import OnloadProvider from 'lesca-react-onload';
 
 const Background = () => (
   <div className='bg-bg-gray-light absolute top-0 h-full w-full opacity-90' />
@@ -15,16 +16,19 @@ const Text = ({ children }: IReactProps) => (
 );
 
 const LoadingSvg = ({ className, type }: { className: string; type?: string }) => {
+  const [loaded, setLoaded] = useState(false);
   return (
-    <div
-      className={twMerge(
-        className,
-        'mask-contain mask-center',
-        'h-16 w-16',
-        'bg-primary-blue',
-        type || LoadingProcessType.Spin,
-      )}
-    />
+    <OnloadProvider onload={() => setLoaded(true)}>
+      <div
+        className={twMerge(
+          className,
+          'mask-contain mask-center',
+          'h-16 w-16',
+          type || LoadingProcessType.Spin,
+          loaded && 'bg-primary-blue',
+        )}
+      />
+    </OnloadProvider>
   );
 };
 

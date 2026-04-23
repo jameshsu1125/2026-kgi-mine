@@ -3,6 +3,6 @@ export const MINER_SIZE = {
   height: 1039,
 };
 
-export const MINER_SPRITE_FRAME_COUNT = 26;
+export const MINER_SPRITE_FRAME_COUNT = 25;
 
 export const MINER_SPRITE_STOP_FRAME = 1;

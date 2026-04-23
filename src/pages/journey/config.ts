@@ -64,7 +64,7 @@ export const JourneySceneList = {
 
 export const JourneyItemsList = {
   [JourneySceneType.金黃稻浪]: [
-    { name: 'goldenRiceField-roadSign', path: 'scene-goldenRiceField-roadSign.png', top: -7, left: 1900 },
+    { name: 'goldenRiceField-roadSign', path: 'scene-goldenRiceField-roadSign.png', top: -4, left: 2130 },
     { name: 'goldenRiceField-item-1', path: 'scene-goldenRiceField-item-1.png', top: -20.7, left: 2739 },
     { name: 'goldenRiceField-item-2', path: 'scene-goldenRiceField-item-2.png', top: -18.4, left: 1320 },
     { name: 'goldenRiceField-item-3', path: 'scene-goldenRiceField-item-3.png', top: 1, left: 235 },
@@ -121,8 +121,10 @@ type JourneySceneDebugType = {
 };
 
 export const JourneySceneSetting = {
-  itemsCenterThreshold: 150,
+  itemsCenterThreshold: 300,
   offset: 100,
+  // offset: 280,
+  shouldReloadWhenWindowResized: true,
 };
 
 export const JourneySceneDebug: JourneySceneDebugType = {
