@@ -59,6 +59,21 @@
           }
         }
 
+        .goldenRiceField-roadSign {
+          width: (unit(image-height(@img))) / 1080 * 380vh;
+
+          @img: '../../../../public/scene-goldenRiceField-roadSign.png';
+
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: var(--goldenRiceField-roadSign);
+          }
+
+          .marker > div {
+            margin-left: -17%;
+          }
+        }
+
         .goldenRiceField-item-1 {
           width: (unit(image-height(@img))) / 1080 * 300vh;
 
@@ -86,7 +101,7 @@
         }
 
         .goldenRiceField-item-3 {
-          width: (unit(image-height(@img))) / 1080 * 380vh;
+          width: (unit(image-height(@img))) / 1080 * 210vh;
 
           @img: '../../../../public/scene-goldenRiceField-item-3.png';
 
@@ -96,7 +111,7 @@
           }
 
           .marker > div {
-            margin-left: -17%;
+            margin-left: 30%;
           }
         }
 
@@ -111,12 +126,12 @@
           }
 
           .marker > div {
-            margin-left: 30%;
+            margin-left: 35%;
           }
         }
 
         .goldenRiceField-item-5 {
-          width: (unit(image-height(@img))) / 1080 * 210vh;
+          width: (unit(image-height(@img))) / 1080 * 120vh;
 
           @img: '../../../../public/scene-goldenRiceField-item-5.png';
 
@@ -126,12 +141,12 @@
           }
 
           .marker > div {
-            margin-left: 35%;
+            margin-left: 0%;
           }
         }
 
         .goldenRiceField-item-6 {
-          width: (unit(image-height(@img))) / 1080 * 120vh;
+          width: (unit(image-height(@img))) / 1080 * 55vh;
 
           @img: '../../../../public/scene-goldenRiceField-item-6.png';
 
@@ -146,7 +161,7 @@
         }
 
         .goldenRiceField-item-7 {
-          width: (unit(image-height(@img))) / 1080 * 55vh;
+          width: (unit(image-height(@img))) / 1080 * 200vh;
 
           @img: '../../../../public/scene-goldenRiceField-item-7.png';
 
@@ -156,22 +171,22 @@
           }
 
           .marker > div {
-            margin-left: 0%;
+            margin-left: 20%;
           }
         }
 
-        .goldenRiceField-item-8 {
-          width: (unit(image-height(@img))) / 1080 * 200vh;
+        .flowerSeaPlain-roadSign {
+          width: (unit(image-height(@img))) / 1080 * 40vh;
 
-          @img: '../../../../public/scene-goldenRiceField-item-8.png';
+          @img: '../../../../public/scene-flowerSeaPlain-roadSign.png';
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-            background-image: var(--goldenRiceField-item-8);
+            background-image: var(--flowerSeaPlain-roadSign);
           }
 
           .marker > div {
-            margin-left: 20%;
+            margin-left: 0%;
           }
         }
 
@@ -251,7 +266,7 @@
         }
 
         .flowerSeaPlain-item-6 {
-          width: (unit(image-height(@img))) / 1080 * 40vh;
+          width: (unit(image-height(@img))) / 1080 * 100vh;
 
           @img: '../../../../public/scene-flowerSeaPlain-item-6.png';
 
@@ -266,7 +281,7 @@
         }
 
         .flowerSeaPlain-item-7 {
-          width: (unit(image-height(@img))) / 1080 * 100vh;
+          width: (unit(image-height(@img))) / 1080 * 140vh;
 
           @img: '../../../../public/scene-flowerSeaPlain-item-7.png';
 
@@ -280,14 +295,14 @@
           }
         }
 
-        .flowerSeaPlain-item-8 {
-          width: (unit(image-height(@img))) / 1080 * 140vh;
+        .azureCoast-roadSign {
+          width: (unit(image-height(@img))) / 1080 * 33vh;
 
-          @img: '../../../../public/scene-flowerSeaPlain-item-8.png';
+          @img: '../../../../public/scene-azureCoast-roadSign.png';
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-            background-image: var(--flowerSeaPlain-item-8);
+            background-image: var(--azureCoast-roadSign);
           }
 
           .marker > div {
@@ -326,7 +341,7 @@
         }
 
         .azureCoast-item-3 {
-          width: (unit(image-height(@img))) / 1080 * 33vh;
+          width: (unit(image-height(@img))) / 1080 * 120vh;
 
           @img: '../../../../public/scene-azureCoast-item-3.png';
 
@@ -341,7 +356,7 @@
         }
 
         .azureCoast-item-4 {
-          width: (unit(image-height(@img))) / 1080 * 120vh;
+          width: (unit(image-height(@img))) / 1080 * 80vh;
 
           @img: '../../../../public/scene-azureCoast-item-4.png';
 
@@ -351,12 +366,12 @@
           }
 
           .marker > div {
-            margin-left: 0%;
+            margin-left: 20%;
           }
         }
 
         .azureCoast-item-5 {
-          width: (unit(image-height(@img))) / 1080 * 80vh;
+          width: (unit(image-height(@img))) / 1080 * 120vh;
 
           @img: '../../../../public/scene-azureCoast-item-5.png';
 
@@ -366,12 +381,12 @@
           }
 
           .marker > div {
-            margin-left: 20%;
+            margin-left: 0%;
           }
         }
 
         .azureCoast-item-6 {
-          width: (unit(image-height(@img))) / 1080 * 120vh;
+          width: (unit(image-height(@img))) / 1080 * 140vh;
 
           @img: '../../../../public/scene-azureCoast-item-6.png';
 
@@ -381,12 +396,12 @@
           }
 
           .marker > div {
-            margin-left: 0%;
+            margin-left: 20%;
           }
         }
 
         .azureCoast-item-7 {
-          width: (unit(image-height(@img))) / 1080 * 140vh;
+          width: (unit(image-height(@img))) / 1080 * 160vh;
 
           @img: '../../../../public/scene-azureCoast-item-7.png';
 
@@ -396,18 +411,18 @@
           }
 
           .marker > div {
-            margin-left: 20%;
+            margin-left: 0%;
           }
         }
 
-        .azureCoast-item-8 {
-          width: (unit(image-height(@img))) / 1080 * 160vh;
+        .moonlitSnowfield-roadSign {
+          width: (unit(image-height(@img))) / 1080 * 35vh;
 
-          @img: '../../../../public/scene-azureCoast-item-8.png';
+          @img: '../../../../public/scene-moonlitSnowfield-roadSign.png';
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-            background-image: var(--azureCoast-item-8);
+            background-image: var(--moonlitSnowfield-roadSign);
           }
 
           .marker > div {
@@ -476,7 +491,7 @@
         }
 
         .moonlitSnowfield-item-5 {
-          width: (unit(image-height(@img))) / 1080 * 35vh;
+          width: (unit(image-height(@img))) / 1080 * 205vh;
 
           @img: '../../../../public/scene-moonlitSnowfield-item-5.png';
 
@@ -491,7 +506,7 @@
         }
 
         .moonlitSnowfield-item-6 {
-          width: (unit(image-height(@img))) / 1080 * 205vh;
+          width: (unit(image-height(@img))) / 1080 * 120vh;
 
           @img: '../../../../public/scene-moonlitSnowfield-item-6.png';
 
@@ -506,7 +521,7 @@
         }
 
         .moonlitSnowfield-item-7 {
-          width: (unit(image-height(@img))) / 1080 * 120vh;
+          width: (unit(image-height(@img))) / 1080 * 190vh;
 
           @img: '../../../../public/scene-moonlitSnowfield-item-7.png';
 
@@ -520,18 +535,18 @@
           }
         }
 
-        .moonlitSnowfield-item-8 {
-          width: (unit(image-height(@img))) / 1080 * 190vh;
+        .lushForest-roadSign {
+          width: (unit(image-height(@img))) / 1080 * 120vh;
 
-          @img: '../../../../public/scene-moonlitSnowfield-item-8.png';
+          @img: '../../../../public/scene-lushForest-roadSign.png';
 
           &::before {
             padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-            background-image: var(--moonlitSnowfield-item-8);
+            background-image: var(--lushForest-roadSign);
           }
 
           .marker > div {
-            margin-left: 0%;
+            margin-left: 55%;
           }
         }
 
@@ -646,21 +661,6 @@
 
           .marker > div {
             margin-left: 33%;
-          }
-        }
-
-        .lushForest-item-8 {
-          width: (unit(image-height(@img))) / 1080 * 120vh;
-
-          @img: '../../../../public/scene-lushForest-item-8.png';
-
-          &::before {
-            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-            background-image: var(--lushForest-item-8);
-          }
-
-          .marker > div {
-            margin-left: 55%;
           }
         }
       }
