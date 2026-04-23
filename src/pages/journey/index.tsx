@@ -38,6 +38,7 @@ const Journey = memo(() => {
                 ...S,
                 loop: 0,
                 scene: scenes[Math.floor(Math.random() * scenes.length)],
+                step: JourneyStepType.unset,
               };
             });
           }
@@ -65,6 +66,7 @@ const Journey = memo(() => {
                 ...S,
                 loop: 0,
                 scene: scenes[Math.floor(Math.random() * scenes.length)],
+                step: JourneyStepType.unset,
               };
             });
           } else {

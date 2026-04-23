@@ -6,9 +6,11 @@ import Button from '../button';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import TweenerProvider from '../tweenProvider';
+import { shareURL } from '@/utils';
+import { Bezier } from 'lesca-use-tween';
 
 const Menu = memo(() => {
-  const [context] = useContext(Context);
+  const [context, setContext] = useContext(Context);
   const sounds = context[ActionType.Sounds]!;
 
   const [muteActive, setMuteActive] = useState(false);
@@ -26,13 +28,28 @@ const Menu = memo(() => {
       <Article className='flex max-w-7xl flex-row items-center justify-end'>
         <Contain>
           <div className='pointer-events-auto flex flex-row items-center justify-center gap-1 p-5'>
-            <Button>
+            <Button
+              onClick={() =>
+                shareURL({
+                  onError: () => {
+                    setContext({
+                      type: ActionType.Modal,
+                      state: {
+                        enabled: true,
+                        body: '分享失敗，請使用支援 Web Share API 的瀏覽器或裝置再試一次！',
+                        label: ['確定'],
+                      },
+                    });
+                  },
+                })
+              }
+            >
               <Button.Menu type='share' />
             </Button>
             <TweenerProvider
               initialStyle={{ y: -100 }}
               tweenTo={{ y: 0 }}
-              options={{ duration: 500 }}
+              options={{ duration: 500, easing: Bezier.outBack }}
               shouldFadeIn={sounds?.track ? true : false}
             >
               <Button

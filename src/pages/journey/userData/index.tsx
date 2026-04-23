@@ -25,7 +25,7 @@ const Icon = memo(() => {
 
   useEffect(() => {
     setStyle(
-      { backgroundPositionY: `${(offsetIndex % 4) * 25}%` },
+      { backgroundPositionY: `${offsetIndex * 25}%` },
       { duration: 500, easing: Bezier.inOutBack },
     );
   }, [offsetIndex]);
