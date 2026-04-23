@@ -35,7 +35,7 @@ const Nav = memo(() => {
 
   useEffect(() => {
     Click.addPreventExcept(`#${id}`);
-    EnterFrame.stop();
+    setState((S) => ({ ...S, step: JourneyStepType.fadeOut }));
   }, []);
 
   useEffect(() => {
