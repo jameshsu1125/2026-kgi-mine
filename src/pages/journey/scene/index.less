@@ -22,4 +22,21 @@
 
     @apply pointer-events-none absolute top-0 left-0 h-full w-full;
   }
+
+  .moon {
+    top: 12%;
+    left: 50%;
+    width: (unit(image-width(@img))) / 1440 * 100%;
+
+    @img: "'../../../public/scene-moonlitSnowfield-moon.png";
+    @apply absolute;
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: var(--scene-moonlitSnowfield-moon);
+      content: '';
+
+      @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
 }

@@ -16,11 +16,8 @@ const Menu = memo(() => {
   const [muteActive, setMuteActive] = useState(false);
 
   useEffect(() => {
-    if (muteActive) {
-      sounds?.track?.mute();
-    } else {
-      sounds?.track?.unmute();
-    }
+    if (muteActive) sounds?.track?.mute();
+    else sounds?.track?.unmute();
   }, [muteActive]);
 
   return (

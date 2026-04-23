@@ -42,7 +42,7 @@ export const ModalState: TModalState = {
 };
 
 export const UserDataState: TUserDataState = {
-  journey: '晴光森林',
+  journey: '月夜雪地',
   character: undefined,
 };
 

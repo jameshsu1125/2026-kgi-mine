@@ -51,6 +51,12 @@ type TJourneySceneProps = {
   onItemSelected?: (item: string) => void;
 };
 
+const Moon = memo(() => {
+  useURI({ path: 'scene-moonlitSnowfield-moon.png', name: 'scene-moonlitSnowfield-moon' });
+
+  return <div className='moon' />;
+});
+
 const Scene = memo(({ onLooped, onEncounteringRoadSign }: TJourneySceneProps) => {
   const [context] = useContext(Context);
   const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
@@ -207,7 +213,6 @@ const Scene = memo(({ onLooped, onEncounteringRoadSign }: TJourneySceneProps) =>
   };
 
   const onCenter = (name: string) => {
-    console.log(name);
     encounteringRoadSignRef.current = name;
     setState((S) => ({ ...S, step: JourneyStepType.fadeOut }));
   };
@@ -215,6 +220,7 @@ const Scene = memo(({ onLooped, onEncounteringRoadSign }: TJourneySceneProps) =>
   return (
     <div className='Scene'>
       <View offset={offset} depth={SceneDepth.back} image='back' />
+      {state.scene && state.scene === JourneySceneType.月夜雪地 && <Moon />}
       <View offset={offset} depth={SceneDepth.middle} image='middle' />
       <Items offset={offset} items={back} onCenter={onCenter} loop />
       <MinerWalker onShowDown={onShowDown} />
