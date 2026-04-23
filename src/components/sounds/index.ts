@@ -254,6 +254,22 @@ export default class Sounds {
     }
   }
 
+  public mute() {
+    Object.values(this.track).forEach((trackInfo) => {
+      if (trackInfo.onload && trackInfo.track) {
+        trackInfo.track.mute(true);
+      }
+    });
+  }
+
+  public unmute() {
+    Object.values(this.track).forEach((trackInfo) => {
+      if (trackInfo.onload && trackInfo.track) {
+        trackInfo.track.mute(false);
+      }
+    });
+  }
+
   // 檢查音頻狀態的方法
   public checkAudioStatus(): { available: boolean; context: string } {
     const sampleTrack = Object.values(this.track).find((track) => track.track);

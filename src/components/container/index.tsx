@@ -6,6 +6,7 @@ import { memo, useContext, useEffect, useRef } from 'react';
 import Div100vh from 'react-div-100vh';
 import NavBar from '../navBar';
 import './index.less';
+import Menu from '../memu';
 
 const Container = memo(({ children }: IReactProps) => {
   const [context, setContext] = useContext(Context);
@@ -35,6 +36,7 @@ const Container = memo(({ children }: IReactProps) => {
           <NavBar />
           <div ref={ref} className='content'>
             {sceneImageSize && sceneImageSize.width && children}
+            <Menu />
           </div>
         </div>
       </div>

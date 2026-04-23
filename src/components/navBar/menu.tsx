@@ -5,7 +5,7 @@ import Button from '../button';
 const Menu = memo(() => {
   useEffect(() => {}, []);
   return (
-    <div className='Menu'>
+    <div className='menu'>
       <Button>
         <Button.NavBar type='burger' />
       </Button>

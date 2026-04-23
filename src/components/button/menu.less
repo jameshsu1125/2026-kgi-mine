@@ -1,0 +1,40 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Button {
+  .mute,
+  .share {
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 100% auto;
+
+    @apply flex h-10 w-10 flex-col items-center justify-center bg-white p-2;
+
+    @media only screen and (max-width: @XS) {
+      & {
+        width: 10vw;
+        height: 10vw;
+      }
+    }
+  }
+
+  .share {
+    mask-image: var(--menu-icon-share);
+  }
+
+  .mute {
+    mask-image: var(--menu-icon-mute);
+    mask-position: 0 100%;
+  }
+
+  &:hover {
+    .share,
+    .mute {
+      @apply bg-primary-blue;
+    }
+  }
+
+  .menu {
+    mask-position: 0 0%;
+  }
+}

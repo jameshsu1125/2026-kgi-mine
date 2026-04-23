@@ -1,13 +1,14 @@
+import { Context } from '@/settings/constant';
 import { ActionType, IReactProps } from '@/settings/type';
-import Regular from './regular';
-import { twMerge } from 'tailwind-merge';
-import { useContext, useEffect, useId, useState } from 'react';
 import Click from 'lesca-click';
+import { useContext, useEffect, useId, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
+import Marker from './marker';
+import Menu from './menu';
 import NavBar from './navBar';
 import Outline from './outline';
-import { Context } from '@/settings/constant';
+import Regular from './regular';
 import SliderArrow from './sliderArray';
-import Marker from './marker';
 
 type TRegularProps = IReactProps & {
   id?: string;
@@ -72,5 +73,6 @@ Button.NavBar = NavBar;
 Button.Outline = Outline;
 Button.SliderArray = SliderArrow;
 Button.Marker = Marker;
+Button.Menu = Menu;
 
 export default Button;
