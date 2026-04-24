@@ -133,7 +133,7 @@ export const JourneySceneSetting = {
   itemsCenterThreshold: 200,
   offset: 100,
   // offset: 200,
-  shouldReloadWhenWindowResized: true,
+  shouldReloadWhenWindowResized: false,
 };
 
 export const JourneySceneDebug: JourneySceneDebugType = {

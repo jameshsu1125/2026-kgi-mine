@@ -4,7 +4,7 @@ import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import { getViewPxRatio } from '@/utils';
 import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { JourneyContext, JourneyItemsList, JourneySceneSetting } from '../config';
+import { JourneyContext, JourneyItemsList } from '../config';
 import './index.less';
 import Item from './item';
 
@@ -54,18 +54,17 @@ const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyI
     };
     resize();
     window.addEventListener('resize', resize);
-    if (JourneySceneSetting.shouldReloadWhenWindowResized) {
-      window.addEventListener('resize', () => {
-        window.location.reload();
-      });
-    }
     return () => window.removeEventListener('resize', resize);
   }, []);
 
   useEffect(() => {
     if (offsetRef === 0) return;
     const currentLoop = Math.floor((offset * SceneDepth.middle * ratio) / (offsetRef * 2));
-    if (loop) setState((S) => ({ ...S, loop: currentLoop }));
+    if (loop) {
+      requestAnimationFrame(() => {
+        setState((S) => ({ ...S, loop: currentLoop }));
+      });
+    }
   }, [offset, offsetRef, ratio]);
 
   const left = useMemo(() => {

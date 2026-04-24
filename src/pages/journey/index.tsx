@@ -6,6 +6,7 @@ import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import {
   JourneyContext,
   JourneyDialogType,
+  JourneySceneSetting,
   JourneySceneType,
   JourneyState,
   JourneyStepType,
@@ -18,6 +19,7 @@ import UserData from './userData';
 const Journey = memo(() => {
   const [context, setContext] = useContext(Context);
   const journey = context[ActionType.UserData]?.journey;
+  const [resetIndex, setResetIndex] = useState(0);
 
   const [state, setState] = useState({
     ...JourneyState,
@@ -32,6 +34,14 @@ const Journey = memo(() => {
 
   const onItemSelected = useCallback((item: string) => {
     console.log(item);
+  }, []);
+
+  useEffect(() => {
+    if (JourneySceneSetting.shouldReloadWhenWindowResized) {
+      window.addEventListener('resize', () => {
+        setResetIndex((index) => index + 1);
+      });
+    }
   }, []);
 
   const onEncounteringRoadSign = useCallback(() => {
@@ -66,7 +76,7 @@ const Journey = memo(() => {
   return (
     <JourneyContext.Provider value={[state, setState]}>
       <OnloadProvider
-        key={state.scene}
+        key={`${state.scene}-${resetIndex}`}
         onStart={() => {
           setState((S) => ({ ...S, step: JourneyStepType.unset }));
           setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
