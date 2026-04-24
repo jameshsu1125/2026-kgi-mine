@@ -1,11 +1,11 @@
 import TweenerProvider from '@/components/tweenProvider';
 import useURI from '@/hooks/useURI';
+import { PATTERN_URI_PROPERTIES } from '@/settings/config';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useEffect, useMemo } from 'react';
 import { HomeContext, HomeStepType } from '../config';
 import { HOME_BACKGROUND_TWEEN_PROPERTIES } from './config';
 import './index.less';
-import { PATTERN_URI_PROPERTIES } from '@/settings/config';
 
 const Background = memo(() => {
   const [state] = useContext(HomeContext);

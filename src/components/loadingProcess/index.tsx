@@ -1,11 +1,11 @@
 import useURI from '@/hooks/useURI';
 import { Context } from '@/settings/constant';
 import { ActionType, IReactProps, LoadingProcessType } from '@/settings/type';
+import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { LoadingProcessIconList } from './config';
 import './index.less';
-import OnloadProvider from 'lesca-react-onload';
 
 const Background = () => (
   <div className='bg-bg-gray-light absolute top-0 h-full w-full opacity-90' />

@@ -13,9 +13,7 @@ const BG = memo(() => {
   const id = useId();
 
   useEffect(() => {
-    Click.add(`#${id}`, () => {
-      setState((S) => ({ ...S, nav: { enabled: false } }));
-    });
+    Click.add(`#${id}`, () => setState((S) => ({ ...S, nav: { enabled: false } })));
     return () => {
       Click.remove(`#${id}`);
     };

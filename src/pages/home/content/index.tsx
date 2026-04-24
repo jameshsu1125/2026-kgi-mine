@@ -1,10 +1,10 @@
+import useQuestion from '@/hooks/useQuestion';
 import { memo, useContext, useEffect, useMemo } from 'react';
 import { HomeContext, HomePageType, HomeStepType } from '../config';
-import 你想要的下一個十年是 from './landing';
-import 你想要哪一場理想旅程呢 from './decade';
 import 選擇你的Miner角色 from './character';
-import useQuestion from '@/hooks/useQuestion';
-import WhichJourney from './journey';
+import 你想要的下一個十年是 from './decade';
+import 你想要哪一場理想旅程呢 from './journey';
+import 歡迎踏上豐盛之旅 from './landing';
 
 const Content = memo(() => {
   const [state] = useContext(HomeContext);
@@ -20,13 +20,13 @@ const Content = memo(() => {
     switch (state.page) {
       default:
       case HomePageType.landing:
-        return <你想要的下一個十年是 />;
+        return <歡迎踏上豐盛之旅 />;
 
       case HomePageType.decade:
-        return <你想要哪一場理想旅程呢 data={questionResponse?.result.quizList} />;
+        return <你想要的下一個十年是 data={questionResponse?.result.quizList} />;
 
       case HomePageType.journey:
-        return <WhichJourney data={questionResponse?.result.tripList} />;
+        return <你想要哪一場理想旅程呢 data={questionResponse?.result.tripList} />;
 
       case HomePageType.character:
         return <選擇你的Miner角色 data={questionResponse?.result.minerList} />;

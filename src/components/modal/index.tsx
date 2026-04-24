@@ -1,11 +1,11 @@
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import Click from 'lesca-click';
+import EnterFrame from 'lesca-enterframe';
 import { memo, useContext, useEffect, useId } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Button from '../button';
 import './index.less';
-import EnterFrame from 'lesca-enterframe';
 
 const Modal = memo(() => {
   const id = useId();

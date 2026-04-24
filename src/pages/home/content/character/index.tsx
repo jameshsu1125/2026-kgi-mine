@@ -2,13 +2,13 @@ import Heading from '@/components/heading';
 import TweenerProvider from '@/components/tweenProvider';
 import { ResponseType } from '@/hooks/useQuestion';
 import useURI from '@/hooks/useURI';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useEffect } from 'react';
 import { HomeContext, HomeStepType } from '../../config';
 import SelectButton from './button';
 import Carousel from './slider';
-import { Context } from '@/settings/constant';
-import { ActionType } from '@/settings/type';
 
 const 選擇你的Miner角色 = memo(({ data }: { data?: ResponseType['result']['minerList'] }) => {
   const [, setContext] = useContext(Context);

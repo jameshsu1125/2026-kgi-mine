@@ -5,10 +5,10 @@ import TweenerProvider from '@/components/tweenProvider';
 import { ResponseType } from '@/hooks/useQuestion';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
-import { memo, useCallback, useContext, useEffect, useMemo } from 'react';
-import { HomeContext, HomePageType, HomeStepType } from '../../config';
 import OnloadProvider from 'lesca-react-onload';
 import { Bezier } from 'lesca-use-tween';
+import { memo, useCallback, useContext, useEffect, useMemo } from 'react';
+import { HomeContext, HomePageType, HomeStepType } from '../../config';
 
 const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['result']['quizList'] }) => {
   const [, setContext] = useContext(Context);

@@ -1,10 +1,10 @@
 import Button from '@/components/button';
 import TweenerProvider from '@/components/tweenProvider';
-import { memo, useContext } from 'react';
-import { HomeContext, HomeStepType } from '../../config';
+import { PAGE } from '@/settings/config';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
-import { PAGE } from '@/settings/config';
+import { memo, useContext } from 'react';
+import { HomeContext, HomeStepType } from '../../config';
 
 const SelectButton = memo(({ onClick }: { onClick: () => void }) => {
   const [context, setContext] = useContext(Context);

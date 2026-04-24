@@ -17,7 +17,7 @@ const animationSetting = {
   y: 30,
 };
 
-const Landing = memo(() => {
+const 歡迎踏上豐盛之旅 = memo(() => {
   const [{ step }] = useContext(HomeContext);
   const [response, getStart] = useStart();
 
@@ -105,4 +105,4 @@ const Landing = memo(() => {
     </>
   );
 });
-export default Landing;
+export default 歡迎踏上豐盛之旅;

@@ -10,11 +10,9 @@
     @apply pointer-events-auto absolute top-0 left-0 flex h-full w-full items-center justify-center overflow-scroll p-5;
 
     .tmp {
-      width: 100%;
-
       @img: '../../../public/tmp.png';
 
-      @apply pointer-events-auto;
+      @apply pointer-events-auto w-full;
 
       &::before {
         padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
