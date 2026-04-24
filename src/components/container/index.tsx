@@ -6,7 +6,7 @@ import { memo, useContext, useEffect, useRef } from 'react';
 import Div100vh from 'react-div-100vh';
 import NavBar from '../navBar';
 import './index.less';
-import Menu from '../memu';
+import Menu from '../menu';
 
 const Container = memo(({ children }: IReactProps) => {
   const [context, setContext] = useContext(Context);

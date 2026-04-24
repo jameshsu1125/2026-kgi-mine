@@ -11,14 +11,14 @@ import Regular from './regular';
 import SliderArrow from './sliderArray';
 
 type TRegularProps = IReactProps & {
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties;
-  clickOnce?: boolean;
-  onClick?: (dataset?: Record<string, string>) => void;
   active?: boolean;
+  className?: string;
+  clickOnce?: boolean;
   dataset?: Record<string, string>;
   disabled?: boolean;
+  id?: string;
+  style?: React.CSSProperties;
+  onClick?: (dataset?: Record<string, string>) => void;
 };
 
 const Button = (props: TRegularProps) => {

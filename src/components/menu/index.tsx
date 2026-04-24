@@ -1,13 +1,13 @@
-import { memo, useContext, useEffect, useState } from 'react';
-import Article from '../article';
-import './index.less';
-import Contain from '../contain';
-import Button from '../button';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
-import TweenerProvider from '../tweenProvider';
 import { shareURL } from '@/utils';
 import { Bezier } from 'lesca-use-tween';
+import { memo, useContext, useEffect, useState } from 'react';
+import Article from '../article';
+import Button from '../button';
+import Contain from '../contain';
+import TweenerProvider from '../tweenProvider';
+import './index.less';
 
 const Menu = memo(() => {
   const [context, setContext] = useContext(Context);

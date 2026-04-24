@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import './sliderArray.less';
 import { twMerge } from 'tailwind-merge';
+import './sliderArray.less';
 
 const SliderArrow = memo(({ direct }: { direct?: 'left' | 'right' }) => (
   <div className={twMerge('slider-arrow', direct === 'left' ? 'slider-prev' : 'slider-next')}>

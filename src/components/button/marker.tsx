@@ -1,9 +1,6 @@
 import { IReactProps } from '@/settings/type';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import './marker.less';
 
-const Marker = memo(({ children }: IReactProps) => {
-  useEffect(() => {}, []);
-  return <div className='Marker'>{children}</div>;
-});
+const Marker = memo(({ children }: IReactProps) => <div className='Marker'>{children}</div>);
 export default Marker;
