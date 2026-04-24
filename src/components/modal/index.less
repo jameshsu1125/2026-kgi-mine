@@ -24,6 +24,12 @@
 
       @apply pointer-events-auto flex flex-col items-center justify-center gap-8 px-10 py-10 text-white;
 
+      @media only screen and (max-width: @XS) {
+        & {
+          min-width: 315px;
+        }
+      }
+
       .title {
         @apply text-xl font-bold;
       }

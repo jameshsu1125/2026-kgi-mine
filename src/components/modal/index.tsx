@@ -35,25 +35,27 @@ const Modal = memo(() => {
         <div className='dialog animate-fadeInWithY'>
           {title && <div className='title'>{title}</div>}
           <div className='body'>{body}</div>
-          <div className='footer'>
-            {label?.map((item, index) => (
-              <Button
-                key={index}
-                className={twMerge(label.length === 1 ? 'w-full' : 'w-1/2')}
-                onClick={() => {
-                  setContext({ type: ActionType.Modal, state: { enabled: false } });
-                  if (item) onConfirm?.(item);
-                }}
-                clickOnce={false}
-              >
-                {index === 0 ? (
-                  <Button.Regular size='w-full'>{item}</Button.Regular>
-                ) : (
-                  <Button.Outline size='w-full'>{item}</Button.Outline>
-                )}
-              </Button>
-            ))}
-          </div>
+          {label && (
+            <div className='footer'>
+              {label?.map((item, index) => (
+                <Button
+                  key={index}
+                  className={twMerge(label.length === 1 ? 'w-full' : 'w-1/2')}
+                  onClick={() => {
+                    setContext({ type: ActionType.Modal, state: { enabled: false } });
+                    if (item) onConfirm?.(item);
+                  }}
+                  clickOnce={false}
+                >
+                  {index === 0 ? (
+                    <Button.Regular size='w-full'>{item}</Button.Regular>
+                  ) : (
+                    <Button.Outline size='w-full'>{item}</Button.Outline>
+                  )}
+                </Button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

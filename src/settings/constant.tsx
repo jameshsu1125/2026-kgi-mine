@@ -40,7 +40,7 @@ export const SceneImageSizeState: TSceneImageSizeState = {
 };
 
 export const InitialState: IState = {
-  [ActionType.Page]: PAGE.home,
+  [ActionType.Page]: PAGE.journey,
   [ActionType.LoadingProcess]: LoadingProcessState,
   [ActionType.Dataset]: DatasetState,
   [ActionType.Sounds]: { track: undefined },

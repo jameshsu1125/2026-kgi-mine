@@ -2,8 +2,15 @@ import Nav from '@/components/nav';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
-import { memo, useCallback, useContext, useState } from 'react';
-import { JourneyContext, JourneySceneType, JourneyState, JourneyStepType } from './config';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
+import {
+  JourneyContext,
+  JourneyDialogType,
+  JourneySceneType,
+  JourneyState,
+  JourneyStepType,
+} from './config';
+import Dialog from './dialog';
 import './index.less';
 import Scene from './scene';
 import UserData from './userData';
@@ -20,33 +27,7 @@ const Journey = memo(() => {
   });
 
   const onLooped = useCallback((_: number) => {
-    setContext({
-      type: ActionType.Modal,
-      state: {
-        enabled: true,
-        body: (
-          <>
-            你太厲害了！
-            <br />
-            成功解鎖許願新路線的權限
-          </>
-        ),
-        label: ['許願新路線'],
-        onConfirm: (label) => {
-          if (label === '許願新路線') {
-            setState((S) => {
-              const scenes = Object.values(JourneySceneType).filter((scene) => scene !== S.scene);
-              return {
-                ...S,
-                loop: 0,
-                scene: scenes[Math.floor(Math.random() * scenes.length)],
-                step: JourneyStepType.unset,
-              };
-            });
-          }
-        },
-      },
-    });
+    setState((S) => ({ ...S, dialog: { enabled: true, type: JourneyDialogType.wish } }));
   }, []);
 
   const onItemSelected = useCallback((item: string) => {
@@ -103,6 +84,7 @@ const Journey = memo(() => {
           />
           <UserData />
           {state.nav.enabled && <Nav />}
+          {state.dialog.enabled && <Dialog />}
         </div>
       </OnloadProvider>
     </JourneyContext.Provider>

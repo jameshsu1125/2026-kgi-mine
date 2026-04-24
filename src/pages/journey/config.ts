@@ -17,13 +17,21 @@ export enum JourneyStepType {
   resume,
 }
 
+export enum JourneyDialogType {
+  wish,
+  navigator,
+  subject,
+}
+
 export type TJourneyState = {
   step: JourneyStepType;
   scene: JourneySceneType;
   loop: number;
   selectedItem?: string;
   nav: { enabled: boolean };
+  dialog: { enabled: boolean; type: JourneyDialogType };
 };
+
 export type TJourneyContext = [TJourneyState, Dispatch<SetStateAction<TJourneyState>>];
 
 export const JourneyState = {
@@ -31,6 +39,7 @@ export const JourneyState = {
   scene: JourneySceneType.晴光森林,
   loop: 0,
   nav: { enabled: false },
+  dialog: { enabled: false, type: JourneyDialogType.wish },
 };
 export const JourneyContext = createContext<TJourneyContext>([JourneyState, () => {}]);
 
@@ -121,7 +130,7 @@ type JourneySceneDebugType = {
 };
 
 export const JourneySceneSetting = {
-  itemsCenterThreshold: 300,
+  itemsCenterThreshold: 200,
   offset: 100,
   // offset: 200,
   shouldReloadWhenWindowResized: true,

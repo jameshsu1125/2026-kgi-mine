@@ -34,10 +34,9 @@ const Icon = memo(() => {
     intervalRef.current = setInterval(() => {
       setOffsetIndex((S) => S + 1);
     }, 5000);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
+    // return () => {
+    //   if (intervalRef.current) clearInterval(intervalRef.current);
+    // };
   }, []);
 
   return <div className='ico' style={style} />;
