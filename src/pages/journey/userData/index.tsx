@@ -1,11 +1,11 @@
 import TweenerProvider from '@/components/tweenProvider';
 import useURI from '@/hooks/useURI';
+import { faker } from '@faker-js/faker';
+import useTween, { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { JourneyContext, JourneyStepType } from '../config';
 import { UserDataURIList } from './config';
 import './index.less';
-import useTween, { Bezier } from 'lesca-use-tween';
-import { faker } from '@faker-js/faker';
 
 const TweenNumber = memo(({ number }: { number: number }) => {
   const [style, setStyle] = useTween({ top: 0 });
@@ -36,9 +36,7 @@ const Icon = memo(() => {
     }, 5000);
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, []);
 
@@ -47,8 +45,8 @@ const Icon = memo(() => {
 
 const UserData = memo(() => {
   const [state] = useContext(JourneyContext);
-
   const [, setURI] = useURI();
+
   useEffect(() => {
     UserDataURIList.forEach((uri) => setURI(uri));
     setURI({ path: 'userData-flap-patterns.svg', name: 'userData-flap-patterns' });
@@ -58,9 +56,7 @@ const UserData = memo(() => {
     return UserDataURIList.map(() => Math.floor(Math.random() * 100));
   }, []);
 
-  const firstName = useMemo(() => {
-    return faker.person.firstName();
-  }, []);
+  const firstName = useMemo(() => faker.person.firstName(), []);
 
   return (
     <div className='UserData'>

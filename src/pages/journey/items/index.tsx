@@ -1,12 +1,12 @@
 import useURI from '@/hooks/useURI';
-import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { JourneyContext, JourneyItemsList, JourneySceneSetting } from '../config';
-import './index.less';
-import Item from './item';
 import { SceneDepth, SceneSize } from '@/settings/config';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import { getViewPxRatio } from '@/utils';
+import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { JourneyContext, JourneyItemsList, JourneySceneSetting } from '../config';
+import './index.less';
+import Item from './item';
 
 type TJourneyItemsProps = {
   offset: number;
@@ -34,9 +34,7 @@ const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyI
   useEffect(() => {
     const { scene } = state;
     const items = JourneyItemsList[scene];
-    items.forEach((item) => {
-      setURI({ path: item.path, name: item.name });
-    });
+    items.forEach((item) => setURI({ path: item.path, name: item.name }));
   }, [state.scene]);
 
   useEffect(() => {

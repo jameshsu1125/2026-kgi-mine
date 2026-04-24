@@ -5,10 +5,10 @@ import useURI from '@/hooks/useURI';
 import { SceneDepth } from '@/settings/config';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
+import { getViewPxByDirection as getPx } from '@/utils';
 import EnterFrame from 'lesca-enterframe';
 import useTween, { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
 import {
   JourneyContext,
   JourneyItemsList,
@@ -21,41 +21,14 @@ import {
 import Items from '../items';
 import MinerWalker from '../miner';
 import './index.less';
-import { getViewPxRatio as getRatio, getViewPxByDirection as getPx } from '@/utils';
-
-type ViewProps = {
-  offset: number;
-  depth: number;
-  image: string;
-  isAlpha?: boolean;
-};
-
-const View = memo(({ offset, depth, image, isAlpha }: ViewProps) => {
-  const [context] = useContext(Context);
-  const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
-
-  const ratio = getRatio({ width });
-  const currentOffset = offset * depth * ratio; // 根據深度調整偏移量
-
-  return (
-    <div
-      className={twMerge('view', isAlpha && 'opacity-50 duration-500', image)}
-      style={{ backgroundPositionX: `${currentOffset}%` }}
-    />
-  );
-});
+import Moon from './Moon';
+import View from './view';
 
 type TJourneySceneProps = {
   onLooped: (index: number) => void;
   onEncounteringRoadSign: () => void;
   onItemSelected?: (item: string) => void;
 };
-
-const Moon = memo(() => {
-  useURI({ path: 'scene-moonlitSnowfield-moon.png', name: 'scene-moonlitSnowfield-moon' });
-
-  return <div className='moon' />;
-});
 
 const Scene = memo(({ onLooped, onEncounteringRoadSign, onItemSelected }: TJourneySceneProps) => {
   const [context] = useContext(Context);
@@ -65,9 +38,7 @@ const Scene = memo(({ onLooped, onEncounteringRoadSign, onItemSelected }: TJourn
   const [state, setState] = useContext(JourneyContext);
 
   const [, setURI] = useURI();
-  const [, setStyle] = useTween({
-    left: getPx(JourneySceneSetting.offset, width) - 300,
-  });
+  const [, setStyle] = useTween({ left: getPx(JourneySceneSetting.offset, width) - 300 });
   const [offset, setOffset] = useState(getPx(JourneySceneSetting.offset, width) - 300);
   const [isAlpha, setIsAlpha] = useState(false);
   const encounteringRoadSignRef = useRef('');
@@ -171,11 +142,7 @@ const Scene = memo(({ onLooped, onEncounteringRoadSign, onItemSelected }: TJourn
     } else if (state.step === JourneyStepType.resume) {
       EnterFrame.play();
       setIsAlpha(false);
-    }
-  }, [state.step]);
-
-  useEffect(() => {
-    if (state.step === JourneyStepType.loop) {
+    } else if (state.step === JourneyStepType.loop) {
       EnterFrame.destroy();
       EnterFrame.reset();
       EnterFrame.add(() => setOffset((S) => S + 1));

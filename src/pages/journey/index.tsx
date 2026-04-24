@@ -26,7 +26,9 @@ const Journey = memo(() => {
         enabled: true,
         body: (
           <>
-            你太厲害了！ <br /> 成功解鎖許願新路線的權限
+            你太厲害了！
+            <br />
+            成功解鎖許願新路線的權限
           </>
         ),
         label: ['許願新路線'],
