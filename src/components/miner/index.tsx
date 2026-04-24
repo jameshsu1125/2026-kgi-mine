@@ -78,7 +78,6 @@ const Miner = forwardRef(({ height, className, autoplay, onShowDown }: MinerProp
         EnterFrame.play();
       }
       return () => {
-        EnterFrame.undo();
         window.removeEventListener('resize', resize);
       };
     }

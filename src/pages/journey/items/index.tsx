@@ -12,10 +12,11 @@ type TJourneyItemsProps = {
   offset: number;
   items: { name: string; top: number; left: number; clicked: boolean }[];
   onCenter?: (item: string) => void;
+  onItemSelected?: (item: string) => void;
   loop?: boolean;
 };
 
-const Items = memo(({ offset, items, onCenter, loop }: TJourneyItemsProps) => {
+const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyItemsProps) => {
   const [context] = useContext(Context);
   const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
   const ratio = useMemo(() => getViewPxRatio({ width }), [width]);
@@ -74,10 +75,11 @@ const Items = memo(({ offset, items, onCenter, loop }: TJourneyItemsProps) => {
     return `-${(offset * SceneDepth.middle * ratio) % (offsetRef * 2)}%`;
   }, [offset, offsetRef, width, ratio]);
 
-  const onItemSelected = useCallback(
+  const onSelected = useCallback(
     (item: string) => {
       setCurrentItems((items) => items.map((i) => (i.name === item ? { ...i, clicked: true } : i)));
       setState((S) => ({ ...S, nav: { enabled: true } }));
+      onItemSelected?.(item);
     },
     [setState],
   );
@@ -98,7 +100,7 @@ const Items = memo(({ offset, items, onCenter, loop }: TJourneyItemsProps) => {
                   x={x}
                   left={left}
                   onCenter={() => onCenter?.(item.name)}
-                  onItemSelected={onItemSelected}
+                  onItemSelected={() => onSelected?.(item.name)}
                 />
               );
             })}

@@ -57,7 +57,7 @@ const Moon = memo(() => {
   return <div className='moon' />;
 });
 
-const Scene = memo(({ onLooped, onEncounteringRoadSign }: TJourneySceneProps) => {
+const Scene = memo(({ onLooped, onEncounteringRoadSign, onItemSelected }: TJourneySceneProps) => {
   const [context] = useContext(Context);
   const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
   const sounds = context[ActionType.Sounds];
@@ -236,9 +236,15 @@ const Scene = memo(({ onLooped, onEncounteringRoadSign }: TJourneySceneProps) =>
       <View offset={offset} depth={SceneDepth.back} image='back' />
       {state.scene && state.scene === JourneySceneType.月夜雪地 && <Moon />}
       <View offset={offset} depth={SceneDepth.middle} image='middle' />
-      <Items offset={offset} items={back} onCenter={onCenter} loop />
+      <Items
+        offset={offset}
+        items={back}
+        onCenter={onCenter}
+        loop
+        onItemSelected={onItemSelected}
+      />
       <MinerWalker onShowDown={onShowDown} />
-      <Items offset={offset} items={front} onCenter={onCenter} />
+      <Items offset={offset} items={front} onCenter={onCenter} onItemSelected={onItemSelected} />
       <View offset={offset} depth={SceneDepth.front} image='front' isAlpha={isAlpha} />
     </div>
   );
