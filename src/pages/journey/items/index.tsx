@@ -7,6 +7,7 @@ import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } f
 import { JourneyContext, JourneyItemsList } from '../config';
 import './index.less';
 import Item from './item';
+import { useDebounce } from 'use-debounce';
 
 type TJourneyItemsProps = {
   offset: number;
@@ -27,6 +28,7 @@ const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyI
   const boxRef = useRef<HTMLDivElement>(null);
 
   const [offsetRef, setOffsetRef] = useState(window.innerWidth);
+  const [debounceOffsetRef] = useDebounce(offsetRef, 1000);
   const [currentItems, setCurrentItems] = useState(items);
 
   const [, setURI] = useURI();
@@ -59,18 +61,17 @@ const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyI
 
   useEffect(() => {
     if (offsetRef === 0) return;
+    if (offsetRef !== debounceOffsetRef) return;
     const currentLoop = Math.floor((offset * SceneDepth.middle * ratio) / (offsetRef * 2));
     if (loop) {
-      requestAnimationFrame(() => {
-        setState((S) => ({ ...S, loop: currentLoop }));
-      });
+      setState((S) => ({ ...S, loop: currentLoop }));
     }
-  }, [offset, offsetRef, ratio]);
+  }, [offset, offsetRef, ratio, debounceOffsetRef, width]);
 
   const left = useMemo(() => {
     if (offsetRef === 0) return '0%';
     return `-${(offset * SceneDepth.middle * ratio) % (offsetRef * 2)}%`;
-  }, [offset, offsetRef, width, ratio]);
+  }, [offset, offsetRef, ratio]);
 
   const onSelected = useCallback(
     (item: string) => {
