@@ -27,18 +27,6 @@ export const DatasetState: TDatasetState = {
 
 export const ModalState: TModalState = {
   enabled: false,
-  title: '',
-  body: (
-    <>
-      請開啟聲音鍵和調大音量
-      <br />
-      並且關掉省電模式
-      <br />
-      才能獲得最佳體驗喔！
-    </>
-  ),
-  label: ['好的'],
-  onClose: () => {},
 };
 
 export const UserDataState: TUserDataState = {
