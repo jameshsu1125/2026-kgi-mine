@@ -2,10 +2,12 @@ import Button from '@/components/button';
 import Sounds from '@/components/sounds';
 import TweenerProvider from '@/components/tweenProvider';
 import { Context } from '@/settings/constant';
-import { ActionType } from '@/settings/type';
+import { ActionType, TUserDataState } from '@/settings/type';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useState } from 'react';
 import { HomeContext, HomeStepType } from '../../config';
+import { PAGE } from '@/settings/config';
+import QueryString from 'lesca-url-parameters';
 
 const Buttons = memo(({ type, getStart }: { type: 'login' | 'entry'; getStart: () => void }) => {
   const [, setContext] = useContext(Context);
@@ -33,7 +35,37 @@ const Buttons = memo(({ type, getStart }: { type: 'login' | 'entry'; getStart: (
           <Button
             clickOnce
             onClick={() => {
-              setState((S) => ({ ...S, step: HomeStepType.landingFadeOut }));
+              // setState((S) => ({ ...S, step: HomeStepType.landingFadeOut }));
+
+              const queryString = QueryString.get('scene');
+              if (!queryString) {
+                setState((S) => ({ ...S, step: HomeStepType.landingFadeOut }));
+                return;
+              }
+
+              let journey: TUserDataState['journey'] = '金黃稻浪';
+
+              switch (queryString) {
+                default:
+                case '1':
+                  journey = '金黃稻浪';
+                  break;
+                case '2':
+                  journey = '花海平原';
+                  break;
+                case '3':
+                  journey = '蔚藍海岸';
+                  break;
+                case '4':
+                  journey = '月夜雪地';
+                  break;
+                case '5':
+                  journey = '晴光森林';
+                  break;
+              }
+
+              setContext({ type: ActionType.UserData, state: { journey } });
+              setContext({ type: ActionType.Page, state: PAGE.journey });
             }}
             disabled={step === HomeStepType.landingFadeOut}
           >

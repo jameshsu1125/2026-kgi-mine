@@ -138,5 +138,5 @@ export const JourneySceneSetting = {
 
 export const JourneySceneDebug: JourneySceneDebugType = {
   enabled: false,
-  count: QueryString.get('count') === 'max' ? 'max' : 1,
+  count: QueryString.get('count') === 'max' ? 'max' : Number(QueryString.get('count')) || 1,
 };
