@@ -1,0 +1,36 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Recent {
+  @apply fixed top-0 left-0 z-50 h-full w-full;
+
+  & > .ctx {
+    @apply text-font-white-light pointer-events-none absolute top-0 flex h-full w-full flex-col items-center justify-center gap-5;
+
+    & > .dialog {
+      min-width: 394px;
+      border-radius: 35px;
+      box-shadow: 0px 0px 20px 0px #0000001a;
+      opacity: 1;
+
+      @apply bg-bg-gray-dark pointer-events-auto gap-8 text-white;
+      @apply relative overflow-hidden bg-cover bg-center bg-no-repeat;
+
+      @media only screen and (max-width: @XS) {
+        & {
+          min-width: 315px;
+        }
+      }
+
+      .img {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        width: 100%;
+        background-image: var(--recent-demo);
+        background-size: cover;
+
+        @img: '../../../public/recent-demo.jpg';
+        @apply w-full;
+      }
+    }
+  }
+}

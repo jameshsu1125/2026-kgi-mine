@@ -11,6 +11,7 @@ export enum ActionType {
   SceneViewSize = 'sceneViewSize',
   Card = 'card',
   Questionnaire = 'questionnaire',
+  Recent = 'recent',
 }
 
 export enum LoadingProcessType {
@@ -68,7 +69,12 @@ export type TCardState = {
 
 export type TQuestionnaireState = {
   enabled?: boolean;
-  questions?: any[];
+};
+
+export type TRecentState = {
+  enabled?: boolean;
+  title?: ReactNode;
+  onClick?: () => void;
 };
 
 export interface IState {
@@ -81,6 +87,7 @@ export interface IState {
   [ActionType.SceneViewSize]: TSceneViewSizeState;
   [ActionType.Card]: TCardState;
   [ActionType.Questionnaire]: TQuestionnaireState;
+  [ActionType.Recent]: TRecentState;
 }
 
 export interface IAction {

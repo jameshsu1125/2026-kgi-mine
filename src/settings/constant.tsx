@@ -11,6 +11,7 @@ import {
   TLoadingProcessState,
   TModalState,
   TQuestionnaireState,
+  TRecentState,
   TSceneViewSizeState,
   TUserDataState,
 } from './type';
@@ -47,7 +48,11 @@ export const CardState: TCardState = {
 
 export const QuestionnaireState: TQuestionnaireState = {
   enabled: true,
-  questions: [],
+};
+
+export const RecentState: TRecentState = {
+  enabled: false,
+  title: '探索更多活動',
 };
 
 export const InitialState: IState = {
@@ -60,6 +65,7 @@ export const InitialState: IState = {
   [ActionType.SceneViewSize]: SceneViewSizeState,
   [ActionType.Card]: CardState,
   [ActionType.Questionnaire]: QuestionnaireState,
+  [ActionType.Recent]: RecentState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);

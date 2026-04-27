@@ -58,6 +58,19 @@ const Questionnaire = memo(() => {
       });
     } else {
       setContext({ type: ActionType.Modal, state: { enabled: false } });
+      setContext({
+        type: ActionType.Recent,
+        state: {
+          enabled: true,
+          title: question.headline,
+          onClick: () => {
+            setContext({ type: ActionType.Recent, state: { enabled: false } });
+            if (index < QuestionnaireOptions.length - 1) {
+              setIndex((S) => S + 1);
+            }
+          },
+        },
+      });
     }
   }, [question, active]);
 

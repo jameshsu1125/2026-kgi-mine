@@ -38,7 +38,7 @@ type TQuestionnaireOption = {
   headline: React.ReactNode;
   options?: { label: string; value: string }[];
   confirmLabel?: string;
-  type: 'Modal' | 'Card';
+  type: 'Modal' | 'Recent';
 }[];
 
 export const QuestionnaireOptions: TQuestionnaireOption = [
@@ -91,7 +91,7 @@ export const QuestionnaireOptions: TQuestionnaireOption = [
   },
   {
     headline: <>探索更多活動</>,
-    type: 'Card',
+    type: 'Recent',
   },
   {
     headline: (
