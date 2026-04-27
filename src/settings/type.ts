@@ -78,15 +78,7 @@ export interface IState {
 }
 
 export interface IAction {
-  state:
-    | IState
-    | IState[ActionType.Page]
-    | IState[ActionType.Dataset]
-    | IState[ActionType.Sounds]
-    | IState[ActionType.Modal]
-    | IState[ActionType.UserData]
-    | IState[ActionType.SceneImageSize]
-    | string;
+  state: IState | IState[ActionType];
   type: ActionType;
 }
 
