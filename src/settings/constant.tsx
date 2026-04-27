@@ -9,7 +9,7 @@ import {
   TDatasetState,
   TLoadingProcessState,
   TModalState,
-  TSceneImageSizeState,
+  TSceneViewSizeState,
   TUserDataState,
 } from './type';
 
@@ -34,19 +34,19 @@ export const UserDataState: TUserDataState = {
   character: undefined,
 };
 
-export const SceneImageSizeState: TSceneImageSizeState = {
+export const SceneViewSizeState: TSceneViewSizeState = {
   height: undefined,
   width: undefined,
 };
 
 export const InitialState: IState = {
-  [ActionType.Page]: PAGE.home,
+  [ActionType.Page]: PAGE.journey,
   [ActionType.LoadingProcess]: LoadingProcessState,
   [ActionType.Dataset]: DatasetState,
   [ActionType.Sounds]: { track: undefined },
   [ActionType.Modal]: ModalState,
   [ActionType.UserData]: UserDataState,
-  [ActionType.SceneImageSize]: SceneImageSizeState,
+  [ActionType.SceneViewSize]: SceneViewSizeState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);
