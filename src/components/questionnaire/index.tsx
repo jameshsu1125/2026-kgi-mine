@@ -43,11 +43,9 @@ const Questionnaire = memo(() => {
               <div className='w-full'>
                 <Button
                   onClick={() => {
+                    setContext({ type: ActionType.Modal, state: { enabled: false } });
                     if (index < QuestionnaireOptions.length - 1) {
-                      setContext({ type: ActionType.Modal, state: { enabled: false } });
                       setIndex((S) => S + 1);
-                    } else {
-                      setContext({ type: ActionType.Questionnaire, state: { enabled: false } });
                     }
                   }}
                 >
