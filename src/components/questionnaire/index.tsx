@@ -4,16 +4,18 @@ import './index.less';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import Button from '../button';
+import { useDebounce } from 'use-debounce';
 
 const Questionnaire = memo(() => {
   const [, setContext] = useContext(Context);
   const [index, setIndex] = useState(0);
-  const question = useMemo(() => QuestionnaireOptions[index], [index]);
+  const [debouncedIndex] = useDebounce(index, 300);
+  const question = useMemo(() => QuestionnaireOptions[debouncedIndex], [debouncedIndex]);
   const [active, setActive] = useState<boolean[]>([]);
 
   useEffect(() => {
     setActive(question.options?.map(() => false) || []);
-  }, [question]);
+  }, [debouncedIndex]);
 
   useEffect(() => {
     if (question.type === 'Modal') {
@@ -30,9 +32,9 @@ const Questionnaire = memo(() => {
                     key={option.label}
                     className='w-full'
                     active={active[optionIndex]}
-                    onClick={() =>
-                      setActive((S) => S.map((val, i) => (i === optionIndex ? !val : val)))
-                    }
+                    onClick={() => {
+                      setActive((S) => S.map((val, i) => (i === optionIndex ? !val : val)));
+                    }}
                   >
                     <Button.Outline className='font-bold'>{option.label}</Button.Outline>
                   </Button>
@@ -42,6 +44,7 @@ const Questionnaire = memo(() => {
                 <Button
                   onClick={() => {
                     if (index < QuestionnaireOptions.length - 1) {
+                      setContext({ type: ActionType.Modal, state: { enabled: false } });
                       setIndex((S) => S + 1);
                     } else {
                       setContext({ type: ActionType.Questionnaire, state: { enabled: false } });
