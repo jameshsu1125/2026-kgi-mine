@@ -19,7 +19,7 @@ type TJourneyItemsProps = {
 
 const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyItemsProps) => {
   const [context] = useContext(Context);
-  const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
+  const { width = window.innerWidth } = context[ActionType.SceneViewSize]!;
   const ratio = useMemo(() => getViewPxRatio({ width }), [width]);
 
   const [state, setState] = useContext(JourneyContext);

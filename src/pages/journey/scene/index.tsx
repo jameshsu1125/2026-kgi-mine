@@ -32,7 +32,7 @@ type TJourneySceneProps = {
 
 const Scene = memo(({ onLooped, onEncounteringRoadSign, onItemSelected }: TJourneySceneProps) => {
   const [context] = useContext(Context);
-  const { width = window.innerWidth } = context[ActionType.SceneImageSize]!;
+  const { width = window.innerWidth } = context[ActionType.SceneViewSize]!;
   const sounds = context[ActionType.Sounds];
 
   const [state, setState] = useContext(JourneyContext);

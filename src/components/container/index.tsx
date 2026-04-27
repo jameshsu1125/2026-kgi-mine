@@ -10,7 +10,7 @@ import Menu from '../menu';
 
 const Container = memo(({ children }: IReactProps) => {
   const [context, setContext] = useContext(Context);
-  const sceneImageSize = context[ActionType.SceneImageSize];
+  const sceneImageSize = context[ActionType.SceneViewSize];
   const ref = useRef<HTMLDivElement>(null);
   useURI({ path: 'scene-bg.jpg', name: 'scene-bg' });
   useURI({ path: 'scene-bg-m.jpg', name: 'scene-bg-m' });
@@ -20,7 +20,7 @@ const Container = memo(({ children }: IReactProps) => {
       if (ref.current) {
         const { height } = ref.current.getBoundingClientRect();
         const width = (height * SceneSize.width) / SceneSize.height;
-        setContext({ type: ActionType.SceneImageSize, state: { height, width } });
+        setContext({ type: ActionType.SceneViewSize, state: { height, width } });
       }
     };
     resize();
