@@ -8,8 +8,7 @@ export enum ActionType {
   Sounds = 'sounds',
   Modal = 'modal',
   UserData = 'userData',
-  SceneViewSize = 'sceneViewSize',
-  Card = 'card',
+  SceneImageSize = 'sceneImageSize',
 }
 
 export enum LoadingProcessType {
@@ -63,13 +62,9 @@ export type TUserDataState = {
   character?: string;
 };
 
-export type TSceneViewSizeState = {
+export type TSceneImageSizeState = {
   height?: number;
   width?: number;
-};
-
-export type TCardState = {
-  enabled?: boolean;
 };
 
 export interface IState {
@@ -79,13 +74,20 @@ export interface IState {
   [ActionType.Sounds]?: TSounds;
   [ActionType.Modal]?: TModalState;
   [ActionType.UserData]?: TUserDataState;
-  [ActionType.SceneViewSize]?: TSceneViewSizeState;
-  [ActionType.Card]?: TCardState;
+  [ActionType.SceneImageSize]?: TSceneImageSizeState;
 }
 
 export interface IAction {
+  state:
+    | IState
+    | IState[ActionType.Page]
+    | IState[ActionType.Dataset]
+    | IState[ActionType.Sounds]
+    | IState[ActionType.Modal]
+    | IState[ActionType.UserData]
+    | IState[ActionType.SceneImageSize]
+    | string;
   type: ActionType;
-  state: IState | IState[ActionType];
 }
 
 export type TContext = [IState, Dispatch<IAction>];
