@@ -10,6 +10,7 @@ import {
   TDatasetState,
   TLoadingProcessState,
   TModalState,
+  TQuestionnaireState,
   TSceneViewSizeState,
   TUserDataState,
 } from './type';
@@ -44,6 +45,11 @@ export const CardState: TCardState = {
   enabled: false,
 };
 
+export const QuestionnaireState: TQuestionnaireState = {
+  enabled: true,
+  questions: [],
+};
+
 export const InitialState: IState = {
   [ActionType.Page]: PAGE.journey,
   [ActionType.LoadingProcess]: LoadingProcessState,
@@ -53,6 +59,7 @@ export const InitialState: IState = {
   [ActionType.UserData]: UserDataState,
   [ActionType.SceneViewSize]: SceneViewSizeState,
   [ActionType.Card]: CardState,
+  [ActionType.Questionnaire]: QuestionnaireState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);

@@ -1,3 +1,5 @@
+import Card from '@/components/card';
+import Questionnaire from '@/components/questionnaire';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
@@ -14,7 +16,6 @@ import Dialog from './dialog';
 import './index.less';
 import Scene from './scene';
 import UserData from './userData';
-import Card from '@/components/card';
 
 const Journey = memo(() => {
   const [context, setContext] = useContext(Context);
@@ -95,6 +96,7 @@ const Journey = memo(() => {
           <UserData />
           {state.dialog.enabled && <Dialog />}
           {context[ActionType.Card]?.enabled && <Card />}
+          {context[ActionType.Questionnaire]?.enabled && <Questionnaire />}
         </div>
       </OnloadProvider>
     </JourneyContext.Provider>

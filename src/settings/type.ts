@@ -10,6 +10,7 @@ export enum ActionType {
   UserData = 'userData',
   SceneViewSize = 'sceneViewSize',
   Card = 'card',
+  Questionnaire = 'questionnaire',
 }
 
 export enum LoadingProcessType {
@@ -65,6 +66,11 @@ export type TCardState = {
   enabled?: boolean;
 };
 
+export type TQuestionnaireState = {
+  enabled?: boolean;
+  questions?: any[];
+};
+
 export interface IState {
   [ActionType.Page]: string;
   [ActionType.LoadingProcess]: TLoadingProcessState;
@@ -74,6 +80,7 @@ export interface IState {
   [ActionType.UserData]: TUserDataState;
   [ActionType.SceneViewSize]: TSceneViewSizeState;
   [ActionType.Card]: TCardState;
+  [ActionType.Questionnaire]: TQuestionnaireState;
 }
 
 export interface IAction {

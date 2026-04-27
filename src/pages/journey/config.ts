@@ -122,16 +122,16 @@ export const JourneyItemsList = {
   ],
 };
 
-type JourneySceneDebugType = {
-  enabled: boolean;
-  count: number | 'max';
-};
-
 export const JourneySceneSetting = {
   itemsCenterThreshold: 200,
   offset: 100,
   // offset: 200,
   shouldReloadWhenWindowResized: false,
+};
+
+type JourneySceneDebugType = {
+  enabled: boolean;
+  count: number | 'max';
 };
 
 export const JourneySceneDebug: JourneySceneDebugType = {
