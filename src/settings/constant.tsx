@@ -5,6 +5,7 @@ import {
   IAction,
   IState,
   LoadingProcessType,
+  TCardState,
   TContext,
   TDatasetState,
   TLoadingProcessState,
@@ -39,6 +40,10 @@ export const SceneViewSizeState: TSceneViewSizeState = {
   width: undefined,
 };
 
+export const CardState: TCardState = {
+  enabled: false,
+};
+
 export const InitialState: IState = {
   [ActionType.Page]: PAGE.home,
   [ActionType.LoadingProcess]: LoadingProcessState,
@@ -47,6 +52,7 @@ export const InitialState: IState = {
   [ActionType.Modal]: ModalState,
   [ActionType.UserData]: UserDataState,
   [ActionType.SceneViewSize]: SceneViewSizeState,
+  [ActionType.Card]: CardState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);

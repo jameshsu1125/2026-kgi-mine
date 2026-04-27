@@ -9,6 +9,7 @@ export enum ActionType {
   Modal = 'modal',
   UserData = 'userData',
   SceneViewSize = 'sceneViewSize',
+  Card = 'card',
 }
 
 export enum LoadingProcessType {
@@ -39,14 +40,10 @@ export type TLoadingProcessState = {
 };
 
 export type TDatasetState = {
-  dataset: {
-    [key: string]: string | undefined;
-  };
+  dataset: { [key: string]: string | undefined };
 };
 
-export type TSounds = {
-  track?: Sounds;
-};
+export type TSounds = { track?: Sounds };
 
 export type TModalState = {
   enabled?: boolean;
@@ -62,23 +59,25 @@ export type TUserDataState = {
   character?: string;
 };
 
-export type TSceneViewSizeState = {
-  height?: number;
-  width?: number;
+export type TSceneViewSizeState = { height?: number; width?: number };
+
+export type TCardState = {
+  enabled?: boolean;
 };
 
 export interface IState {
-  [ActionType.Page]?: string;
-  [ActionType.LoadingProcess]?: TLoadingProcessState;
-  [ActionType.Dataset]?: TDatasetState;
-  [ActionType.Sounds]?: TSounds;
-  [ActionType.Modal]?: TModalState;
-  [ActionType.UserData]?: TUserDataState;
-  [ActionType.SceneViewSize]?: TSceneViewSizeState;
+  [ActionType.Page]: string;
+  [ActionType.LoadingProcess]: TLoadingProcessState;
+  [ActionType.Dataset]: TDatasetState;
+  [ActionType.Sounds]: TSounds;
+  [ActionType.Modal]: TModalState;
+  [ActionType.UserData]: TUserDataState;
+  [ActionType.SceneViewSize]: TSceneViewSizeState;
+  [ActionType.Card]: TCardState;
 }
 
 export interface IAction {
-  state: IState | IState[ActionType];
+  state: IState | Partial<IState[ActionType]>;
   type: ActionType;
 }
 
