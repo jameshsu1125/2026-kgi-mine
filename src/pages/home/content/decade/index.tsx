@@ -1,4 +1,4 @@
-import Article from '@/components/article';
+import Blockquote from '@/components/article';
 import Button from '@/components/button';
 import Heading from '@/components/heading';
 import TweenerProvider from '@/components/tweenProvider';
@@ -48,7 +48,7 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
   }, [data, state.decadeData]);
 
   return (
-    <Article>
+    <Blockquote>
       <OnloadProvider
         onload={() => {
           setState((S) => ({ ...S, step: HomeStepType.decadeFadeIn }));
@@ -64,7 +64,7 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
             fadeOutStyle={{ opacity: 0, y: -200 }}
             optionsFadeOut={{ duration: 1200, easing: Bezier.inQuart }}
           >
-            <Heading.H2>你想要的下一個十年是?</Heading.H2>
+            <Heading.H3>你想要的下一個十年是?</Heading.H3>
           </TweenerProvider>
           <TweenerProvider
             initialStyle={{ y: 50, opacity: -0.1 }}
@@ -117,7 +117,7 @@ const 你想要的下一個十年是 = memo(({ data }: { data?: ResponseType['re
           </div>
         </div>
       </OnloadProvider>
-    </Article>
+    </Blockquote>
   );
 });
 export default 你想要的下一個十年是;

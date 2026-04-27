@@ -5,7 +5,7 @@ import { ActionType } from '@/settings/type';
 import Click from 'lesca-click';
 import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useEffect, useId } from 'react';
-import Article from '../article';
+import Blockquote from '../article';
 import './index.less';
 
 const BG = memo(() => {
@@ -56,11 +56,11 @@ const Nav = memo(() => {
       <nav className='Nav'>
         <BG />
         <div id={id} className='ctx'>
-          <Article className='max-w-md'>
+          <Blockquote className='max-w-md'>
             <div className='flex min-h-full w-full items-center justify-center pb-[13vh]'>
-              <div id={id2} className='tmp animate-fadeInWithY' />
+              <div id={id2} className='tmp animate-fadeInPy' />
             </div>
-          </Article>
+          </Blockquote>
         </div>
       </nav>
     </OnloadProvider>

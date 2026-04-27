@@ -3,7 +3,7 @@ import { ActionType } from '@/settings/type';
 import { shareURL } from '@/utils';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useEffect, useState } from 'react';
-import Article from '../article';
+import Blockquote from '../article';
 import Button from '../button';
 import Contain from '../contain';
 import TweenerProvider from '../tweenProvider';
@@ -22,7 +22,7 @@ const Menu = memo(() => {
 
   return (
     <div className='Menu'>
-      <Article className='flex max-w-7xl flex-row items-center justify-end'>
+      <Blockquote className='flex max-w-7xl flex-row items-center justify-end'>
         <Contain className='p-0 md:p-3.5'>
           <div className='pointer-events-auto m-1 flex flex-row items-center justify-center gap-1'>
             <Button
@@ -59,7 +59,7 @@ const Menu = memo(() => {
             </TweenerProvider>
           </div>
         </Contain>
-      </Article>
+      </Blockquote>
     </div>
   );
 });

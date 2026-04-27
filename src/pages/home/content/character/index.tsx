@@ -45,7 +45,7 @@ const 選擇你的Miner角色 = memo(({ data }: { data?: ResponseType['result'][
             fadeOutStyle={{ opacity: 0 }}
             optionsFadeOut={{ duration: 600 }}
           >
-            <Heading.H2>選擇你的Miner角色</Heading.H2>
+            <Heading.H3>選擇你的Miner角色</Heading.H3>
           </TweenerProvider>
           <TweenerProvider
             initialStyle={{ y: 50, opacity: 0 }}
@@ -56,7 +56,7 @@ const 選擇你的Miner角色 = memo(({ data }: { data?: ResponseType['result'][
             fadeOutStyle={{ opacity: 0 }}
             optionsFadeOut={{ duration: 600 }}
           >
-            <Heading.H2>開啟一段專屬旅程！</Heading.H2>
+            <Heading.H3>開啟一段專屬旅程！</Heading.H3>
           </TweenerProvider>
         </div>
         <div className='max-h-[40vh] w-full overflow-hidden'>

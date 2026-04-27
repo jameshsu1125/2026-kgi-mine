@@ -1,0 +1,20 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Button {
+  .card {
+    @apply h-6 w-6;
+  }
+
+  &:hover {
+    .card {
+      // @apply bg-bg-gray-dark/50;
+    }
+  }
+
+  &:active {
+    .card {
+      @apply bg-bg-gray-dark/50;
+    }
+  }
+}

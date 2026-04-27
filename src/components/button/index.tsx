@@ -9,6 +9,8 @@ import NavBar from './navBar';
 import Outline from './outline';
 import Regular from './regular';
 import SliderArrow from './sliderArray';
+import Card from './card';
+import Soft from './soft';
 
 type TRegularProps = IReactProps & {
   active?: boolean;
@@ -74,5 +76,7 @@ Button.Outline = Outline;
 Button.SliderArray = SliderArrow;
 Button.Marker = Marker;
 Button.Menu = Menu;
+Button.Card = Card;
+Button.Soft = Soft;
 
 export default Button;

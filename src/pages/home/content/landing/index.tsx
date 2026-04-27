@@ -36,7 +36,7 @@ const 歡迎踏上豐盛之旅 = memo(() => {
         fadeOutStyle={{ opacity: 0 }}
         optionsFadeOut={{ duration: 800 }}
       >
-        <Heading.H1>歡迎踏上豐盛之旅</Heading.H1>
+        <Heading.H3>歡迎踏上豐盛之旅</Heading.H3>
       </TweenerProvider>
       <Paragraph className='text-center'>
         <TweenerProvider

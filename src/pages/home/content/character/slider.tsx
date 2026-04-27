@@ -1,4 +1,4 @@
-import Article from '@/components/article';
+import Blockquote from '@/components/article';
 import Button from '@/components/button';
 import TweenerProvider from '@/components/tweenProvider';
 import { ResponseType } from '@/hooks/useQuestion';
@@ -135,9 +135,9 @@ type CarouselProps = {
 
 const Carousel = memo(({ data }: CarouselProps) => {
   return (
-    <Article className='w-full lg:max-w-5xl xl:max-w-7xl'>
+    <Blockquote className='w-full lg:max-w-5xl xl:max-w-7xl'>
       <SliderContainer data={data} />
-    </Article>
+    </Blockquote>
   );
 });
 export default Carousel;

@@ -1,4 +1,4 @@
-import Article from '@/components/article';
+import Blockquote from '@/components/article';
 import Button from '@/components/button';
 import Heading from '@/components/heading';
 import TweenerProvider from '@/components/tweenProvider';
@@ -41,7 +41,7 @@ const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType[
   }, [data, state.journeyData]);
 
   return (
-    <Article>
+    <Blockquote>
       <OnloadProvider
         onload={() => {
           setState((S) => ({ ...S, step: HomeStepType.journeyFadeIn }));
@@ -57,7 +57,7 @@ const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType[
             fadeOutStyle={{ opacity: 0, y: -200 }}
             optionsFadeOut={{ duration: 1200, easing: Bezier.inQuart }}
           >
-            <Heading.H2>你想要的下一個十年是?</Heading.H2>
+            <Heading.H3>你想要的下一個十年是?</Heading.H3>
           </TweenerProvider>
           <div className='w-full px-10 pt-16 md:px-44'>
             <div className='grid w-full grid-cols-1 gap-5 md:gap-8'>
@@ -98,7 +98,7 @@ const 你想要哪一場理想旅程呢 = memo(({ data }: { data?: ResponseType[
           </div>
         </div>
       </OnloadProvider>
-    </Article>
+    </Blockquote>
   );
 });
 export default 你想要哪一場理想旅程呢;
