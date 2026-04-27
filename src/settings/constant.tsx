@@ -41,7 +41,7 @@ export const SceneViewSizeState: TSceneViewSizeState = {
 };
 
 export const CardState: TCardState = {
-  enabled: true,
+  enabled: false,
 };
 
 export const InitialState: IState = {

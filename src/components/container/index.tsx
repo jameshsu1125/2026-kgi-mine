@@ -4,10 +4,9 @@ import { Context } from '@/settings/constant';
 import { ActionType, IReactProps } from '@/settings/type';
 import { memo, useContext, useEffect, useRef } from 'react';
 import Div100vh from 'react-div-100vh';
+import Menu from '../menu';
 import NavBar from '../navBar';
 import './index.less';
-import Menu from '../menu';
-import Card from '../card';
 
 const Container = memo(({ children }: IReactProps) => {
   const [context, setContext] = useContext(Context);
@@ -37,7 +36,6 @@ const Container = memo(({ children }: IReactProps) => {
           <NavBar />
           <div ref={ref} className='content'>
             {sceneImageSize && sceneImageSize.width && children}
-            {context[ActionType.Card]?.enabled && <Card />}
             <Menu />
           </div>
         </div>

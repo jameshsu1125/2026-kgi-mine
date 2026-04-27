@@ -4,7 +4,7 @@ import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import { getViewPxRatio } from '@/utils';
 import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { JourneyContext, JourneyItemsList } from '../config';
+import { JourneyContext, JourneyItemsList, JourneyStepType } from '../config';
 import './index.less';
 import Item from './item';
 import { useDebounce } from 'use-debounce';
@@ -77,6 +77,7 @@ const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyI
     (item: string) => {
       setCurrentItems((items) => items.map((i) => (i.name === item ? { ...i, clicked: true } : i)));
       setContext({ type: ActionType.Card, state: { enabled: true } });
+      setState((S) => ({ ...S, step: JourneyStepType.fadeOut }));
       onItemSelected?.(item);
     },
     [setState, setContext],

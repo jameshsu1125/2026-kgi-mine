@@ -3,7 +3,7 @@ import { JourneyContext, JourneyStepType } from '@/pages/journey/config';
 import { Context } from '@/settings/constant';
 import { ActionType, TransitionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
-import { memo, useContext, useEffect, useState } from 'react';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Blockquote from '../article';
 import Button from '../button';

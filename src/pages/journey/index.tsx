@@ -14,6 +14,7 @@ import Dialog from './dialog';
 import './index.less';
 import Scene from './scene';
 import UserData from './userData';
+import Card from '@/components/card';
 
 const Journey = memo(() => {
   const [context, setContext] = useContext(Context);
@@ -93,6 +94,7 @@ const Journey = memo(() => {
           />
           <UserData />
           {state.dialog.enabled && <Dialog />}
+          {context[ActionType.Card]?.enabled && <Card />}
         </div>
       </OnloadProvider>
     </JourneyContext.Provider>
