@@ -1,4 +1,3 @@
-import Nav from '@/components/nav';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
@@ -93,7 +92,6 @@ const Journey = memo(() => {
             onEncounteringRoadSign={onEncounteringRoadSign}
           />
           <UserData />
-          {state.nav.enabled && <Nav />}
           {state.dialog.enabled && <Dialog />}
         </div>
       </OnloadProvider>

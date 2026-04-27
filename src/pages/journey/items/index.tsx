@@ -18,7 +18,7 @@ type TJourneyItemsProps = {
 };
 
 const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyItemsProps) => {
-  const [context] = useContext(Context);
+  const [context, setContext] = useContext(Context);
   const { width = window.innerWidth } = context[ActionType.SceneViewSize]!;
   const ratio = useMemo(() => getViewPxRatio({ width }), [width]);
 
@@ -76,10 +76,10 @@ const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyI
   const onSelected = useCallback(
     (item: string) => {
       setCurrentItems((items) => items.map((i) => (i.name === item ? { ...i, clicked: true } : i)));
-      setState((S) => ({ ...S, nav: { enabled: true } }));
+      setContext({ type: ActionType.Card, state: { enabled: true } });
       onItemSelected?.(item);
     },
-    [setState],
+    [setState, setContext],
   );
 
   return (
