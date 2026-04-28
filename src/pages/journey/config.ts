@@ -39,6 +39,7 @@ export const JourneyState = {
   loop: 0,
   dialog: { enabled: false, type: JourneyDialogType.wish },
 };
+
 export const JourneyContext = createContext<TJourneyContext>([JourneyState, () => {}]);
 
 export const JourneySceneList = {

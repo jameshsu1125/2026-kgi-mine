@@ -47,7 +47,7 @@ export const CardState: TCardState = {
 };
 
 export const QuestionnaireState: TQuestionnaireState = {
-  enabled: true,
+  enabled: false,
 };
 
 export const RecentState: TRecentState = {

@@ -26,34 +26,33 @@ const Questionnaire = memo(() => {
           body: (
             <div className='flex w-full flex-col gap-8'>
               <div className='w-full'>{question.headline}</div>
-              <div className='flex w-full flex-col gap-3'>
-                {question.options?.map((option, optionIndex) => (
-                  <Button
-                    key={option.label}
-                    className='w-full'
-                    active={active[optionIndex]}
-                    onClick={() => {
-                      setActive((S) => S.map((val, i) => (i === optionIndex ? !val : val)));
-                    }}
-                  >
-                    <Button.Outline className='font-bold'>{option.label}</Button.Outline>
-                  </Button>
-                ))}
-              </div>
-              <div className='w-full'>
-                <Button
-                  onClick={() => {
-                    setContext({ type: ActionType.Modal, state: { enabled: false } });
-                    if (index < QuestionnaireOptions.length - 1) {
-                      setIndex((S) => S + 1);
-                    }
-                  }}
-                >
-                  <Button.Regular>{question.confirmLabel}</Button.Regular>
-                </Button>
-              </div>
+              {question.options && (
+                <div className='flex w-full flex-col gap-3'>
+                  {question.options?.map((option, optionIndex) => (
+                    <Button
+                      key={option.label}
+                      className='w-full'
+                      active={active[optionIndex]}
+                      onClick={() => {
+                        setActive((S) => S.map((val, i) => (i === optionIndex ? !val : val)));
+                      }}
+                    >
+                      <Button.Outline className='font-bold'>{option.label}</Button.Outline>
+                    </Button>
+                  ))}
+                </div>
+              )}
             </div>
           ),
+          label: [question.confirmLabel || '確認'],
+          onConfirm: (label) => {
+            if (label === question.confirmLabel) {
+              setContext({ type: ActionType.Modal, state: { enabled: false } });
+              if (index < QuestionnaireOptions.length - 1) {
+                setIndex((S) => S + 1);
+              }
+            }
+          },
         },
       });
     } else {

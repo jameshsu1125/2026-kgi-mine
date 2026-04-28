@@ -30,7 +30,7 @@ const Journey = memo(() => {
   });
 
   const onLooped = useCallback((_: number) => {
-    setState((S) => ({ ...S, dialog: { enabled: true, type: JourneyDialogType.wish } }));
+    setContext({ type: ActionType.Questionnaire, state: { enabled: true } });
   }, []);
 
   const onItemSelected = useCallback((item: string) => {
