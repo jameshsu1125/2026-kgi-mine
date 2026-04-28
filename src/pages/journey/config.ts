@@ -125,8 +125,8 @@ export const JourneyItemsList = {
 
 export const JourneySceneSetting = {
   itemsCenterThreshold: 200,
+  // offset: 100,
   offset: 100,
-  // offset: 200,
   shouldReloadWhenWindowResized: false,
 };
 

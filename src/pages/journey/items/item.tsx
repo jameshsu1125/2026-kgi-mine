@@ -26,12 +26,11 @@ const Item = memo(({ item, y, x, left, onCenter, onInView, onItemSelected }: TIt
   );
 
   useEffect(() => {
-    if (ref.current && !left.includes('NaN')) {
+    if (ref.current && left !== '') {
       const inCenter = checkElementCenterOfScreenWithOffset(
         ref.current,
         JourneySceneSetting.itemsCenterThreshold,
       );
-
       const inView = checkElementInViewport(ref.current);
       if (inCenter && !status.isCenter) {
         onCenter?.();

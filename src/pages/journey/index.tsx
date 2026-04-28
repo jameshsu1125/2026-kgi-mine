@@ -29,7 +29,8 @@ const Journey = memo(() => {
       : JourneyState.scene,
   });
 
-  const onLooped = useCallback((_: number) => {
+  const onLooped = useCallback((loop: number) => {
+    if (loop < 0) return;
     setContext({ type: ActionType.Questionnaire, state: { enabled: true } });
   }, []);
 

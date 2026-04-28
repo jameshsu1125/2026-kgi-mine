@@ -1,13 +1,11 @@
+import ParallaxView from '@/components/parallaxView';
 import useURI from '@/hooks/useURI';
-import { SceneDepth, SceneSize } from '@/settings/config';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
-import { getViewPxRatio } from '@/utils';
-import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { JourneyContext, JourneyItemsList, JourneyStepType } from '../config';
 import './index.less';
 import Item from './item';
-import { useDebounce } from 'use-debounce';
 
 type TJourneyItemsProps = {
   offset: number;
@@ -18,19 +16,10 @@ type TJourneyItemsProps = {
 };
 
 const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyItemsProps) => {
-  const [context, setContext] = useContext(Context);
-  const { width = window.innerWidth } = context[ActionType.SceneViewSize]!;
-  const ratio = useMemo(() => getViewPxRatio({ width }), [width]);
-
+  const [, setContext] = useContext(Context);
   const [state, setState] = useContext(JourneyContext);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const boxRef = useRef<HTMLDivElement>(null);
-
-  const [offsetRef, setOffsetRef] = useState(window.innerWidth);
-  const [debounceOffsetRef] = useDebounce(offsetRef, 1000);
   const [currentItems, setCurrentItems] = useState(items);
-
+  const [left, setLeft] = useState('');
   const [, setURI] = useURI();
 
   useEffect(() => {
@@ -38,40 +27,6 @@ const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyI
     const items = JourneyItemsList[scene];
     items.forEach((item) => setURI({ path: item.path, name: item.name }));
   }, [state.scene]);
-
-  useEffect(() => {
-    const resize = () => {
-      if (containerRef.current && contentRef.current && boxRef.current) {
-        const { width, height } = containerRef.current.getBoundingClientRect();
-        const ratio = SceneSize.width / SceneSize.height;
-        const currentWidth = width / height < ratio ? height * ratio : width;
-        const currentHeight = width / height < ratio ? height : width / ratio;
-        contentRef.current.style.width = `${currentWidth - width}px`;
-        contentRef.current.style.height = `${currentHeight}px`;
-        contentRef.current.style.visibility = 'visible';
-        boxRef.current.style.width = `${currentWidth}px`;
-        boxRef.current.style.left = `${currentWidth}px`;
-        setOffsetRef((currentWidth / (currentWidth - width)) * 100);
-      }
-    };
-    resize();
-    window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
-  }, []);
-
-  useEffect(() => {
-    if (offsetRef === 0) return;
-    if (offsetRef !== debounceOffsetRef) return;
-    const currentLoop = Math.floor((offset * SceneDepth.middle * ratio) / (offsetRef * 2));
-    if (loop) {
-      setState((S) => ({ ...S, loop: currentLoop }));
-    }
-  }, [offset, offsetRef, ratio, debounceOffsetRef, width]);
-
-  const left = useMemo(() => {
-    if (offsetRef === 0) return '0%';
-    return `-${(offset * SceneDepth.middle * ratio) % (offsetRef * 2)}%`;
-  }, [offset, offsetRef, ratio]);
 
   const onSelected = useCallback(
     (item: string) => {
@@ -84,29 +39,23 @@ const Items = memo(({ offset, items, onCenter, onItemSelected, loop }: TJourneyI
   );
 
   return (
-    <div ref={containerRef} className='Items'>
-      <div ref={contentRef}>
-        <div className='content' style={{ left }}>
-          <div ref={boxRef}>
-            {currentItems.map((item) => {
-              const y = item.top + 5.5;
-              const x = (item.left / 3840) * 100;
-              return (
-                <Item
-                  key={item.name}
-                  item={item}
-                  y={y}
-                  x={x}
-                  left={left}
-                  onCenter={() => onCenter?.(item.name)}
-                  onItemSelected={() => onSelected?.(item.name)}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </div>
+    <ParallaxView className='Item' offset={offset} loop={loop} onLeftChange={setLeft}>
+      {currentItems.map((item) => {
+        const y = item.top + 5.5;
+        const x = (item.left / 3840) * 100;
+        return (
+          <Item
+            key={item.name}
+            item={item}
+            y={y}
+            x={x}
+            left={left}
+            onCenter={() => onCenter?.(item.name)}
+            onItemSelected={() => onSelected?.(item.name)}
+          />
+        );
+      })}
+    </ParallaxView>
   );
 });
 export default Items;
