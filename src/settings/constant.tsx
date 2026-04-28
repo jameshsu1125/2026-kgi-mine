@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { PAGE } from './config';
+import { PAGE, QuestionnaireOptions } from './config';
 import {
   ActionType,
   IAction,
@@ -46,8 +46,10 @@ export const CardState: TCardState = {
   enabled: false,
 };
 
+// 問券
 export const QuestionnaireState: TQuestionnaireState = {
   enabled: false,
+  question: QuestionnaireOptions,
 };
 
 export const RecentState: TRecentState = {

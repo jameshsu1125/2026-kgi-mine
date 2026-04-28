@@ -67,8 +67,16 @@ export type TCardState = {
   enabled?: boolean;
 };
 
+export type TQuestionnaireOption = {
+  headline: React.ReactNode;
+  options?: { label: string; value: string }[];
+  confirmLabel?: string;
+  type: 'Modal' | 'Recent';
+};
+
 export type TQuestionnaireState = {
   enabled?: boolean;
+  question?: TQuestionnaireOption[];
 };
 
 export type TRecentState = {

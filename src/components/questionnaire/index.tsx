@@ -7,28 +7,30 @@ import Button from '../button';
 import { useDebounce } from 'use-debounce';
 
 const Questionnaire = memo(() => {
-  const [, setContext] = useContext(Context);
+  const [context, setContext] = useContext(Context);
+  const { question = QuestionnaireOptions } = context[ActionType.Questionnaire]!;
+
   const [index, setIndex] = useState(0);
   const [debouncedIndex] = useDebounce(index, 300);
-  const question = useMemo(() => QuestionnaireOptions[debouncedIndex], [debouncedIndex]);
+  const currentQuestion = useMemo(() => question[debouncedIndex], [debouncedIndex, question]);
   const [active, setActive] = useState<boolean[]>([]);
 
   useEffect(() => {
-    setActive(question.options?.map(() => false) || []);
-  }, [debouncedIndex]);
+    setActive(currentQuestion.options?.map(() => false) || []);
+  }, [currentQuestion]);
 
   useEffect(() => {
-    if (question.type === 'Modal') {
+    if (currentQuestion.type === 'Modal') {
       setContext({
         type: ActionType.Modal,
         state: {
           enabled: true,
           body: (
             <div className='flex w-full flex-col gap-8'>
-              <div className='w-full'>{question.headline}</div>
-              {question.options && (
+              <div className='w-full'>{currentQuestion.headline}</div>
+              {currentQuestion.options && (
                 <div className='flex w-full flex-col gap-3'>
-                  {question.options?.map((option, optionIndex) => (
+                  {currentQuestion.options?.map((option, optionIndex) => (
                     <Button
                       key={option.label}
                       className='w-full'
@@ -44,9 +46,9 @@ const Questionnaire = memo(() => {
               )}
             </div>
           ),
-          label: [question.confirmLabel || '確認'],
+          label: [currentQuestion.confirmLabel || '確認'],
           onConfirm: (label) => {
-            if (label === question.confirmLabel) {
+            if (label === currentQuestion.confirmLabel) {
               setContext({ type: ActionType.Modal, state: { enabled: false } });
               if (index < QuestionnaireOptions.length - 1) {
                 setIndex((S) => S + 1);
@@ -61,7 +63,7 @@ const Questionnaire = memo(() => {
         type: ActionType.Recent,
         state: {
           enabled: true,
-          title: question.headline,
+          title: currentQuestion.headline,
           onClick: () => {
             setContext({ type: ActionType.Recent, state: { enabled: false } });
             if (index < QuestionnaireOptions.length - 1) {
@@ -71,7 +73,7 @@ const Questionnaire = memo(() => {
         },
       });
     }
-  }, [question, active]);
+  }, [currentQuestion, active]);
 
   return <></>;
 });

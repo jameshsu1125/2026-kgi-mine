@@ -1,3 +1,5 @@
+import { TQuestionnaireOption } from './type';
+
 export const PAGE = {
   home: 'home',
   journey: 'journey',
@@ -34,14 +36,7 @@ export const PATTERN_URI_PROPERTIES = [
   { path: 'pattern-icon-society.png', name: 'pattern-icon-society' },
 ];
 
-type TQuestionnaireOption = {
-  headline: React.ReactNode;
-  options?: { label: string; value: string }[];
-  confirmLabel?: string;
-  type: 'Modal' | 'Recent';
-}[];
-
-export const QuestionnaireOptions: TQuestionnaireOption = [
+export const QuestionnaireOptions: TQuestionnaireOption[] = [
   {
     headline: (
       <>
