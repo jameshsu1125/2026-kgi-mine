@@ -17,7 +17,7 @@ const Topic = ({ topic, transition }: { topic: string; transition: TransitionTyp
 
   useEffect(() => {
     if (transition === TransitionType.FadeIn) {
-      setStyle({ opacity: 1, y: 0 }, { duration: 600, delay: 500 });
+      setStyle({ opacity: 1, y: 0 }, { duration: 600, delay: 1200 });
     }
   }, [transition]);
 
@@ -28,11 +28,62 @@ const Topic = ({ topic, transition }: { topic: string; transition: TransitionTyp
   );
 };
 
+const InnerCard = memo(({ transition }: { transition: TransitionType }) => {
+  const [style, setStyle] = useTween({ opacity: 0, y: 30 });
+  const [context, setContext] = useContext(Context);
+  const { navBarIcon, mines } = context[ActionType.Card]!;
+  const [, setState] = useContext(JourneyContext);
+
+  useEffect(() => {
+    if (transition === TransitionType.FadeIn) {
+      setStyle({ opacity: 1, y: 0 }, { duration: 600, delay: 200 });
+    }
+  }, [transition]);
+
+  return (
+    <div className='card' style={style}>
+      <img src='/card-demo.jpg' alt='Card Demo' />
+      <div className='gradient-top' />
+      <div className='gradient-bottom' />
+      <div className='ctx'>
+        <div className='head'>
+          <Heading.D3 icon={navBarIcon}>豐盛未來式</Heading.D3>
+          <div className='navBar'>
+            {mines?.map((mine) => (
+              <div
+                key={mine.type}
+                className={twMerge(mine.type, `after:content-[attr(data-count)]`)}
+                data-count={mine.count}
+              />
+            ))}
+          </div>
+        </div>
+        <div className='foot'>
+          <Button className='w-fit'>
+            <Button.Soft>點我觀看</Button.Soft>
+          </Button>
+          <Button className='w-fit'>
+            <Button.Soft>收藏內容</Button.Soft>
+          </Button>
+          <Button
+            className='w-fit'
+            onClick={() => {
+              setState((S) => ({ ...S, step: JourneyStepType.resume }));
+              setContext({ type: ActionType.Card, state: { enabled: false } });
+            }}
+          >
+            <Button.Soft>繼續旅程</Button.Soft>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+});
+
 const Card = memo(() => {
   const [context, setContext] = useContext(Context);
-  const { cardURI, headline, navigator, navBarIcon, mines, topic } = context[ActionType.Card]!;
+  const { cardURI, headline, navigator, topic } = context[ActionType.Card]!;
 
-  const [, setState] = useContext(JourneyContext);
   const [, setURI] = useURI();
   const [transition, setTransition] = useState(TransitionType.Unset);
 
@@ -77,42 +128,7 @@ const Card = memo(() => {
                   <div className='hr' />
                   <Heading.H3>{navigator}</Heading.H3>
                 </div>
-                <div className='card'>
-                  <img src='/card-demo.jpg' alt='Card Demo' />
-                  <div className='gradient-top' />
-                  <div className='gradient-bottom' />
-                  <div className='ctx'>
-                    <div className='head'>
-                      <Heading.D3 icon={navBarIcon}>豐盛未來式</Heading.D3>
-                      <div className='navBar'>
-                        {mines?.map((mine) => (
-                          <div
-                            key={mine.type}
-                            className={twMerge(mine.type, `after:content-[attr(data-count)]`)}
-                            data-count={mine.count}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <div className='foot'>
-                      <Button className='w-fit'>
-                        <Button.Soft>點我觀看</Button.Soft>
-                      </Button>
-                      <Button className='w-fit'>
-                        <Button.Soft>收藏內容</Button.Soft>
-                      </Button>
-                      <Button
-                        className='w-fit'
-                        onClick={() => {
-                          setState((S) => ({ ...S, step: JourneyStepType.resume }));
-                          setContext({ type: ActionType.Card, state: { enabled: false } });
-                        }}
-                      >
-                        <Button.Soft>繼續旅程</Button.Soft>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                <InnerCard transition={transition} />
               </div>
               {topic && <Topic topic={topic} transition={transition} />}
             </div>

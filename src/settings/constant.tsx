@@ -44,7 +44,7 @@ export const SceneViewSizeState: TSceneViewSizeState = {
 
 // 卡片
 export const CardState: TCardState = {
-  enabled: true,
+  enabled: false,
   ...CardDemoData,
 };
 
