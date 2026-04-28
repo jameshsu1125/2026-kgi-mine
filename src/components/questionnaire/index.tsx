@@ -1,4 +1,4 @@
-import { QuestionnaireOptions } from '@/settings/config';
+import { QuestionnaireDemoData } from '@/settings/config';
 import { memo, useContext, useEffect, useMemo, useState } from 'react';
 import './index.less';
 import { Context } from '@/settings/constant';
@@ -8,7 +8,7 @@ import { useDebounce } from 'use-debounce';
 
 const Questionnaire = memo(() => {
   const [context, setContext] = useContext(Context);
-  const { question = QuestionnaireOptions } = context[ActionType.Questionnaire]!;
+  const { question = QuestionnaireDemoData } = context[ActionType.Questionnaire]!;
 
   const [index, setIndex] = useState(0);
   const [debouncedIndex] = useDebounce(index, 300);
@@ -50,7 +50,7 @@ const Questionnaire = memo(() => {
           onConfirm: (label) => {
             if (label === currentQuestion.confirmLabel) {
               setContext({ type: ActionType.Modal, state: { enabled: false } });
-              if (index < QuestionnaireOptions.length - 1) {
+              if (index < QuestionnaireDemoData.length - 1) {
                 setIndex((S) => S + 1);
               }
             }
@@ -66,7 +66,7 @@ const Questionnaire = memo(() => {
           title: currentQuestion.headline,
           onClick: () => {
             setContext({ type: ActionType.Recent, state: { enabled: false } });
-            if (index < QuestionnaireOptions.length - 1) {
+            if (index < QuestionnaireDemoData.length - 1) {
               setIndex((S) => S + 1);
             }
           },

@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { PAGE, QuestionnaireOptions } from './config';
+import { CardDemoData, PAGE, QuestionnaireDemoData } from './config';
 import {
   ActionType,
   IAction,
@@ -42,16 +42,19 @@ export const SceneViewSizeState: TSceneViewSizeState = {
   width: undefined,
 };
 
+// 卡片
 export const CardState: TCardState = {
-  enabled: false,
+  enabled: true,
+  ...CardDemoData,
 };
 
 // 問券
 export const QuestionnaireState: TQuestionnaireState = {
   enabled: false,
-  question: QuestionnaireOptions,
+  question: QuestionnaireDemoData,
 };
 
+// 最近活動
 export const RecentState: TRecentState = {
   enabled: false,
   title: '探索更多活動',

@@ -65,6 +65,12 @@ export type TSceneViewSizeState = { height?: number; width?: number };
 
 export type TCardState = {
   enabled?: boolean;
+  cardURI?: { path: string; name: string }[];
+  headline?: ReactNode;
+  navigator?: string;
+  navBarIcon?: ReactNode;
+  mines?: { type: 'career' | 'finance' | 'health' | 'relations' | 'society'; count: number }[];
+  topic?: string;
 };
 
 export type TQuestionnaireOption = {

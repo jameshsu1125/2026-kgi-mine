@@ -10,136 +10,152 @@
 
     @apply w-full;
 
-    .round {
-      padding-top: 5%;
-      border-radius: 35px;
-      background-color: #d9d9d9;
-      background-image: var(--card-bg);
+    .inner-contain {
+      @apply relative w-full;
 
-      @apply flex w-full flex-col items-center justify-center gap-3 overflow-hidden bg-cover bg-center bg-no-repeat;
+      .round {
+        padding-top: 9%;
+        border-radius: 35px;
+        background-color: #d9d9d9;
+        background-image: var(--card-bg);
 
-      & > .head {
-        padding-inline: 5%;
-        @apply text-font-white-light flex w-full flex-row items-start justify-between;
+        @apply flex w-full flex-col items-center justify-center gap-3 overflow-hidden bg-cover bg-center bg-no-repeat;
 
-        .navBar {
-          @apply flex flex-row items-center gap-1;
-        }
-      }
+        & > .head {
+          padding-inline: 5%;
+          @apply text-font-white-light flex w-full flex-row items-start justify-between gap-5;
 
-      & > .sub {
-        padding-inline: 5%;
-        @apply text-font-white-light relative flex w-full flex-row items-stretch gap-3;
-
-        & > .hr {
-          width: 1px;
-
-          padding-block: 1.3%;
-          @apply shrink-0 self-stretch;
-
-          &::after {
-            content: '';
-            @apply bg-font-white-light block h-full w-full;
+          .navBar {
+            @apply flex flex-row items-center gap-1;
           }
         }
-      }
 
-      & > .card {
-        border-radius: 35px;
-        @apply relative mt-2 w-full overflow-hidden;
+        & > .sub {
+          padding-inline: 5%;
+          @apply text-font-white-light relative flex w-full flex-row items-stretch gap-3;
 
-        img {
-          margin-bottom: -1px;
-          @apply w-full;
+          & > .hr {
+            width: 1px;
+
+            padding-block: 1.3%;
+            @apply shrink-0 self-stretch;
+
+            &::after {
+              content: '';
+              @apply bg-font-white-light block h-full w-full;
+            }
+          }
         }
 
-        .gradient-top {
-          background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 60.81%);
+        & > .card {
+          border-radius: 35px;
+          @apply relative mt-2 w-full overflow-hidden;
 
-          @apply absolute top-0 h-40 w-full;
-        }
+          img {
+            margin-bottom: -1px;
+            @apply w-full;
+          }
 
-        .gradient-bottom {
-          background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 60.81%);
+          .gradient-top {
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 60.81%);
 
-          @apply absolute bottom-0 h-40 w-full;
-        }
+            @apply absolute top-0 h-40 w-full;
+          }
 
-        .ctx {
-          padding: 5%;
-          @apply absolute top-0 flex h-full w-full flex-col items-center justify-between;
+          .gradient-bottom {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 60.81%);
 
-          & > .head {
-            @apply text-font-white-light flex w-full flex-row items-start justify-between;
+            @apply absolute bottom-0 h-40 w-full;
+          }
 
-            & > .navBar {
-              @apply flex flex-row flex-nowrap items-center gap-3;
+          .ctx {
+            padding: 5%;
+            @apply absolute top-0 flex h-full w-full flex-col items-center justify-between;
 
-              .career {
-                @img: '../../../public/pattern-xs-icon-career.png';
+            & > .head {
+              @apply text-font-white-light flex w-full flex-row items-start justify-between;
 
-                &::before {
-                  padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-                  background-image: url(@img);
-                }
-              }
+              & > .navBar {
+                @apply flex flex-row flex-nowrap items-center gap-3;
 
-              .finance {
-                @img: '../../../public/pattern-xs-icon-finance.png';
+                .career {
+                  @img: '../../../public/pattern-xs-icon-career.png';
 
-                &::before {
-                  padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-                  background-image: url(@img);
-                }
-              }
-
-              .health {
-                @img: '../../../public/pattern-xs-icon-health.png';
-
-                &::before {
-                  padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-                  background-image: url(@img);
-                }
-              }
-
-              .relations {
-                @img: '../../../public/pattern-xs-icon-relations.png';
-
-                &::before {
-                  padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-                  background-image: url(@img);
-                }
-              }
-
-              .society {
-                @img: '../../../public/pattern-xs-icon-society.png';
-
-                &::before {
-                  padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-                  background-image: url(@img);
-                }
-              }
-
-              & > div {
-                @apply flex flex-row items-center;
-                @apply w-8;
-
-                &::before {
-                  content: '';
-
-                  @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+                  &::before {
+                    padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+                    background-image: url(@img);
+                  }
                 }
 
-                &::after {
-                  @apply text-shadow-font-white-light;
+                .finance {
+                  @img: '../../../public/pattern-xs-icon-finance.png';
+
+                  &::before {
+                    padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+                    background-image: url(@img);
+                  }
+                }
+
+                .health {
+                  @img: '../../../public/pattern-xs-icon-health.png';
+
+                  &::before {
+                    padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+                    background-image: url(@img);
+                  }
+                }
+
+                .relations {
+                  @img: '../../../public/pattern-xs-icon-relations.png';
+
+                  &::before {
+                    padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+                    background-image: url(@img);
+                  }
+                }
+
+                .society {
+                  @img: '../../../public/pattern-xs-icon-society.png';
+
+                  &::before {
+                    padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+                    background-image: url(@img);
+                  }
+                }
+
+                & > div {
+                  @apply flex flex-row items-center;
+                  @apply w-8;
+
+                  &::before {
+                    content: '';
+
+                    @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+                  }
+
+                  &::after {
+                    @apply text-shadow-font-white-light;
+                  }
                 }
               }
             }
-          }
 
-          & > .foot {
-            @apply flex w-full flex-row items-center justify-around;
+            & > .foot {
+              @apply flex w-full flex-row items-center justify-around;
+            }
           }
+        }
+      }
+
+      .topic {
+        top: -2%;
+        @apply text-font-black font-noto-sans-tc absolute h-fit w-fit max-w-full bg-white px-3 py-1 text-sm;
+        @apply flex flex-row items-center rounded-l-full rounded-r-full;
+
+        &::before {
+          background-image: var(--card-topic-icon);
+          content: '';
+          @apply mr-2 inline-block h-6 w-6 bg-contain bg-center bg-no-repeat;
         }
       }
     }

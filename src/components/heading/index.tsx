@@ -6,17 +6,13 @@ const Heading = () => {};
 
 const H1 = memo(({ className, children }: IReactProps & { className?: string }) => {
   return (
-    <h1 className={twMerge(`font-noto-sans-tc text-3xl font-bold tracking-wide`, className)}>
-      {children}
-    </h1>
+    <h1 className={twMerge(`font-noto-sans-tc text-3xl tracking-wide`, className)}>{children}</h1>
   );
 });
 
 const H2 = memo(({ className, children }: IReactProps & { className?: string }) => {
   return (
-    <h1 className={twMerge(`font-noto-sans-tc text-2xl font-black tracking-wide`, className)}>
-      {children}
-    </h1>
+    <h1 className={twMerge(`font-noto-sans-tc text-2xl tracking-wide`, className)}>{children}</h1>
   );
 });
 
@@ -25,7 +21,7 @@ const H3 = memo(
     return (
       <h3
         className={twMerge(
-          `font-noto-sans-tc flex flex-row items-center gap-2 text-xl font-medium tracking-wide`,
+          `font-noto-sans-tc flex flex-row items-center gap-2 text-xl tracking-wide`,
           className,
         )}
       >
